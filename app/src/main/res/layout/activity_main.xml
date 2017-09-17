@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    tools:context="szakdolgozat.istvan.ping_pong.MainActivity">
+
+    <!--> disable last page effect -->
+
+    <view
+        android:id="@+id/viewPager"
+        class="android.support.v4.view.ViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:overScrollMode="never" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonsLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ImageButton
+            android:id="@+id/buttonSinglePlayer"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:onClick="toSinglePlayer"
+            android:src="@mipmap/singleplayer"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/buttonMultiPlayer"
+            android:layout_toStartOf="@+id/buttonMultiPlayer" />
+
+        <ImageButton
+            android:id="@+id/buttonMultiPlayer"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:onClick="toMultiPlayer"
+            android:src="@mipmap/multiplayer"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/buttonHighScores"
+            android:layout_toStartOf="@+id/buttonHighScores" />
+
+        <ImageButton
+            android:id="@+id/buttonHighScores"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:onClick="toHighScores"
+            android:src="@mipmap/highscores"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+        <ImageButton
+            android:id="@+id/buttonOptions"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:onClick="toOptions"
+            android:src="@mipmap/options"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/buttonHighScores"
+            android:layout_toEndOf="@+id/buttonHighScores" />
+
+        <ImageButton
+            android:id="@+id/buttonAbout"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:onClick="toAbout"
+            android:src="@mipmap/about"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/buttonOptions"
+            android:layout_toEndOf="@+id/buttonOptions" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
