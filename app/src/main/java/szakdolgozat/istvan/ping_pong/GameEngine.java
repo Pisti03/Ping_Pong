@@ -1,7 +1,5 @@
 package szakdolgozat.istvan.ping_pong;
 
-import szakdolgozat.istvan.ping_pong.GameState;
-
 /**
  * Created by Pisti on 2017. 09. 06..
  */
@@ -9,6 +7,7 @@ import szakdolgozat.istvan.ping_pong.GameState;
 public class GameEngine {
     private GameState gameState;
     private double screenWidth, screenHeight;
+    private static double MAX_MOVE_AREA;//TODO
 
     public GameEngine(double x, double y) {
         this.screenWidth = x;
@@ -74,42 +73,12 @@ public class GameEngine {
             gameState.getBall().generateNewDirection();
         }
 
-        /*if((nextX >= gameState.getPlayer1().getPosX()-gameState.getPlayer1().getWidth()/2 && nextX <= gameState.getPlayer1().getPosX()+gameState.getPlayer1().getWidth()/2)
-                && (nextY + radius >= gameState.getPlayer1().getPosY()-gameState.getPlayer1().getHeight()/2 && nextY - radius <= gameState.getPlayer1().getPosY()+gameState.getPlayer1().getHeight()/2))
-        {
-            gameState.getBall().reverseY();
-            if(nextX < gameState.getPlayer1().getPosX())
-                gameState.getBall().setVeloX(Math.abs(gameState.getBall().getVeloX())*-1);
-            else
-                gameState.getBall().setVeloX(Math.abs(gameState.getBall().getVeloX()));
-        }
-
-        if((nextY >= gameState.getPlayer1().getPosY()-gameState.getPlayer1().getHeight()/2 && nextY <= gameState.getPlayer1().getPosY()+gameState.getPlayer1().getHeight()/2)
-                && (nextX + radius >= gameState.getPlayer1().getPosX()-gameState.getPlayer1().getWidth()/2 && nextX - radius <= gameState.getPlayer1().getPosX()+gameState.getPlayer1().getWidth()/2)) {
-            gameState.getBall().reverseX();
-            gameState.getBall().reverseY();
-        }
-
-        if((nextX >= gameState.getPlayer2().getPosX()-gameState.getPlayer2().getWidth()/2 && nextX <= gameState.getPlayer2().getPosX()+gameState.getPlayer2().getWidth()/2)
-                && (nextY - radius <= gameState.getPlayer2().getPosY()+gameState.getPlayer2().getHeight()/2 && nextY + radius >= gameState.getPlayer2().getPosY()-gameState.getPlayer2().getHeight()/2))
-            gameState.getBall().reverseY();
-
-        if((nextY <= gameState.getPlayer2().getPosY()+gameState.getPlayer2().getHeight()/2 && nextY >= gameState.getPlayer2().getPosY()-gameState.getPlayer2().getHeight()/2)
-                && (nextX + radius >= gameState.getPlayer2().getPosX()-gameState.getPlayer2().getWidth()/2 && nextX - radius <= gameState.getPlayer2().getPosX()+gameState.getPlayer2().getWidth()/2)) {
-            gameState.getBall().reverseX();
-            gameState.getBall().reverseY();
-        }*/
         if(testCollision(gameState.getPlayer1(), gameState.getBall())) {
-            double newVeloX, newVeloy, posX, posY, lastPosX, lastPosY;
+            double newVeloX, newVeloY, posX, posY, lastPosX, lastPosY;
             posX = gameState.getPlayer1().getPosX();
             posY = gameState.getPlayer1().getPosY();
             lastPosX = gameState.getPlayer1().getLastPosX();
             lastPosY = gameState.getPlayer1().getLastPosY();
-
-            /*System.out.println("posX: " + posX );
-            System.out.println("posY: " + posY );
-            System.out.println("lastPosX: " + lastPosX );
-            System.out.println("lastPosY: " + lastPosY );*/
 
             if(posX >= lastPosY)
                 newVeloX = posX-lastPosX;
@@ -117,24 +86,21 @@ public class GameEngine {
                 newVeloX = lastPosX-posX;
 
             if(posY >= lastPosY)
-                newVeloy = 0;
+                newVeloY = 0;
             else
-                newVeloy = lastPosY - posY;
+                newVeloY = lastPosY - posY;
 
-            /*System.out.println("newVeloX: " + newVeloX);
-            System.out.println("newVeloy: " + newVeloy);
-            System.out.println("actprevVeloX: " + getGameState().getBall().getVeloX());
-            System.out.println("actprevVeloY: " + getGameState().getBall().getVeloY());*/
+            if(newVeloX == 0 && newVeloY == 0) {
+                gameState.getBall().reverseY();
+            } else {
+                gameState.getBall().setVeloX(gameState.getBall().getVeloX() - newVeloX);
+                gameState.getBall().setVeloY(gameState.getBall().getVeloY() - newVeloY);
+            }
 
-            gameState.getBall().setVeloX(gameState.getBall().getVeloX()+newVeloX);
-            gameState.getBall().setVeloY(gameState.getBall().getVeloY()-newVeloy);
-            /*System.out.println("actnewVeloX: " + getGameState().getBall().getVeloX());
-            System.out.println("actnewVeloY: " + getGameState().getBall().getVeloY());*/
-            // gameState.getBall().reverseY();
         }
 
         if(testCollision(gameState.getPlayer2(), gameState.getBall())){
-            double newVeloX, newVeloy, posX, posY, lastPosX, lastPosY;
+            double newVeloX, newVeloY, posX, posY, lastPosX, lastPosY;
             posX = gameState.getPlayer2().getPosX();
             posY = gameState.getPlayer2().getPosY();
             lastPosX = gameState.getPlayer2().getLastPosX();
@@ -146,18 +112,23 @@ public class GameEngine {
                 newVeloX = lastPosX-posX;
 
             if(posY >= lastPosY)
-                newVeloy = 0;
+                newVeloY = 0;
             else
-                newVeloy = lastPosY - posY;
+                newVeloY = lastPosY - posY;
 
-            gameState.getBall().setVeloX(gameState.getBall().getVeloX()+newVeloX);
-            gameState.getBall().setVeloY(10);
+            if(newVeloX == 0 && newVeloY == 0) {
+                gameState.getBall().reverseY();
+            } else {
+                gameState.getBall().setVeloX(gameState.getBall().getVeloX() + newVeloX);
+                gameState.getBall().setVeloY(10);
+            }
         }
 
     }
 
     public void movePlayer1(double x, double y) {
-        if(!(((x-gameState.getPlayer1().getWidth()/2) < 0 || (x + gameState.getPlayer1().getWidth()/2) > screenWidth) && (y-gameState.getPlayer1().getHeight()/2) < 0 || (y + gameState.getPlayer1().getHeight()/2) > screenHeight))
+        if(!(((x-gameState.getPlayer1().getWidth()/2) < 0 || (x + gameState.getPlayer1().getWidth()/2) > screenWidth)
+                || (y-gameState.getPlayer1().getHeight()/2) < 0 || (y + gameState.getPlayer1().getHeight()/2) > screenHeight))
         {
             if(gameState.getPlayer1().getMaxSpeed()!=0) {
                 if (Math.abs(gameState.getPlayer1().getPosX() - gameState.getBall().getX()) < gameState.getPlayer1().getMaxSpeed())
