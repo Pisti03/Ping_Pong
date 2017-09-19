@@ -11,6 +11,7 @@ public class GameLoop extends Thread {
     private GameView gameView;
     private boolean running = false;
     private GameEngine gameEngine;
+    private boolean paused = false;
 
     public GameLoop(GameView gameView, GameEngine gameEngine)
     {
@@ -30,10 +31,12 @@ public class GameLoop extends Thread {
         while (running) {
             Canvas c = null;
             startTime = System.currentTimeMillis();
+            if(!paused)
+                gameEngine.nextStep();
+
             try {
                 c = gameView.getHolder().lockCanvas();
                 synchronized (gameView.getHolder()) {
-                    gameEngine.nextStep();
                     gameView.draw(c);
                 }
             } finally {
@@ -53,5 +56,17 @@ public class GameLoop extends Thread {
 
     public boolean isRunning() {
         return running;
+    }
+
+    void pause() {
+        synchronized (gameView.getHolder()) {
+            paused = true;
+        }
+    }
+
+    void unPause() {
+        synchronized (gameView.getHolder()) {
+            paused = false;
+        }
     }
 }

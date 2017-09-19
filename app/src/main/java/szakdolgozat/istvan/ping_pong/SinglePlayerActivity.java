@@ -17,6 +17,7 @@ public class SinglePlayerActivity extends Activity {
     private GameView gameView;
     private boolean paused = false;
     private PopupWindow popupWindow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,6 @@ public class SinglePlayerActivity extends Activity {
 
     private void callPopUp()
     {
-
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View popupView = inflater.inflate(R.layout.pausepopup, null);
 

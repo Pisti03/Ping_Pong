@@ -11,7 +11,6 @@ public class Player {
     private double posX, posY, lastPosX, lastPosY;
     public double width, height;
     private int color;
-    double maxSpeed;
     //private Pickup pickup;
 
     public Player(double posX, double posY, double width, double height, int color) {
@@ -20,17 +19,6 @@ public class Player {
         this.posY = posY;
         this.width = width;
         this.height = height;
-        this.color = color;
-    }
-
-
-    public Player(double posX, double posY, double width, double height, double maxSpeed, int color) {
-        this.score = 0;
-        this.posX = posX;
-        this.posY = posY;
-        this.width = width;
-        this.height = height;
-        this.maxSpeed = maxSpeed;
         this.color = color;
     }
 
@@ -63,9 +51,6 @@ public class Player {
         return height;
     }
 
-    public double getMaxSpeed() {
-        return maxSpeed;
-    }
 
     public double getLastPosX() {
         return lastPosX;
@@ -99,10 +84,6 @@ public class Player {
 
     public void setHeight(double height) {
         this.height = height;
-    }
-
-    public void setMaxSpeed(double maxSpeed) {
-        this.maxSpeed = maxSpeed;
     }
 
 }

@@ -106,7 +106,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public boolean onTouchEvent(MotionEvent event) {
         double x = (double) event.getX();
         double y = (double) event.getY();
-        gameEngine.movePlayer1(x,y);
+        gameEngine.movePlayer(x,y, gameEngine.getGameState().getPlayer1());
         return true;
     }
 
@@ -118,23 +118,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void pauseGame(){
-        gameLoop.setRunning(false);
-        boolean retry = true;
-        gameLoop.setRunning(false);
-        while (retry) {
-            try {
-                gameLoop.join();
-                retry = false;
-            } catch (InterruptedException e) {
-            }
-        }
+        gameLoop.pause();
     }
 
     public void continueGame()
     {
-        gameLoop = new GameLoop(this, gameEngine);
-        gameLoop.setRunning(true);
-        gameLoop.start();
+        gameLoop.unPause();
     }
 }
 

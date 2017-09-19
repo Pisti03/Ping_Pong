@@ -7,7 +7,6 @@ package szakdolgozat.istvan.ping_pong;
 public class GameEngine {
     private GameState gameState;
     private double screenWidth, screenHeight;
-    private static double MAX_MOVE_AREA;//TODO
 
     public GameEngine(double x, double y) {
         this.screenWidth = x;
@@ -39,16 +38,52 @@ public class GameEngine {
         double playerUpSide = player.getPosY() - player.getHeight()/2;
         double playerDownSide = player.getPosY() + player.getHeight()/2;
 
-        if(ballRightSide >= playerLeftSide && ballRightSide <= playerRightSide && ball.getY() >= playerUpSide && ball.getY() <= playerDownSide )
-            return true;
-        if(ballLeftSide >= playerLeftSide && ballLeftSide <= playerRightSide && ball.getY() >= playerUpSide && ball.getY() <= playerDownSide )
-            return true;
-        if(ball.getX() >= playerLeftSide && ball.getX() <= playerRightSide && ballUpSide >= playerDownSide && ballUpSide <= playerDownSide )
-            return true;
-        if(ball.getX() >= playerLeftSide && ball.getX() <= playerRightSide && ballDownSide >= playerUpSide && ballDownSide <= playerDownSide )
+        if(ballRightSide >= playerLeftSide && ballRightSide <= playerRightSide && ball.getY() >= playerUpSide && ball.getY() <= playerDownSide
+           || ballLeftSide >= playerLeftSide && ballLeftSide <= playerRightSide && ball.getY() >= playerUpSide && ball.getY() <= playerDownSide
+           || ball.getX() >= playerLeftSide && ball.getX() <= playerRightSide && ballUpSide >= playerDownSide && ballUpSide <= playerDownSide
+           || ball.getX() >= playerLeftSide && ball.getX() <= playerRightSide && ballDownSide >= playerUpSide && ballDownSide <= playerDownSide)
             return true;
 
         return false;
+    }
+
+    private void setSpeed(Player player)
+    {
+        double newVeloX, newVeloY, posX, posY, lastPosX, lastPosY;
+        posX = player.getPosX();
+        posY = player.getPosY();
+        lastPosX = player.getLastPosX();
+        lastPosY = player.getLastPosY();
+
+        if(posX >= lastPosY)
+            newVeloX = posX-lastPosX;
+        else
+            newVeloX = lastPosX-posX;
+
+        if(posY >= lastPosY)
+            newVeloY = 0;
+        else
+            newVeloY = lastPosY - posY;
+
+        if(newVeloX != 0 && newVeloY != 0) {
+            gameState.getBall().setVeloX(newVeloX);
+            gameState.getBall().setVeloY(-newVeloY - 1);
+        } else {
+            gameState.getBall().reverseY();
+        }
+    }
+
+    private void outOfMap()
+    {
+        Ball ball = gameState.getBall();
+        if(ball.getY() <= 0)
+        {
+            //player1 score;
+        } else {
+            //player2 score
+        }
+        ball.setPosition(screenWidth/2, screenHeight/2);
+        ball.generateNewDirection();
     }
 
     public void collision(){
@@ -61,109 +96,37 @@ public class GameEngine {
             gameState.getBall().reverseX();
         }
 
-        if(nextY >= screenHeight)
+        if(nextY - radius > screenHeight || nextY + radius < 0)
         {
-            gameState.getBall().setPosition(screenWidth/2, screenHeight/2);
-            gameState.getBall().generateNewDirection();
-        }
-
-        if(nextY <= 0)
-        {
-            gameState.getBall().setPosition(screenWidth/2, screenHeight/2);
-            gameState.getBall().generateNewDirection();
+            outOfMap();
         }
 
         if(testCollision(gameState.getPlayer1(), gameState.getBall())) {
-            double newVeloX, newVeloY, posX, posY, lastPosX, lastPosY;
-            posX = gameState.getPlayer1().getPosX();
-            posY = gameState.getPlayer1().getPosY();
-            lastPosX = gameState.getPlayer1().getLastPosX();
-            lastPosY = gameState.getPlayer1().getLastPosY();
-
-            if(posX >= lastPosY)
-                newVeloX = posX-lastPosX;
-            else
-                newVeloX = lastPosX-posX;
-
-            if(posY >= lastPosY)
-                newVeloY = 0;
-            else
-                newVeloY = lastPosY - posY;
-
-            if(newVeloX == 0 && newVeloY == 0) {
-                gameState.getBall().reverseY();
-            } else {
-                gameState.getBall().setVeloX(gameState.getBall().getVeloX() - newVeloX);
-                gameState.getBall().setVeloY(gameState.getBall().getVeloY() - newVeloY);
-            }
+            setSpeed(gameState.getPlayer1());
 
         }
 
         if(testCollision(gameState.getPlayer2(), gameState.getBall())){
-            double newVeloX, newVeloY, posX, posY, lastPosX, lastPosY;
-            posX = gameState.getPlayer2().getPosX();
-            posY = gameState.getPlayer2().getPosY();
-            lastPosX = gameState.getPlayer2().getLastPosX();
-            lastPosY = gameState.getPlayer2().getLastPosY();
-
-            if(posX >= lastPosY)
-                newVeloX = posX-lastPosX;
-            else
-                newVeloX = lastPosX-posX;
-
-            if(posY >= lastPosY)
-                newVeloY = 0;
-            else
-                newVeloY = lastPosY - posY;
-
-            if(newVeloX == 0 && newVeloY == 0) {
-                gameState.getBall().reverseY();
-            } else {
-                gameState.getBall().setVeloX(gameState.getBall().getVeloX() + newVeloX);
-                gameState.getBall().setVeloY(10);
-            }
+            setSpeed(gameState.getPlayer2());
         }
 
     }
 
-    public void movePlayer1(double x, double y) {
-        if(!(((x-gameState.getPlayer1().getWidth()/2) < 0 || (x + gameState.getPlayer1().getWidth()/2) > screenWidth)
-                || (y-gameState.getPlayer1().getHeight()/2) < 0 || (y + gameState.getPlayer1().getHeight()/2) > screenHeight))
+    public void movePlayer(double x, double y, Player player) {
+        if(!((x - player.getWidth()/2) < 0 || (x + player.getWidth()/2) > screenWidth))
         {
-            if(gameState.getPlayer1().getMaxSpeed()!=0) {
-                if (Math.abs(gameState.getPlayer1().getPosX() - gameState.getBall().getX()) < gameState.getPlayer1().getMaxSpeed())
-                    gameState.getPlayer1().setPosX(gameState.getBall().getX());
-                else if (x < gameState.getPlayer1().getPosX())
-                    gameState.getPlayer1().setPosX(gameState.getPlayer1().getPosX() - gameState.getPlayer1().getMaxSpeed());
-                else
-                    gameState.getPlayer1().setPosX(gameState.getPlayer1().getPosX() + gameState.getPlayer1().getMaxSpeed());
-            } else
-                gameState.getPlayer1().setPosX(x);
-                gameState.getPlayer1().setPosY(y);
+            player.setPosX(x);
+        }
+
+        if(!((y - player.getHeight()/2) < 0 || (y + player.getHeight()/2) > screenHeight)){
+            player.setPosY(y);
         }
     }
 
-    public void movePlayer2()
-    {
-        if(!(((gameState.getPlayer2().getPosX()-gameState.getPlayer2().getWidth()/2 < 0) && gameState.getPlayer2().getPosX()>gameState.getBall().getX())
-                || (((gameState.getPlayer2().getPosX() + gameState.getPlayer2().getWidth()/2) > screenWidth) && gameState.getPlayer2().getPosX()<gameState.getBall().getX()) ))
-        {
-            if(gameState.getPlayer2().getMaxSpeed()!=0) {
-                if (Math.abs(gameState.getPlayer2().getPosX() - gameState.getBall().getX()) < gameState.getPlayer2().getMaxSpeed())
-                    gameState.getPlayer2().setPosX(gameState.getBall().getX());
-                else if (gameState.getBall().getX() < gameState.getPlayer2().getPosX())
-                    gameState.getPlayer2().setPosX(gameState.getPlayer2().getPosX() - gameState.getPlayer2().getMaxSpeed());
-                else
-                    gameState.getPlayer2().setPosX(gameState.getPlayer2().getPosX() + gameState.getPlayer2().getMaxSpeed());
-            } else
-                gameState.getPlayer2().setPosX(gameState.getBall().getX());
-        }
-
-
-    }
     public void nextStep(){
+        Ball ball = gameState.getBall();
         collision();
-        gameState.getBall().nextPosition();
-        movePlayer2();
+        ball.nextPosition();
+        movePlayer(ball.getX(), ball.getY(), gameState.getPlayer2());
     }
 }
