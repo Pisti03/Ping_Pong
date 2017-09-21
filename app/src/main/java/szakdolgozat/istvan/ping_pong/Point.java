@@ -4,15 +4,15 @@ package szakdolgozat.istvan.ping_pong;
  * Created by Pisti on 2017. 09. 19..
  */
 
-public class Coordinate {
+public class Point {
     private double X, Y;
 
-    Coordinate(){
+    Point(){
         this.X = 0;
         this.Y = 0;
     }
 
-    Coordinate(double X, double Y)
+    Point(double X, double Y)
     {
         this.X = X;
         this.Y = Y;
