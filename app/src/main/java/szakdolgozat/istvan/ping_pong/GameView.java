@@ -59,6 +59,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         paint.setAlpha(50); //Put a value between 0 and 255
         paint.setColor(Color.GRAY); //Put your line color
         canvas.drawLine(0, height/2, width, height/2, paint);
+        paint.setColor(Color.RED);
+        canvas.drawLine(0, height-(height*1/3), width, height-(height*1/3), paint);
+        canvas.drawLine(0, height-(height*1/8), width, height-(height*1/8), paint);
     }
 
 

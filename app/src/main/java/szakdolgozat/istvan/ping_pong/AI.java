@@ -7,7 +7,7 @@ import static szakdolgozat.istvan.ping_pong.Difficulty.*;
  */
 
 public class AI {
-    private static double DIF1_SPEED = 5;
+    private static double DIF1_SPEED = 10;
     private static double DIF2_SPEED = 10;
     private static double DIF3_SPEED = 15;
     private Difficulty difficulty;

@@ -56,11 +56,24 @@ public class GameEngine {
         double playerUpSide = player.getPosY() - player.getHeight()/2;
         double playerDownSide = player.getPosY() + player.getHeight()/2;
 
-        if((ballRightSide >= playerLeftSide && ballRightSide <= playerRightSide && ball.getY() >= playerUpSide && ball.getY() <= playerDownSide)
-           || ballLeftSide >= playerLeftSide && ballLeftSide <= playerRightSide && ball.getY() >= playerUpSide && ball.getY() <= playerDownSide
-           || ball.getX() >= playerLeftSide && ball.getX() <= playerRightSide && ballUpSide >= playerDownSide && ballUpSide <= playerDownSide
-           || ball.getX() >= playerLeftSide && ball.getX() <= playerRightSide && ballDownSide >= playerUpSide && ballDownSide <= playerDownSide)
-            return true;
+        switch(getDirection(ball, player)){
+            case UP:
+                if(ball.getX() >= playerLeftSide && ball.getX() <= playerRightSide && ballDownSide >= playerUpSide)
+                    return true;
+                break;
+            case DOWN:
+                if(ball.getX() >= playerLeftSide && ball.getX() <= playerRightSide && ballUpSide <= playerDownSide)
+                    return true;
+                break;
+            case RIGHT:
+                if(ballLeftSide <= playerRightSide && ball.getY() >= playerUpSide && ball.getY() <= playerDownSide)
+                    return true;
+                break;
+            case LEFT:
+                if(ballRightSide >= playerLeftSide && ball.getY() >= playerUpSide && ball.getY() <= playerDownSide)
+                    return true;
+                break;
+        }
 
         return false;
     }
@@ -135,17 +148,16 @@ public class GameEngine {
         Ball ball = gameState.getBall();
         Player player1 = gameState.getPlayer1();
         Player player2 = gameState.getPlayer2();
-        Point A, B, C, D, E, F;
 
-        A = new Point(ball.getX()-(Math.signum(ball.getVeloX()*(ball.getDiameter()/2))), ball.getY()-(Math.signum(ball.getVeloY()*(ball.getDiameter()/2))));
-        B = new Point(ball.getX()+ball.getVeloX(), ball.getY()+ball.getVeloY());
-        C = new Point(player1.getPosX()-player1.getWidth()/2, player1.getPosY()-player1.getHeight()/2);
-        D = new Point(player1.getPosX()+player1.getWidth()/2, player1.getPosY()-player1.getHeight()/2);
-        E = new Point(player1.getPosX()-player1.getWidth()/2, player1.getPosY()+player1.getHeight()/2);
-        F = new Point(player1.getPosX()+player1.getWidth()/2, player1.getPosY()+player1.getHeight()/2);
-
-        if((ball.getX() >= screenWidth) || (ball.getX() <= 0))
+        if(ball.getX() >= screenWidth)
         {
+            ball.setX(screenWidth-(ball.getDiameter()/2)-0.2);
+            ball.reverseX();
+        }
+
+        if(ball.getX() <= 0)
+        {
+            ball.setX((ball.getDiameter()/2)+0.2);
             gameState.getBall().reverseX();
         }
 
@@ -154,9 +166,7 @@ public class GameEngine {
             outOfMap();
         }
 
-
-
-        if(doIntersect(A,B,C,D) || doIntersect(A,B,E,F) || testCollision(gameState.getPlayer1(), gameState.getBall()))
+        if(testCollision(gameState.getPlayer1(), gameState.getBall()))
         {
             switch(getDirection(ball, player1)){
                 case UP:
@@ -175,12 +185,7 @@ public class GameEngine {
              setSpeed(gameState.getPlayer1());
         }
 
-        C = new Point(player2.getPosX()-player2.getWidth()/2, player2.getPosY()-player2.getHeight()/2);
-        D = new Point(player2.getPosX()+player2.getWidth()/2, player2.getPosY()-player2.getHeight()/2);
-        E = new Point(player2.getPosX()-player2.getWidth()/2, player2.getPosY()+player2.getHeight()/2);
-        F = new Point(player2.getPosX()+player2.getWidth()/2, player2.getPosY()+player2.getHeight()/2);
-
-        if(doIntersect(A,B,C,D) || doIntersect(A,B,E,F) || testCollision(gameState.getPlayer2(), gameState.getBall())){
+        if(testCollision(gameState.getPlayer2(), gameState.getBall())){
             switch(getDirection(ball, player2)){
                 case UP:
                     ball.setY(player2.getPosY()-player2.getHeight()/2 - 0.1 - ball.getDiameter()/2);
@@ -206,7 +211,7 @@ public class GameEngine {
             player.setPosX(x);
         }
 
-        if(!((y - player.getHeight()/2) < 0 || (y + player.getHeight()/2) > screenHeight)){
+        if(!((y - player.getHeight()/2) < screenHeight-(screenHeight*1/3) || (y + player.getHeight()/2) > screenHeight-(screenHeight*1/8))){
             player.setPosY(y);
         }
     }

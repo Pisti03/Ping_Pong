@@ -17,6 +17,8 @@ public class Player {
         this.score = 0;
         this.posX = posX;
         this.posY = posY;
+        this.lastPosX = posX;
+        this.lastPosY = posY;
         this.width = width;
         this.height = height;
         this.color = color;
