@@ -1,8 +1,8 @@
 package szakdolgozat.istvan.ping_pong;
 
-import android.graphics.Bitmap;
-import android.graphics.Color;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -14,13 +14,11 @@ public class Ball {
     private double x,y;
     private double veloX, veloY;
     private int color;
-    private double speed;
 
-    public Ball(double diameter, double x, double y, double speed, int color) {
+    public Ball(double diameter, double x, double y, int color) {
         this.diameter = diameter;
         this.x = x;
         this.y = y;
-        this.speed = speed;
         this.color = color;
     }
 
@@ -48,7 +46,7 @@ public class Ball {
         return color;
     }
 
-    public void getDiameter(double diameter) {
+    public void setDiameter(double diameter) {
         this.diameter = diameter;
     }
 
@@ -97,8 +95,19 @@ public class Ball {
     public void generateNewDirection()
     {
         Random r = new Random();
-        double direction = 0 + ((2*Math.PI) - 0) * r.nextDouble();
-        this.veloX = Math.sin(direction) * speed;
-        this.veloY = Math.cos(direction) * speed;
+        ArrayList<Point> x = new ArrayList<>();
+        x.add(new Point(3,3));
+        x.add(new Point(4,4));
+        x.add(new Point(3,5));
+        x.add(new Point(4,5));
+        x.add(new Point(5,5));
+        x.add(new Point(6,5));
+        x.add(new Point(6,6));
+        x.add(new Point(6,7));
+        x.add(new Point(6,8));
+        x.add(new Point(8,7));
+        Collections.shuffle(x);
+        this.veloX = (r.nextBoolean() ? 1 : -1) * x.get(0).getX();
+        this.veloY = (r.nextBoolean() ? 1 : -1) * x.get(0).getY();
     }
 }

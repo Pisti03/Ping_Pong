@@ -22,16 +22,12 @@ import szakdolgozat.istvan.ping_pong.R;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private SurfaceHolder holder;
-    private Bitmap bmp;
-    private int kepX, kepY;
-    private int signX = 1, signY = 1;
     private int width, height;
     private GameLoop gameLoop;
     private GameEngine gameEngine;
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.ball);
         holder = getHolder();
         holder.addCallback(this);
         this.width = Resources.getSystem().getDisplayMetrics().widthPixels;
@@ -45,30 +41,26 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public void draw(Canvas canvas) {
         super.draw(canvas);
         Paint paint = new Paint();
+        Ball ball = gameEngine.getGameState().getBall();
+        Player player = gameEngine.getGameState().getPlayer1();
         paint.setColor(Color.BLUE);
         canvas.drawColor(Color.WHITE);
-        Ball temp = gameEngine.getGameState().getBall();
-        paint.setColor(temp.getColor());
-        canvas.drawCircle((float) temp.getX(), (float) temp.getY(), (int) temp.getDiameter(), paint);
-        Player temp2 = gameEngine.getGameState().getPlayer1();
-        paint.setColor(temp2.getColor());
-        canvas.drawRect((float) (temp2.getPosX() - temp2.getWidth() / 2), (float) (temp2.getPosY() - temp2.getHeight() / 2), (float) (temp2.getPosX() + temp2.getWidth() / 2), (float) (temp2.getPosY() + temp2.getHeight() / 2), paint);
-        temp2 = gameEngine.getGameState().getPlayer2();
-        paint.setColor(temp2.getColor());
-        canvas.drawRect((float) (temp2.getPosX() - temp2.getWidth() / 2), (float) (temp2.getPosY() - temp2.getHeight() / 2), (float) (temp2.getPosX() + temp2.getWidth() / 2), (float) (temp2.getPosY() + temp2.getHeight() / 2), paint);
-        paint.setAlpha(50); //Put a value between 0 and 255
-        paint.setColor(Color.GRAY); //Put your line color
+        paint.setColor(ball.getColor());
+        canvas.drawCircle((float) ball.getX(), (float) ball.getY(), (int) ball.getDiameter(), paint);
+        paint.setColor(player.getColor());
+        canvas.drawRect((float) (player.getPosX() - player.getWidth() / 2), (float) (player.getPosY() - player.getHeight() / 2), (float) (player.getPosX() + player.getWidth() / 2), (float) (player.getPosY() + player.getHeight() / 2), paint);
+        player = gameEngine.getGameState().getPlayer2();
+        paint.setColor(player.getColor());
+        canvas.drawRect((float) (player.getPosX() - player.getWidth() / 2), (float) (player.getPosY() - player.getHeight() / 2), (float) (player.getPosX() + player.getWidth() / 2), (float) (player.getPosY() + player.getHeight() / 2), paint);
+        paint.setAlpha(50);
+        paint.setColor(Color.GRAY);
         canvas.drawLine(0, height/2, width, height/2, paint);
+        paint.setColor(Color.GREEN);
+        canvas.drawLine(0, height-(height*1/4), width, height-(height*1/4), paint);
+        canvas.drawLine(0, height-(height*1/12), width, height-(height*1/12), paint);
         paint.setColor(Color.RED);
-        canvas.drawLine(0, height-(height*1/3), width, height-(height*1/3), paint);
-        canvas.drawLine(0, height-(height*1/8), width, height-(height*1/8), paint);
-    }
-
-
-    public void rajzol() {
-        Canvas canvas = holder.lockCanvas();
-        canvas.drawBitmap(this.bmp, kepX - (bmp.getWidth() / 2), kepY - (bmp.getHeight() / 2), null);
-        holder.unlockCanvasAndPost(canvas);
+        canvas.drawLine(0, height*1/4, width, height*1/4, paint);
+        canvas.drawLine(0, height*1/12, width, height*1/12, paint);
     }
 
     @Override
@@ -109,7 +101,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public boolean onTouchEvent(MotionEvent event) {
         double x = (double) event.getX();
         double y = (double) event.getY();
-        gameEngine.movePlayer(x,y, gameEngine.getGameState().getPlayer1());
+        gameEngine.movePlayer1(x,y, gameEngine.getGameState().getPlayer1());
         return true;
     }
 

@@ -12,7 +12,7 @@ public class GameState {
     private Player player1, player2;
 
     public GameState(double screenWidth, double screenHeight) {
-        ball = new Ball((int)(screenHeight+screenWidth)/90, screenWidth/2, screenHeight/2, screenWidth/80, Color.BLUE);
+        ball = new Ball((int)(screenHeight+screenWidth)/90, screenWidth/2, screenHeight/2, Color.BLUE);
         ball.generateNewDirection();
         player1 = new Player(screenWidth/2, screenHeight - screenHeight/8, screenWidth/5, screenHeight/50, Color.GREEN);
         player2 = new Player(screenWidth/2, screenHeight/8, screenWidth/5, screenHeight/50, Color.RED);

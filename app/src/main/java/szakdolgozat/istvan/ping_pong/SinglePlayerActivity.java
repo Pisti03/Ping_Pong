@@ -29,24 +29,26 @@ public class SinglePlayerActivity extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+        System.out.println("press");
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             if(!paused) {
                 gameView.pauseGame();
                 paused = true;
                 callPopUp();
+                System.out.println("Pause");
             } else{
-                popupWindow.dismiss();
+                //popupWindow.dismiss();
                 gameView.continueGame();
                 paused = false;
+                System.out.println("Continue");
             }
             return false;
         }
         return true;
     }
 
+    private void callPopUp(){
 
-    private void callPopUp()
-    {
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View popupView = inflater.inflate(R.layout.pausepopup, null);
 

@@ -22,7 +22,7 @@
         android:layout_alignStart="@+id/textViewMenu" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/playerScore1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18dp"
@@ -38,8 +38,8 @@
         android:layout_marginTop="94dp"
         android:text="Sound:"
         android:layout_below="@+id/textViewMenu"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignStart="@+id/textView2" />
+        android:layout_alignLeft="@+id/playerScore1"
+        android:layout_alignStart="@+id/playerScore1" />
 
     <Switch
         android:id="@+id/switch2"
@@ -47,7 +47,7 @@
         android:layout_height="30dp"
         android:text="Offline mode:"
         android:layout_below="@+id/seekBar3"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignStart="@+id/textView2" />
+        android:layout_alignLeft="@+id/playerScore1"
+        android:layout_alignStart="@+id/playerScore1" />
 
 </RelativeLayout>

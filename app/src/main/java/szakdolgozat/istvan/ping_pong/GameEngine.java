@@ -115,9 +115,9 @@ public class GameEngine {
         Ball ball = gameState.getBall();
         if(ball.getY() <= 0)
         {
-            //player1 score;
+            gameState.getPlayer1().increaseScore(1);
         } else {
-            //player2 score
+            gameState.getPlayer2().increaseScore(1);
         }
         ball.setPosition(screenWidth/2, screenHeight/2);
         ball.generateNewDirection();
@@ -205,13 +205,24 @@ public class GameEngine {
 
     }
 
-    public void movePlayer(double x, double y, Player player) {
+    public void movePlayer1(double x, double y, Player player) {
         if(!((x - player.getWidth()/2) < 0 || (x + player.getWidth()/2) > screenWidth))
         {
             player.setPosX(x);
         }
 
-        if(!((y - player.getHeight()/2) < screenHeight-(screenHeight*1/3) || (y + player.getHeight()/2) > screenHeight-(screenHeight*1/8))){
+        if(!((y - player.getHeight()/2) < screenHeight-(screenHeight*1/4) || (y + player.getHeight()/2) > screenHeight-(screenHeight*1/12))){
+            player.setPosY(y);
+        }
+    }
+
+    public void movePlayer2(double x, double y, Player player) {
+        if(!((x - player.getWidth()/2) < 0 || (x + player.getWidth()/2) > screenWidth))
+        {
+            player.setPosX(x);
+        }
+
+        if(!((y + player.getHeight()/2) > screenHeight*1/4 || (y - player.getHeight()/2) < screenHeight*1/12)){
             player.setPosY(y);
         }
     }
@@ -222,54 +233,7 @@ public class GameEngine {
         ball.nextPosition();
         if(isAI) {
             Point dest = ai.getDestination(gameState);
-            movePlayer(dest.getX(), dest.getY(), gameState.getPlayer2());
+            movePlayer2(dest.getX(), dest.getY(), gameState.getPlayer2());
         }
-    }
-
-    boolean onSegment(Point p, Point q, Point r)
-    {
-        if (q.getX() <= Math.max(p.getX(), r.getX()) && q.getX() >= Math.min(p.getX(), r.getX()) &&
-                q.getY() <= Math.max(p.getY(), r.getY()) && q.getY() >= Math.min(p.getY(), r.getY()))
-            return true;
-
-        return false;
-    }
-
-
-    int orientation(Point a, Point b, Point c)
-    {
-        int orientation = (int)((b.getY() - a.getY()) * (c.getX() - b.getX()) -
-                (b.getX() - a.getX()) * (c.getY() - b.getY()));
-
-        if (orientation == 0)
-            return 0;
-
-        return (orientation > 0) ? 1 : 2;
-    }
-
-
-    boolean doIntersect(Point a, Point b, Point c, Point d)
-    {
-        int o1 = orientation(a, b, c);
-        int o2 = orientation(a, b, d);
-        int o3 = orientation(c, d, a);
-        int o4 = orientation(c, d, b);
-
-        if (o1 != o2 && o3 != o4)
-            return true;
-
-        if (o1 == 0 && onSegment(a, c, b))
-            return true;
-
-        if (o2 == 0 && onSegment(a, d, b))
-            return true;
-
-        if (o3 == 0 && onSegment(c, a, d))
-            return true;
-
-        if (o4 == 0 && onSegment(c, b, d))
-            return true;
-
-        return false;
     }
 }
