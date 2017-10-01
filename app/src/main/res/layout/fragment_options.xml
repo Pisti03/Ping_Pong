@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
-        android:text="Options"
+        android:text="@string/options"
         android:textSize="36sp" />
 
     <SeekBar
@@ -19,14 +19,15 @@
         android:layout_height="30dp"
         android:layout_below="@+id/SWITH_SOUND"
         android:layout_alignLeft="@+id/textViewMenu"
-        android:layout_alignStart="@+id/textViewMenu" />
+        android:layout_alignStart="@+id/textViewMenu"
+        android:layout_marginTop="13dp" />
 
     <TextView
         android:id="@+id/TV_VOLUME"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:text="Volume:"
+        android:textSize="18sp"
+        android:text="@string/volume"
         android:layout_alignBottom="@+id/SB_VOLUME"
         android:layout_toLeftOf="@+id/SB_VOLUME"
         android:layout_toStartOf="@+id/SB_VOLUME" />
@@ -36,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="91dp"
-        android:text="Sound:"
+        android:text="@string/sound"
         android:layout_below="@+id/textViewMenu"
         android:layout_alignLeft="@+id/TV_VOLUME"
         android:layout_alignStart="@+id/TV_VOLUME" />
@@ -48,7 +49,7 @@
         android:layout_marginTop="15dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="@string/name"
         android:layout_below="@+id/SB_VOLUME"
         android:layout_alignLeft="@+id/SB_VOLUME"
         android:layout_alignStart="@+id/SB_VOLUME" />
@@ -57,8 +58,8 @@
         android:id="@+id/TV_NAME"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name:"
-        android:textSize="18dp"
+        android:text="@string/name"
+        android:textSize="18sp"
         android:layout_alignBaseline="@+id/ET_NAME"
         android:layout_alignBottom="@+id/ET_NAME"
         android:layout_toLeftOf="@+id/ET_NAME"
@@ -68,11 +69,12 @@
         android:id="@+id/TV_FPS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FPS: "
-        android:textSize="18dp"
-        android:layout_centerVertical="true"
+        android:text="@string/fps"
+        android:textSize="18sp"
+        android:layout_below="@+id/ET_NAME"
         android:layout_toLeftOf="@+id/ET_NAME"
-        android:layout_toStartOf="@+id/ET_NAME" />
+        android:layout_toStartOf="@+id/ET_NAME"
+        android:layout_marginTop="37dp" />
 
     <RadioGroup
         android:layout_width="wrap_content"
@@ -88,8 +90,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:checked="false"
-            android:text="30 fps"
-            android:textSize="18dp" />
+            android:text="@string/fps30"
+            android:textSize="18sp" />
 
         <RadioButton
             android:id="@+id/RB_60"
@@ -97,8 +99,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:checked="true"
-            android:text="60 fps"
-            android:textSize="18dp" />
+            android:text="@string/fps60"
+            android:textSize="18sp" />
     </RadioGroup>
 
 </RelativeLayout>
