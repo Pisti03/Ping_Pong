@@ -87,6 +87,12 @@ public class GameEngine {
         lastPosX = player.getLastPosX();
         lastPosY = player.getLastPosY();
 
+        int direction;
+        if(player.getPosY() > screenHeight/2)
+            direction = -1;
+        else
+            direction = 1;
+
         if(posX >= lastPosY)
             newVeloX = posX-lastPosX;
         else
@@ -98,13 +104,13 @@ public class GameEngine {
             newVeloY = lastPosY - posY;
 
         if(newVeloX != 0) {
-            gameState.getBall().setVeloX(-newVeloX);
+            gameState.getBall().setVeloX(direction * newVeloX);
         } else {
             gameState.getBall().reverseX();
         }
 
         if(newVeloY != 0){
-            gameState.getBall().setVeloY(-newVeloY);
+            gameState.getBall().setVeloY(direction * newVeloY);
         } else {
             gameState.getBall().reverseY();
         }

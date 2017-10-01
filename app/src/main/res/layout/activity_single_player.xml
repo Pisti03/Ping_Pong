@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="szakdolgozat.istvan.ping_pong.SinglePlayerActivity">
+    tools:context="szakdolgozat.istvan.ping_pong.GameActivity">
     <szakdolgozat.istvan.ping_pong.GameView
         android:id="@+id/gameView"
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_alignParentEnd="true" />
 
         <TextView
-            android:id="@+id/playerScore1"
+            android:id="@+id/TV_VOLUME"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"

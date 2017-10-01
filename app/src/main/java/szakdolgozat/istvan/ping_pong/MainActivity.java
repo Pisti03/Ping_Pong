@@ -91,7 +91,7 @@ public class MainActivity extends FragmentActivity {
     }
 
     public void onButtonStart(View v) {
-        this.startActivity(new Intent(this, SinglePlayerActivity.class));
+        this.startActivity(new Intent(this, GameActivity.class));
     }
 
 }

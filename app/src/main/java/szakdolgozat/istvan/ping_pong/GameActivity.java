@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 
 
-public class SinglePlayerActivity extends Activity {
+public class GameActivity extends Activity {
     private GameView gameView;
     private boolean paused = false;
     private PopupWindow popupWindow;

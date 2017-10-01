@@ -33,7 +33,7 @@ public class SinglePlayerFragment extends Fragment implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonStart:
-                this.startActivity(new Intent(getActivity(), SinglePlayerActivity.class));
+                this.startActivity(new Intent(getActivity(), GameActivity.class));
             break;
         }
     }
