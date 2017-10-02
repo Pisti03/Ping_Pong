@@ -29,18 +29,15 @@ public class GameActivity extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        System.out.println("press");
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if(!paused) {
                 gameView.pauseGame();
                 paused = true;
                 callPopUp();
-                System.out.println("Pause");
             } else{
                 //popupWindow.dismiss();
                 gameView.continueGame();
                 paused = false;
-                System.out.println("Continue");
             }
             return false;
         }

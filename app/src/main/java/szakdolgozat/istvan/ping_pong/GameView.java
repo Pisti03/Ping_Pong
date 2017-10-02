@@ -33,7 +33,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         holder.addCallback(this);
         this.width = Resources.getSystem().getDisplayMetrics().widthPixels;
         this.height = Resources.getSystem().getDisplayMetrics().heightPixels;
-        gameEngine = new GameEngine(width, height);//, Difficulty.EASY);
+        gameEngine = new GameEngine(width, height, Difficulty.MEDIUM);
         gameLoop = new GameLoop(this, gameEngine);
         setFocusable(true);
     }
@@ -49,10 +49,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         paint.setColor(ball.getColor());
         canvas.drawCircle((float) ball.getX(), (float) ball.getY(), (int) ball.getDiameter(), paint);
         paint.setColor(player.getColor());
-        canvas.drawRect((float) (player.getPosX() - player.getWidth() / 2), (float) (player.getPosY() - player.getHeight() / 2), (float) (player.getPosX() + player.getWidth() / 2), (float) (player.getPosY() + player.getHeight() / 2), paint);
+        canvas.drawRect((float) (player.getX() - player.getWidth() / 2), (float) (player.getY() - player.getHeight() / 2), (float) (player.getX() + player.getWidth() / 2), (float) (player.getY() + player.getHeight() / 2), paint);
         player = gameEngine.getGameState().getPlayer2();
         paint.setColor(player.getColor());
-        canvas.drawRect((float) (player.getPosX() - player.getWidth() / 2), (float) (player.getPosY() - player.getHeight() / 2), (float) (player.getPosX() + player.getWidth() / 2), (float) (player.getPosY() + player.getHeight() / 2), paint);
+        canvas.drawRect((float) (player.getX() - player.getWidth() / 2), (float) (player.getY() - player.getHeight() / 2), (float) (player.getX() + player.getWidth() / 2), (float) (player.getY() + player.getHeight() / 2), paint);
         paint.setAlpha(50);
         paint.setColor(Color.GRAY);
         canvas.drawLine(0, height / 2, width, height / 2, paint);
@@ -109,10 +109,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             else if (multiplayer && event.getY(i) < height * 1 / 4)
                 gameEngine.movePlayer2(event.getX(i), event.getY(i), gameEngine.getGameState().getPlayer2());
         }
-        /*double x = (double) event.getX();
-        double y = (double) event.getY();
-        gameEngine.movePlayer1(x, y, gameEngine.getGameState().getPlayer1());
-        */
         return true;
     }
 

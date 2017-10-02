@@ -8,17 +8,17 @@ import android.graphics.Color;
 
 public class Player {
     private int score;
-    private double posX, posY, lastPosX, lastPosY;
+    private double X, Y, lastX, lastY;
     public double width, height;
     private int color;
     //private Pickup pickup;
 
-    public Player(double posX, double posY, double width, double height, int color) {
+    public Player(double X, double Y, double width, double height, int color) {
         this.score = 0;
-        this.posX = posX;
-        this.posY = posY;
-        this.lastPosX = posX;
-        this.lastPosY = posY;
+        this.X = X;
+        this.Y = Y;
+        this.lastX = X;
+        this.lastY = Y;
         this.width = width;
         this.height = height;
         this.color = color;
@@ -33,12 +33,12 @@ public class Player {
         return score;
     }
 
-    public double getPosX() {
-        return posX;
+    public double getX() {
+        return X;
     }
 
-    public double getPosY() {
-        return posY;
+    public double getY() {
+        return Y;
     }
 
     public int getColor() {
@@ -54,26 +54,26 @@ public class Player {
     }
 
 
-    public double getLastPosX() {
-        return lastPosX;
+    public double getLastX() {
+        return lastX;
     }
 
-    public double getLastPosY() {
-        return lastPosY;
+    public double getLastY() {
+        return lastY;
     }
 
     public void setScore(int score) {
         this.score = score;
     }
 
-    public void setPosX(double posX) {
-        this.lastPosX = this.posX;
-        this.posX = posX;
+    public void setX(double X) {
+        this.lastX = this.X;
+        this.X = X;
     }
 
-    public void setPosY(double posY) {
-        this.lastPosY = this.posY;
-        this.posY = posY;
+    public void setY(double Y) {
+        this.lastY = this.Y;
+        this.Y = Y;
     }
 
     public void setColor(int color) {

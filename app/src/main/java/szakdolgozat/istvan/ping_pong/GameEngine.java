@@ -9,6 +9,7 @@ public class GameEngine {
     private double screenWidth, screenHeight;
     private boolean isAI = false;
     private AI ai;
+    private Sound sound;
 
     public GameEngine(double x, double y) {
         this.screenWidth = x;
@@ -20,7 +21,7 @@ public class GameEngine {
         this.screenWidth = x;
         this.screenHeight = y;
         this.isAI = isAI;
-        this.ai = new AI(Difficulty.MEDIUM);
+        this.ai = new AI(Difficulty.MEDIUM, screenHeight*1/12, screenHeight*1/4);
         restart();
     }
 
@@ -28,7 +29,7 @@ public class GameEngine {
         this.screenWidth = x;
         this.screenHeight = y;
         this.isAI = true;
-        this.ai = new AI(difficulty);
+        this.ai = new AI(difficulty, screenHeight*1/12, screenHeight*1/4);
         restart();
     }
 
@@ -51,10 +52,10 @@ public class GameEngine {
         double ballLeftSide = ball.getX() + ball.getVeloX() - ball.getDiameter()/2;
         double ballUpSide = ball.getY() + ball.getVeloY() - ball.getDiameter()/2;
         double ballDownSide = ball.getY() + ball.getVeloY() + ball.getDiameter()/2;
-        double playerLeftSide = player.getPosX() - player.getWidth()/2;
-        double playerRightSide = player.getPosX() + player.getWidth()/2;
-        double playerUpSide = player.getPosY() - player.getHeight()/2;
-        double playerDownSide = player.getPosY() + player.getHeight()/2;
+        double playerLeftSide = player.getX() - player.getWidth()/2;
+        double playerRightSide = player.getX() + player.getWidth()/2;
+        double playerUpSide = player.getY() - player.getHeight()/2;
+        double playerDownSide = player.getY() + player.getHeight()/2;
 
         switch(getDirection(ball, player)){
             case UP:
@@ -80,39 +81,39 @@ public class GameEngine {
 
     private void setSpeed(Player player)
     {
-        double newVeloX, newVeloY, posX, posY, lastPosX, lastPosY;
+        double newVeloX, newVeloY, X, Y, lastX, lastY;
         Ball ball = gameState.getBall();
-        posX = player.getPosX();
-        posY = player.getPosY();
-        lastPosX = player.getLastPosX();
-        lastPosY = player.getLastPosY();
+        X = player.getX();
+        Y = player.getY();
+        lastX = player.getLastX();
+        lastY = player.getLastY();
 
         int direction;
-        if(player.getPosY() > screenHeight/2)
+        if(player.getY() > screenHeight/2)
             direction = -1;
         else
             direction = 1;
 
-        if(posX >= lastPosY)
-            newVeloX = posX-lastPosX;
+        if(X >= lastY)
+            newVeloX = X-lastX;
         else
-            newVeloX = lastPosX-posX;
+            newVeloX = lastX-X;
 
-        if(posY >= lastPosY)
+        if(Y >= lastY)
             newVeloY = 0;
         else
-            newVeloY = lastPosY - posY;
+            newVeloY = lastY - Y;
 
         if(newVeloX != 0) {
-            gameState.getBall().setVeloX(direction * newVeloX);
+            ball.setVeloX(direction * newVeloX);
         } else {
-            gameState.getBall().reverseX();
+            ball.reverseX();
         }
 
         if(newVeloY != 0){
-            gameState.getBall().setVeloY(direction * newVeloY);
+            ball.setVeloY(direction * newVeloY);
         } else {
-            gameState.getBall().reverseY();
+            ball.reverseY();
         }
     }
 
@@ -134,16 +135,16 @@ public class GameEngine {
         double x,y;
         x = ball.getX();
         y = ball.getY();
-        if(y < player.getPosY() && x >= player.getPosX() - player.getWidth()/2  && x <= player.getPosX() + player.getWidth()/2)
+        if(y < player.getY() && x >= player.getX() - player.getWidth()/2  && x <= player.getX() + player.getWidth()/2)
             return Direction.UP;
 
-        if(y > player.getPosY() && x >= player.getPosX() - player.getWidth()/2  && x <= player.getPosX() + player.getWidth()/2)
+        if(y > player.getY() && x >= player.getX() - player.getWidth()/2  && x <= player.getX() + player.getWidth()/2)
             return Direction.DOWN;
 
-        if(x < player.getPosX())
+        if(x < player.getX())
             return Direction.LEFT;
 
-        if(x > player.getPosX())
+        if(x > player.getX())
             return  Direction.RIGHT;
 
         return Direction.UP;
@@ -159,51 +160,56 @@ public class GameEngine {
         {
             ball.setX(screenWidth-(ball.getDiameter()/2)-0.2);
             ball.reverseX();
+            sound.playWallSound();
         }
 
         if(ball.getX() <= 0)
         {
             ball.setX((ball.getDiameter()/2)+0.2);
             gameState.getBall().reverseX();
+            sound.playWallSound();
         }
 
         if(ball.getY() > screenHeight || ball.getY() < 0)
         {
+            sound.playWinSound();
             outOfMap();
         }
 
         if(testCollision(gameState.getPlayer1(), gameState.getBall()))
         {
+            sound.playPlayerSound();
             switch(getDirection(ball, player1)){
                 case UP:
-                    ball.setY(player1.getPosY()-player1.getHeight()/2 - 0.1 - ball.getDiameter()/2);
+                    ball.setY(player1.getY()-player1.getHeight()/2 - 0.1 - ball.getDiameter()/2);
                     break;
                 case DOWN:
-                    ball.setY(player1.getPosY()+player1.getHeight()/2 + 0.1 + ball.getDiameter()/2);
+                    ball.setY(player1.getY()+player1.getHeight()/2 + 0.1 + ball.getDiameter()/2);
                     break;
                 case RIGHT:
-                    ball.setX(player1.getPosX()+player1.getWidth()/2 + 0.1 +  ball.getDiameter()/2);
+                    ball.setX(player1.getX()+player1.getWidth()/2 + 0.1 +  ball.getDiameter()/2);
                     break;
                 case LEFT:
-                    ball.setX(player1.getPosX()-player1.getWidth()/2 - 0.1 - ball.getDiameter()/2);
+                    ball.setX(player1.getX()-player1.getWidth()/2 - 0.1 - ball.getDiameter()/2);
                     break;
             }
              setSpeed(gameState.getPlayer1());
         }
 
         if(testCollision(gameState.getPlayer2(), gameState.getBall())){
+            sound.playPlayerSound();
             switch(getDirection(ball, player2)){
                 case UP:
-                    ball.setY(player2.getPosY()-player2.getHeight()/2 - 0.1 - ball.getDiameter()/2);
+                    ball.setY(player2.getY()-player2.getHeight()/2 - 0.1 - ball.getDiameter()/2);
                     break;
                 case DOWN:
-                    ball.setY(player2.getPosY()+player2.getHeight()/2 + 0.1 + ball.getDiameter()/2);
+                    ball.setY(player2.getY()+player2.getHeight()/2 + 0.1 + ball.getDiameter()/2);
                     break;
                 case RIGHT:
-                    ball.setX(player2.getPosX()+player2.getWidth()/2 + 0.1 +  ball.getDiameter()/2);
+                    ball.setX(player2.getX()+player2.getWidth()/2 + 0.1 +  ball.getDiameter()/2);
                     break;
                 case LEFT:
-                    ball.setX(player2.getPosX()-player2.getWidth()/2 - 0.1 - ball.getDiameter()/2);
+                    ball.setX(player2.getX()-player2.getWidth()/2 - 0.1 - ball.getDiameter()/2);
                     break;
             }
             setSpeed(gameState.getPlayer2());
@@ -214,22 +220,22 @@ public class GameEngine {
     public void movePlayer1(double x, double y, Player player) {
         if(!((x - player.getWidth()/2) < 0 || (x + player.getWidth()/2) > screenWidth))
         {
-            player.setPosX(x);
+            player.setX(x);
         }
 
         if(!((y - player.getHeight()/2) < screenHeight-(screenHeight*1/4) || (y + player.getHeight()/2) > screenHeight-(screenHeight*1/12))){
-            player.setPosY(y);
+            player.setY(y);
         }
     }
 
     public void movePlayer2(double x, double y, Player player) {
         if(!((x - player.getWidth()/2) < 0 || (x + player.getWidth()/2) > screenWidth))
         {
-            player.setPosX(x);
+            player.setX(x);
         }
 
         if(!((y + player.getHeight()/2) > screenHeight*1/4 || (y - player.getHeight()/2) < screenHeight*1/12)){
-            player.setPosY(y);
+            player.setY(y);
         }
     }
 
