@@ -1,18 +1,29 @@
 package szakdolgozat.istvan.ping_pong;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity {
 
     private static MainPageAdapter mainPageAdapter;
     private MainButtonsManipulator mainButtonsManipulator;
+    private Options options;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +74,40 @@ public class MainActivity extends FragmentActivity {
         });
 
         viewPager.setCurrentItem(MainButtonsManipulator.SINGLEPLAYER_POSITION);
+        options = new Options(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(options.getUsername() == null)
+            firstTimeSetup();
+    }
+
+    public void firstTimeSetup(){
+        double width, height;
+        width = Resources.getSystem().getDisplayMetrics().widthPixels;
+        height = Resources.getSystem().getDisplayMetrics().heightPixels;
+        options.setScreenHeight((float)height);
+        options.setScreenWidth((float) width);
+        options.setSound(true);
+        options.setVolume(50);
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.usernamepopup);
+        dialog.setTitle("Username");
+        dialog.setCanceledOnTouchOutside(false);
+        final EditText editText = (EditText) dialog.findViewById(R.id.ET_USERNAME);
+        Button button = (Button) dialog.findViewById(R.id.BT_OK);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                options.setUsername(editText.getText().toString());
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
     public void toSinglePlayer(View v){
@@ -88,10 +133,6 @@ public class MainActivity extends FragmentActivity {
     public void toAbout(View v){
         ViewPager viewPagerGame = (ViewPager) findViewById(R.id.viewPager);
         viewPagerGame.setCurrentItem(MainButtonsManipulator.ABOUT_POSITION, false);
-    }
-
-    public void onButtonStart(View v) {
-        this.startActivity(new Intent(this, GameActivity.class));
     }
 
 }

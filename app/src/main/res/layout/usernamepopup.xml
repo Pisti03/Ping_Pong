@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="216dp"
+        android:layout_height="wrap_content"
         android:layout_margin="1dp"
         android:background="@android:color/darker_gray"
         android:orientation="vertical">
@@ -22,37 +22,27 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/TV_USERNAME"
                 android:layout_width="fill_parent"
                 android:layout_height="26dp"
                 android:gravity="center"
-                android:text="Pause" />
+                android:text="Username" />
+
+            <EditText
+                android:id="@+id/ET_USERNAME"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name" />
 
             <Button
-                android:id="@+id/buttonContinue"
+                android:id="@+id/BT_OK"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Continue" />
-
-            <Button
-                android:id="@+id/buttonRestart"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Restart" />
-
-            <Button
-                android:id="@+id/buttonExit2"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Exit" />
+                android:text="OK" />
 
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignParentBottom="true"
-            app:srcCompat="@android:drawable/ic_popup_disk_full" />
     </RelativeLayout>
 </LinearLayout>

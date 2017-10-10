@@ -34,14 +34,10 @@ public class GameActivity extends Activity {
                 gameView.pauseGame();
                 paused = true;
                 callPopUp();
-            } else{
-                //popupWindow.dismiss();
-                gameView.continueGame();
-                paused = false;
             }
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     private void callPopUp(){
@@ -69,13 +65,22 @@ public class GameActivity extends Activity {
         buttonExit.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 popupWindow.dismiss();
+                gameView.getGameLoop().setRunning(false);
                 finish();
             }
         });
 
         popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
-
         popupWindow.setTouchable(true);
+        popupWindow.setOutsideTouchable(false);
+        popupWindow.setFocusable(true);
         popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                gameView.continueGame();
+                paused = false;
+            }
+        });
     }
 }

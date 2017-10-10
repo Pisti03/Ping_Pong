@@ -10,7 +10,7 @@ import android.content.SharedPreferences;
 public class Options {
     public static final String MYOPTIONS = "MyOptions";
     public static final String USERNAME= "UserName";
-    public static final String MUTED = "Muted";
+    public static final String SOUND = "Sound";
     public static final String VOLUME = "Volume";
     public static final String SCREENHEIGHT = "Height";
     public static final String SCREENWIDTH = "Width";
@@ -28,8 +28,8 @@ public class Options {
         editor.commit();
     }
 
-    public void setMuted(Boolean muted){
-        editor.putBoolean(MUTED, muted);
+    public void setSound(Boolean sound){
+        editor.putBoolean(SOUND, sound);
         editor.commit();
     }
 
@@ -48,15 +48,17 @@ public class Options {
         editor.commit();
     }
 
+
     public String getUsername(){
-        return sharedpreferences.getString(USERNAME,"");
+        return sharedpreferences.getString(USERNAME, null);
     }
 
-    public Boolean getMuted(){
-        return sharedpreferences.getBoolean(MUTED, true);
+    public Boolean getSound(){
+        return sharedpreferences.getBoolean(SOUND, true);
     }
 
     public int getVolume(){
         return sharedpreferences.getInt(VOLUME, 0);
     }
+
 }

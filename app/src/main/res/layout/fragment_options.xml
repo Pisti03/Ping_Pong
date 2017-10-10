@@ -17,10 +17,10 @@
         android:id="@+id/SB_VOLUME"
         android:layout_width="200dp"
         android:layout_height="30dp"
-        android:layout_below="@+id/SWITH_SOUND"
-        android:layout_alignLeft="@+id/textViewMenu"
-        android:layout_alignStart="@+id/textViewMenu"
-        android:layout_marginTop="13dp" />
+        android:layout_marginTop="13dp"
+        android:layout_below="@+id/SW_SOUND"
+        android:layout_alignLeft="@+id/ET_NAME"
+        android:layout_alignStart="@+id/ET_NAME" />
 
     <TextView
         android:id="@+id/TV_VOLUME"
@@ -28,19 +28,18 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:text="@string/volume"
-        android:layout_alignBottom="@+id/SB_VOLUME"
-        android:layout_toLeftOf="@+id/SB_VOLUME"
-        android:layout_toStartOf="@+id/SB_VOLUME" />
+        android:layout_above="@+id/ET_NAME"
+        android:layout_toLeftOf="@+id/textViewMenu"
+        android:layout_toStartOf="@+id/textViewMenu" />
 
     <Switch
-        android:id="@+id/SWITH_SOUND"
+        android:id="@+id/SW_SOUND"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginTop="91dp"
-        android:text="@string/sound"
+        android:layout_marginTop="83dp"
         android:layout_below="@+id/textViewMenu"
-        android:layout_alignLeft="@+id/TV_VOLUME"
-        android:layout_alignStart="@+id/TV_VOLUME" />
+        android:layout_alignLeft="@+id/SB_VOLUME"
+        android:layout_alignStart="@+id/SB_VOLUME" />
 
     <EditText
         android:id="@+id/ET_NAME"
@@ -51,8 +50,8 @@
         android:inputType="textPersonName"
         android:text="@string/name"
         android:layout_below="@+id/SB_VOLUME"
-        android:layout_alignLeft="@+id/SB_VOLUME"
-        android:layout_alignStart="@+id/SB_VOLUME" />
+        android:layout_alignLeft="@+id/BT_SAVE"
+        android:layout_alignStart="@+id/BT_SAVE" />
 
     <TextView
         android:id="@+id/TV_NAME"
@@ -62,45 +61,27 @@
         android:textSize="18sp"
         android:layout_alignBaseline="@+id/ET_NAME"
         android:layout_alignBottom="@+id/ET_NAME"
-        android:layout_toLeftOf="@+id/ET_NAME"
-        android:layout_toStartOf="@+id/ET_NAME" />
+        android:layout_alignLeft="@+id/TV_VOLUME"
+        android:layout_alignStart="@+id/TV_VOLUME" />
+
+    <Button
+        android:id="@+id/BT_SAVE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="63dp"
+        android:text="Save" />
 
     <TextView
-        android:id="@+id/TV_FPS"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/fps"
         android:textSize="18sp"
-        android:layout_below="@+id/ET_NAME"
-        android:layout_toLeftOf="@+id/ET_NAME"
-        android:layout_toStartOf="@+id/ET_NAME"
-        android:layout_marginTop="37dp" />
-
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/radioGroup"
-        android:layout_alignTop="@+id/TV_FPS"
-        android:layout_toRightOf="@+id/TV_FPS"
-        android:layout_toEndOf="@+id/TV_FPS">
-
-        <RadioButton
-            android:id="@+id/RB_30"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:checked="false"
-            android:text="@string/fps30"
-            android:textSize="18sp" />
-
-        <RadioButton
-            android:id="@+id/RB_60"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:checked="true"
-            android:text="@string/fps60"
-            android:textSize="18sp" />
-    </RadioGroup>
+        android:text="@string/sound"
+        android:layout_alignBaseline="@+id/SW_SOUND"
+        android:layout_alignBottom="@+id/SW_SOUND"
+        android:layout_alignLeft="@+id/TV_VOLUME"
+        android:layout_alignStart="@+id/TV_VOLUME" />
 
 </RelativeLayout>

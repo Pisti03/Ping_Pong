@@ -25,7 +25,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private int width, height;
     private GameLoop gameLoop;
     private GameEngine gameEngine;
-    private Boolean multiplayer = true;
+    private Boolean multiplayer;
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -34,6 +34,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         this.width = Resources.getSystem().getDisplayMetrics().widthPixels;
         this.height = Resources.getSystem().getDisplayMetrics().heightPixels;
         gameEngine = new GameEngine(width, height, Difficulty.MEDIUM);
+        this.multiplayer = false;
         gameLoop = new GameLoop(this, gameEngine);
         setFocusable(true);
     }

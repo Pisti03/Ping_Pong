@@ -160,25 +160,25 @@ public class GameEngine {
         {
             ball.setX(screenWidth-(ball.getDiameter()/2)-0.2);
             ball.reverseX();
-            sound.playWallSound();
+            //sound.playWallSound();
         }
 
         if(ball.getX() <= 0)
         {
             ball.setX((ball.getDiameter()/2)+0.2);
             gameState.getBall().reverseX();
-            sound.playWallSound();
+            //sound.playWallSound();
         }
 
         if(ball.getY() > screenHeight || ball.getY() < 0)
         {
-            sound.playWinSound();
+            //sound.playWinSound();
             outOfMap();
         }
 
         if(testCollision(gameState.getPlayer1(), gameState.getBall()))
         {
-            sound.playPlayerSound();
+            //sound.playPlayerSound();
             switch(getDirection(ball, player1)){
                 case UP:
                     ball.setY(player1.getY()-player1.getHeight()/2 - 0.1 - ball.getDiameter()/2);
@@ -197,7 +197,9 @@ public class GameEngine {
         }
 
         if(testCollision(gameState.getPlayer2(), gameState.getBall())){
-            sound.playPlayerSound();
+            //sound.playPlayerSound();
+            if(isAI)
+                ai.setWillHit();
             switch(getDirection(ball, player2)){
                 case UP:
                     ball.setY(player2.getY()-player2.getHeight()/2 - 0.1 - ball.getDiameter()/2);

@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class AI {
     private static double EASY_SPEED = 10;
-    private static double MEDIUM_SPEED = 15;
+    private static double MEDIUM_SPEED = 6.25;
     private static double HARD_SPEED = 20;
     private Difficulty difficulty;
     private double minY, maxY, hitY;
@@ -49,6 +49,14 @@ public class AI {
                 setWillHit();
                 if(difficulty == Difficulty.HARD)
                     generateHitDirection();
+            } else
+            {
+                if(ball.getY() > maxY){
+                    ballInArea=!ballInArea;
+                    setWillHit();
+                    if(difficulty == Difficulty.HARD)
+                        generateHitDirection();
+                }
             }
 
         switch (difficulty) {
@@ -57,7 +65,7 @@ public class AI {
             case MEDIUM:
                 return getMediumDestination(ai, ball);
             case HARD:
-                return getHardDestination(ai, opponent, ball);
+                return getHardDestination(ai, ball);
             default:
                 return getMediumDestination(ai, ball);
         }
@@ -76,14 +84,14 @@ public class AI {
 
     private Point getMediumDestination(Player ai, Ball ball) {
         Point point = new Point();
-        if (ball.getX() > ai.getX() + MEDIUM_SPEED)
+        if (ball.getX() > (ai.getX() + MEDIUM_SPEED))
             point.setX(ai.getX() + MEDIUM_SPEED);
-        else if (ball.getX() < ai.getX() - MEDIUM_SPEED)
+        else if (ball.getX() < (ai.getX() - MEDIUM_SPEED))
             point.setX(ai.getX() - MEDIUM_SPEED);
         else
             point.setX(ball.getX());
 
-        if ((ball.getY() > (hitY + ai.getHeight() / 2) + MEDIUM_SPEED) || ball.getY() < ai.getY())
+        if ((ball.getY() > ((hitY + ai.getHeight() / 2) + MEDIUM_SPEED)) || (ball.getY() < ai.getY()))
             point.setY(ai.getY() - MEDIUM_SPEED);
         else if (isBallInRange(ball, ai, MEDIUM_SPEED))
             if(willHit)
@@ -99,7 +107,7 @@ public class AI {
         return false;
     }
 
-    private Point getHardDestination(Player ai, Player opponent, Ball ball) {
+    private Point getHardDestination(Player ai, Ball ball) {
         Point point = new Point();
 
         return point;
@@ -109,6 +117,7 @@ public class AI {
     {
         Random random = new Random();
         willHit = random.nextBoolean();
+        System.out.println("willHit" + willHit);
     }
 
     private void generateHitDirection(){
