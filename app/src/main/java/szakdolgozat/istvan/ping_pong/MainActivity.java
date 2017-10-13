@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
@@ -24,6 +26,7 @@ public class MainActivity extends FragmentActivity {
     private static MainPageAdapter mainPageAdapter;
     private MainButtonsManipulator mainButtonsManipulator;
     private Options options;
+    PopupWindow popupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +83,6 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         if(options.getUsername() == null)
             firstTimeSetup();
     }
@@ -93,21 +95,29 @@ public class MainActivity extends FragmentActivity {
         options.setScreenWidth((float) width);
         options.setSound(true);
         options.setVolume(50);
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.usernamepopup);
-        dialog.setTitle("Username");
-        dialog.setCanceledOnTouchOutside(false);
-        final EditText editText = (EditText) dialog.findViewById(R.id.ET_USERNAME);
-        Button button = (Button) dialog.findViewById(R.id.BT_OK);
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View popupView = inflater.inflate(R.layout.usernamepopup, null);
+
+
+        final EditText editText = (EditText) popupView.findViewById(R.id.ET_USERNAME);
+        Button button = (Button) popupView.findViewById(R.id.BT_OK);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 options.setUsername(editText.getText().toString());
-                dialog.dismiss();
+                popupWindow.dismiss();
             }
         });
 
-        dialog.show();
+        popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+        popupWindow.setTouchable(true);
+        popupWindow.setOutsideTouchable(false);
+        popupWindow.setFocusable(true);
+        popupView.post(new Runnable() {
+            public void run() {
+                popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+            }
+        });
     }
 
     public void toSinglePlayer(View v){

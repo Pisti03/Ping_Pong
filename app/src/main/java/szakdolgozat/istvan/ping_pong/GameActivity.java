@@ -21,7 +21,10 @@ public class GameActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LayoutInflater inflater = (LayoutInflater) getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+        inflater.inflate(R.layout.activity_single_player, (ViewGroup) findViewById(R.id.mainlayout));
         setContentView(R.layout.activity_single_player);
+
         gameView = (GameView) findViewById(R.id.gameView); //new GameView(this)
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);

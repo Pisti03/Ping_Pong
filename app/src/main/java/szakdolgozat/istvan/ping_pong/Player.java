@@ -11,6 +11,7 @@ public class Player {
     private double X, Y, lastX, lastY;
     public double width, height;
     private int color;
+    private Boolean moving;
     //private Pickup pickup;
 
     public Player(double X, double Y, double width, double height, int color) {
@@ -22,6 +23,7 @@ public class Player {
         this.width = width;
         this.height = height;
         this.color = color;
+        this.moving = false;
     }
 
     public void increaseScore(int score)
@@ -62,6 +64,10 @@ public class Player {
         return lastY;
     }
 
+    public Boolean isMoving() {
+        return moving;
+    }
+
     public void setScore(int score) {
         this.score = score;
     }
@@ -88,4 +94,15 @@ public class Player {
         this.height = height;
     }
 
+    public void setMoving(Boolean moving) {
+        this.moving = moving;
+    }
+
+    public void setLastX(double lastX) {
+        this.lastX = lastX;
+    }
+
+    public void setLastY(double lastY) {
+        this.lastY = lastY;
+    }
 }

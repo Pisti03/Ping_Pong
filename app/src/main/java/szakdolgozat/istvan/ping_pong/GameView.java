@@ -2,8 +2,6 @@ package szakdolgozat.istvan.ping_pong;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,9 +9,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.widget.TextView;
-
-import szakdolgozat.istvan.ping_pong.R;
 
 /**
  * Created by Pisti on 2017. 03. 22..
@@ -26,6 +23,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private GameLoop gameLoop;
     private GameEngine gameEngine;
     private Boolean multiplayer;
+    private Player[] players;
+    private GameActivity gameActivity;
+    private TextView playerScore, playerScore2;
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -36,12 +36,31 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         gameEngine = new GameEngine(width, height, Difficulty.MEDIUM);
         this.multiplayer = false;
         gameLoop = new GameLoop(this, gameEngine);
+        players = new Player[2];
         setFocusable(true);
+        gameActivity = (GameActivity) getContext();
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        View root = getRootView();
+        playerScore = (TextView) root.findViewById(R.id.playerScore);
+        playerScore2 = (TextView) root.findViewById(R.id.playerScore2);
     }
 
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
+        gameActivity.runOnUiThread(new Runnable()
+        {
+            public void run()
+            {
+                playerScore.setText(String.valueOf(gameEngine.getGameState().getPlayer1().getScore()));
+                playerScore2.setText(String.valueOf(gameEngine.getGameState().getPlayer2().getScore()));
+            }
+
+        });
         Paint paint = new Paint();
         Ball ball = gameEngine.getGameState().getBall();
         Player player = gameEngine.getGameState().getPlayer1();
@@ -100,7 +119,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         return gameLoop;
     }
 
-    @Override
+/*    @Override
     public boolean onTouchEvent(MotionEvent event) {
         int pointerCount = event.getPointerCount();
 
@@ -111,8 +130,58 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 gameEngine.movePlayer2(event.getX(i), event.getY(i), gameEngine.getGameState().getPlayer2());
         }
         return true;
+    }*/
+
+    //-------------------------------------------------------------------------------
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        int pointerIndex = event.getActionIndex();
+
+        // get masked (not specific to a pointer) action
+        int maskedAction = event.getActionMasked();
+
+        switch (maskedAction) {
+
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_POINTER_DOWN: {
+                // We have a new pointer. Lets add it to the list of pointers
+                if (event.getY(pointerIndex) > height/2) {
+                    players[pointerIndex] = gameEngine.getGameState().getPlayer1();
+                    players[pointerIndex].setMoving(true);
+                    gameEngine.movePlayer1(event.getX(pointerIndex), event.getY(pointerIndex), players[pointerIndex]);
+                } else {
+                    players[pointerIndex] = gameEngine.getGameState().getPlayer2();
+                    players[pointerIndex].setMoving(true);
+                    gameEngine.movePlayer2(event.getX(pointerIndex), event.getY(pointerIndex), players[pointerIndex]);
+                }
+                break;
+            }
+            case MotionEvent.ACTION_MOVE: { // a pointer was moved
+                for (int size = event.getPointerCount(), i = 0; i < size; i++) {
+                    if (event.getY(i) > height/2) {
+                        gameEngine.movePlayer1(event.getX(i), event.getY(i), players[pointerIndex]);
+                    } else {
+                        gameEngine.movePlayer2(event.getX(i), event.getY(i), players[pointerIndex]);
+                    }
+                }
+                break;
+            }
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_POINTER_UP:
+            case MotionEvent.ACTION_CANCEL: {
+                players[pointerIndex].setMoving(false);
+                //FINGER UP, PLAYER NOT MOVING, DEFAULT HIT WILL BE EXECUTED
+                break;
+            }
+        }
+        invalidate();
+
+        return true;
     }
 
+    //-------------------------------------------------------------------------------
     public void restart() {
         gameEngine.restart();
         continueGame();

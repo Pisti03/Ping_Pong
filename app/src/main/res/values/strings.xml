@@ -8,6 +8,9 @@
     <string name="sound">Sound</string>
     <string name="options">Options</string>
     <string name="aboutlabel">About</string>
+    <string name="singleplayer">Singleplayer</string>
+    <string name="multiplayer">Multiplayer</string>
+    <string name="highscores">High Scores</string>
     <string name="about">This game was made as a thesis work at the University of Debrecen under the license .....
     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
