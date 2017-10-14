@@ -49,8 +49,7 @@ public class AI {
                 setWillHit();
                 if(difficulty == Difficulty.HARD)
                     generateHitDirection();
-            } else
-            {
+            } else {
                 if(ball.getY() > maxY){
                     ballInArea=!ballInArea;
                     setWillHit();
@@ -117,7 +116,6 @@ public class AI {
     {
         Random random = new Random();
         willHit = random.nextBoolean();
-        System.out.println("willHit" + willHit);
     }
 
     private void generateHitDirection(){

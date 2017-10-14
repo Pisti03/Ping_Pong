@@ -188,20 +188,18 @@ public class GameEngine {
 
         if (testCollision(gameState.getPlayer2(), gameState.getBall())) {
             //sound.playPlayerSound();
-            if (isAI)
-                ai.setWillHit();
             switch (getDirection(ball, player2)) {
                 case UP:
-                    ball.setY(player2.getY() - player2.getHeight() / 2 - 0.1 - ball.getDiameter() / 2);
+                    ball.setY(player2.getY() - player2.getHeight() / 2 - 0.5 - ball.getDiameter() / 2);
                     break;
                 case DOWN:
-                    ball.setY(player2.getY() + player2.getHeight() / 2 + 0.1 + ball.getDiameter() / 2);
+                    ball.setY(player2.getY() + player2.getHeight() / 2 + 0.5 + ball.getDiameter() / 2);
                     break;
                 case RIGHT:
-                    ball.setX(player2.getX() + player2.getWidth() / 2 + 0.1 + ball.getDiameter() / 2);
+                    ball.setX(player2.getX() + player2.getWidth() / 2 + 0.5 + ball.getDiameter() / 2);
                     break;
                 case LEFT:
-                    ball.setX(player2.getX() - player2.getWidth() / 2 - 0.1 - ball.getDiameter() / 2);
+                    ball.setX(player2.getX() - player2.getWidth() / 2 - 0.5 - ball.getDiameter() / 2);
                     break;
             }
             setSpeed(gameState.getPlayer2());
@@ -237,10 +235,17 @@ public class GameEngine {
         }
     }
 
+    public void setPlayersLastPosition()
+    {
+        gameState.getPlayer1().setLast();
+        gameState.getPlayer2().setLast();
+    }
+
     public void nextStep() {
         Ball ball = gameState.getBall();
         collision();
         ball.nextPosition();
+        setPlayersLastPosition();
         if (isAI) {
             Point dest = ai.getDestination(gameState);
             movePlayer2(dest.getX(), dest.getY(), gameState.getPlayer2());

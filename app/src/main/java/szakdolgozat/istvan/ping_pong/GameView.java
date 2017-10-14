@@ -52,27 +52,33 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-        gameActivity.runOnUiThread(new Runnable()
-        {
-            public void run()
-            {
-                playerScore.setText(String.valueOf(gameEngine.getGameState().getPlayer1().getScore()));
-                playerScore2.setText(String.valueOf(gameEngine.getGameState().getPlayer2().getScore()));
-            }
+        setScore();
+        drawMap(canvas);
+        drawPlayers(canvas);
+        drawBall(canvas);
+    }
 
-        });
+    private void drawBall(Canvas canvas) {
         Paint paint = new Paint();
         Ball ball = gameEngine.getGameState().getBall();
-        Player player = gameEngine.getGameState().getPlayer1();
-        paint.setColor(Color.BLUE);
-        canvas.drawColor(Color.WHITE);
         paint.setColor(ball.getColor());
         canvas.drawCircle((float) ball.getX(), (float) ball.getY(), (int) ball.getDiameter(), paint);
+    }
+
+    private void drawPlayers(Canvas canvas) {
+        Player player = gameEngine.getGameState().getPlayer1();
+        Paint paint = new Paint();
         paint.setColor(player.getColor());
         canvas.drawRect((float) (player.getX() - player.getWidth() / 2), (float) (player.getY() - player.getHeight() / 2), (float) (player.getX() + player.getWidth() / 2), (float) (player.getY() + player.getHeight() / 2), paint);
         player = gameEngine.getGameState().getPlayer2();
         paint.setColor(player.getColor());
         canvas.drawRect((float) (player.getX() - player.getWidth() / 2), (float) (player.getY() - player.getHeight() / 2), (float) (player.getX() + player.getWidth() / 2), (float) (player.getY() + player.getHeight() / 2), paint);
+
+    }
+
+    private void drawMap(Canvas canvas) {
+        Paint paint = new Paint();
+        canvas.drawColor(Color.WHITE);
         paint.setAlpha(50);
         paint.setColor(Color.GRAY);
         canvas.drawLine(0, height / 2, width, height / 2, paint);
@@ -82,6 +88,16 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         paint.setColor(Color.RED);
         canvas.drawLine(0, height * 1 / 4, width, height * 1 / 4, paint);
         canvas.drawLine(0, height * 1 / 12, width, height * 1 / 12, paint);
+    }
+
+    private void setScore() {
+        gameActivity.runOnUiThread(new Runnable() {
+            public void run() {
+                playerScore.setText(String.valueOf(gameEngine.getGameState().getPlayer1().getScore()));
+                playerScore2.setText(String.valueOf(gameEngine.getGameState().getPlayer2().getScore()));
+            }
+
+        });
     }
 
     @Override
@@ -115,25 +131,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
     }
 
-    public GameLoop getGameLoop() {
-        return gameLoop;
-    }
-
-/*    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        int pointerCount = event.getPointerCount();
-
-        for (int i = 0; i < pointerCount; i++) {
-            if (event.getY(i) > height - (height * 1 / 4))
-                gameEngine.movePlayer1(event.getX(i), event.getY(i), gameEngine.getGameState().getPlayer1());
-            else if (multiplayer && event.getY(i) < height * 1 / 4)
-                gameEngine.movePlayer2(event.getX(i), event.getY(i), gameEngine.getGameState().getPlayer2());
-        }
-        return true;
-    }*/
-
-    //-------------------------------------------------------------------------------
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
@@ -146,12 +143,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN: {
-                // We have a new pointer. Lets add it to the list of pointers
-                if (event.getY(pointerIndex) > height/2) {
+                if (event.getY(pointerIndex) > height / 2) {
                     players[pointerIndex] = gameEngine.getGameState().getPlayer1();
                     players[pointerIndex].setMoving(true);
                     gameEngine.movePlayer1(event.getX(pointerIndex), event.getY(pointerIndex), players[pointerIndex]);
-                } else {
+                } else if (multiplayer) {
                     players[pointerIndex] = gameEngine.getGameState().getPlayer2();
                     players[pointerIndex].setMoving(true);
                     gameEngine.movePlayer2(event.getX(pointerIndex), event.getY(pointerIndex), players[pointerIndex]);
@@ -160,9 +156,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             }
             case MotionEvent.ACTION_MOVE: { // a pointer was moved
                 for (int size = event.getPointerCount(), i = 0; i < size; i++) {
-                    if (event.getY(i) > height/2) {
+                    if (event.getY(i) > height / 2) {
                         gameEngine.movePlayer1(event.getX(i), event.getY(i), players[pointerIndex]);
-                    } else {
+                    } else if (multiplayer) {
                         gameEngine.movePlayer2(event.getX(i), event.getY(i), players[pointerIndex]);
                     }
                 }
@@ -171,8 +167,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_POINTER_UP:
             case MotionEvent.ACTION_CANCEL: {
-                players[pointerIndex].setMoving(false);
                 //FINGER UP, PLAYER NOT MOVING, DEFAULT HIT WILL BE EXECUTED
+                players[pointerIndex].setMoving(false);
                 break;
             }
         }
@@ -181,7 +177,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         return true;
     }
 
-    //-------------------------------------------------------------------------------
     public void restart() {
         gameEngine.restart();
         continueGame();
@@ -194,6 +189,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     public void continueGame() {
         gameLoop.unPause();
+    }
+
+    public void stopGame() {
+        gameLoop.stopLoop();
     }
 }
 

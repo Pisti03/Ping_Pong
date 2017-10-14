@@ -73,12 +73,10 @@ public class Player {
     }
 
     public void setX(double X) {
-        this.lastX = this.X;
         this.X = X;
     }
 
     public void setY(double Y) {
-        this.lastY = this.Y;
         this.Y = Y;
     }
 
@@ -98,11 +96,8 @@ public class Player {
         this.moving = moving;
     }
 
-    public void setLastX(double lastX) {
-        this.lastX = lastX;
-    }
-
-    public void setLastY(double lastY) {
-        this.lastY = lastY;
+    public void setLast() {
+        this.lastX = this.X;
+        this.lastY = this.Y;
     }
 }

@@ -58,13 +58,17 @@ public class GameLoop extends Thread {
         return running;
     }
 
-    void pause() {
+    public void stopLoop(){
+        this.running = false;
+    }
+
+    public void pause() {
         synchronized (gameView.getHolder()) {
             paused = true;
         }
     }
 
-    void unPause() {
+   public void unPause() {
         synchronized (gameView.getHolder()) {
             paused = false;
         }

@@ -68,7 +68,7 @@ public class GameActivity extends Activity {
         buttonExit.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 popupWindow.dismiss();
-                gameView.getGameLoop().setRunning(false);
+                gameView.stopGame();
                 finish();
             }
         });
