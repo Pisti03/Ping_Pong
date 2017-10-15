@@ -1,17 +1,21 @@
 package szakdolgozat.istvan.ping_pong;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MultiPlayerFragment extends Fragment {
+public class MultiPlayerFragment extends Fragment implements View.OnClickListener {
+
+    private Button start;
 
     public static MultiPlayerFragment newInstance() {
         return new MultiPlayerFragment();
@@ -27,6 +31,27 @@ public class MultiPlayerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_multi_player, container, false);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        start = (Button) getView().findViewById(R.id.buttonStart2);
+        start.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.buttonStart2:
+                System.out.println("buttonStart2 pressed");
+                Intent intent = new Intent(getActivity(), GameActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("players", 2); //Your id
+                intent.putExtras(b); //Put your id to your next Intent
+                startActivity(intent);
+                break;
+        }
     }
 
 }

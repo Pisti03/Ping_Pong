@@ -21,12 +21,15 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class MainActivity extends FragmentActivity {
 
     private static MainPageAdapter mainPageAdapter;
     private MainButtonsManipulator mainButtonsManipulator;
     private Options options;
     PopupWindow popupWindow;
+    MySQLiteHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +81,12 @@ public class MainActivity extends FragmentActivity {
 
         viewPager.setCurrentItem(MainButtonsManipulator.SINGLEPLAYER_POSITION);
         options = new Options(this);
+        helper = new MySQLiteHelper(this);
+        System.out.println("DB TEST");
+        helper.insertMatch("Tesz", "Asd", 1, 5);
+        List<Match> matches = helper.getAllMatches();
+        for(int i=0; i<matches.size(); i++)
+            System.out.println(matches.get(i).toString());
     }
 
     @Override

@@ -94,7 +94,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         match.setWinner(Integer.parseInt(cursor.getString(3)));
         match.setScore(Integer.parseInt(cursor.getString(4)));
         match.setDate(Timestamp.valueOf(cursor.getString(5)));
-
+        db.close();
         return match;
     }
 
@@ -118,7 +118,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                 matches.add(match);
             } while (cursor.moveToNext());
         }
-
+        db.close();
         return matches;
     }
 

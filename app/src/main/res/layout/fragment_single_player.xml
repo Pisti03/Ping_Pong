@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     tools:context="szakdolgozat.istvan.ping_pong.SinglePlayerFragment">
 
+    <Spinner
+        android:id="@+id/spinnerBestOf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/spinnerDifficulties"
+        android:layout_alignStart="@+id/spinnerDifficulties"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="23dp" />
+
     <TextView
         android:id="@+id/TV_SINGLEPLAYER"
         android:layout_width="wrap_content"
@@ -17,10 +26,37 @@
         android:id="@+id/buttonStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onButtonStart"
         android:text="Start"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="77dp" />
+
+    <Spinner
+        android:id="@+id/spinnerDifficulties"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="159dp"
+        android:layout_below="@+id/TV_SINGLEPLAYER"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="First To Reach:"
+        android:textSize="18sp"
+        android:layout_below="@+id/spinnerDifficulties"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/spinnerDifficulties"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="54dp"
+        android:text="Difficulty"
+        android:textSize="18sp" />
 
 </RelativeLayout>

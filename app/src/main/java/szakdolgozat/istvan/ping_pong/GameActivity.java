@@ -17,10 +17,17 @@ public class GameActivity extends Activity {
     private GameView gameView;
     private boolean paused = false;
     private PopupWindow popupWindow;
+    private int players, difficulty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle b = getIntent().getExtras();
+        players = -1; // or other values
+        if(b != null) {
+            players = b.getInt("players");
+            difficulty = b.getInt("difficulty");
+        }
         LayoutInflater inflater = (LayoutInflater) getSystemService( Context.LAYOUT_INFLATER_SERVICE );
         inflater.inflate(R.layout.activity_single_player, (ViewGroup) findViewById(R.id.mainlayout));
         setContentView(R.layout.activity_single_player);
@@ -28,6 +35,15 @@ public class GameActivity extends Activity {
         gameView = (GameView) findViewById(R.id.gameView); //new GameView(this)
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(players == 1)
+            gameView.startSinglePlayer(difficulty);
+        else if(players == 2)
+            gameView.startMultiPlayer();
     }
 
     @Override

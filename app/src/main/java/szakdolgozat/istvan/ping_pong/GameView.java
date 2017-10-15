@@ -33,12 +33,37 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         holder.addCallback(this);
         this.width = Resources.getSystem().getDisplayMetrics().widthPixels;
         this.height = Resources.getSystem().getDisplayMetrics().heightPixels;
-        gameEngine = new GameEngine(width, height, Difficulty.MEDIUM);
-        this.multiplayer = false;
-        gameLoop = new GameLoop(this, gameEngine);
         players = new Player[2];
         setFocusable(true);
         gameActivity = (GameActivity) getContext();
+    }
+
+    public void startSinglePlayer(int difficulty){
+        Difficulty diff;
+        switch (difficulty){
+            case 1:
+                diff = Difficulty.EASY;
+                break;
+            case 2:
+                diff = Difficulty.MEDIUM;
+                break;
+            case 3:
+                diff = Difficulty.HARD;
+                break;
+            default:
+                diff = Difficulty.MEDIUM;
+                break;
+        }
+
+        gameEngine = new GameEngine(width, height, diff);
+        this.multiplayer = false;
+        gameLoop = new GameLoop(this, gameEngine);
+    }
+
+    public void startMultiPlayer(){
+        gameEngine = new GameEngine(width, height);
+        this.multiplayer = true;
+        gameLoop = new GameLoop(this, gameEngine);
     }
 
     @Override

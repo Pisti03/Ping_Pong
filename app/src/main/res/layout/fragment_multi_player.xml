@@ -12,4 +12,14 @@
         android:layout_centerHorizontal="true"
         android:text="@string/multiplayer"
         android:textSize="36sp" />
+
+    <Button
+        android:id="@+id/buttonStart2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="77dp" />
+
 </RelativeLayout>
