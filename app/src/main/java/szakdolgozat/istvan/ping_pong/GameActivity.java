@@ -29,8 +29,8 @@ public class GameActivity extends Activity {
             difficulty = b.getInt("difficulty");
         }
         LayoutInflater inflater = (LayoutInflater) getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-        inflater.inflate(R.layout.activity_single_player, (ViewGroup) findViewById(R.id.mainlayout));
-        setContentView(R.layout.activity_single_player);
+        inflater.inflate(R.layout.activity_game, (ViewGroup) findViewById(R.id.mainlayout));
+        setContentView(R.layout.activity_game);
 
         gameView = (GameView) findViewById(R.id.gameView); //new GameView(this)
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,

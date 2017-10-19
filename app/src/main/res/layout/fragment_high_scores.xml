@@ -11,15 +11,131 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="@string/highscores"
+        android:textStyle="bold"
         android:textSize="36sp" />
 
-    <Button
-        android:id="@+id/BT_HSADD"
+    <TextView
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
+        android:layout_marginTop="36dp"
+        android:text="Total Number Of Matches:"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_below="@+id/textView5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView8"
+        android:layout_alignStart="@+id/textView8"
+        android:layout_below="@+id/textView8"
+        android:layout_marginTop="10dp"
+        android:text="Number of matches played against AI:" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView9"
+        android:layout_alignStart="@+id/textView9"
+        android:layout_below="@+id/textView9"
+        android:layout_marginTop="12dp"
+        android:text="Number of multiplayer matches:" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView9"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_toEndOf="@+id/textView9"
+        android:layout_toRightOf="@+id/textView9"
+        android:text="1" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView11"
+        android:layout_alignStart="@+id/textView11"
+        android:layout_alignTop="@+id/textView9"
+        android:text="2" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView10"
+        android:layout_alignBottom="@+id/textView10"
+        android:layout_alignLeft="@+id/textView12"
+        android:layout_alignStart="@+id/textView12"
+        android:text="3" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Match history"
+        android:textStyle="bold"
+        android:layout_marginBottom="20sp"
+        android:layout_above="@+id/relativeLayout"
+        android:layout_centerHorizontal="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/relativeLayout"
+        android:layout_above="@+id/matchList"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="13dp">
+
+        <TextView
+            android:id="@+id/TV_HPLAYER1"
+            android:layout_width="95sp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Winner" />
+
+        <TextView
+            android:id="@+id/TV_HPLAYER2"
+            android:layout_width="95sp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/TV_HPLAYER1"
+            android:gravity="center"
+            android:text="Opponent" />
+
+        <TextView
+            android:id="@+id/TV_HSCORE"
+            android:layout_width="95sp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/TV_HPLAYER2"
+            android:gravity="center"
+            android:text="Score" />
+
+        <TextView
+            android:id="@+id/TV_HDATE"
+            android:layout_width="95sp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/TV_HSCORE"
+            android:gravity="center"
+            android:text="Date" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/matchList"
+        android:layout_width="match_parent"
+        android:layout_height="280sp"
+        android:layout_marginBottom="56dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="77dp"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 
 </RelativeLayout>

@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class AI {
     private static double EASY_SPEED = 10;
-    private static double MEDIUM_SPEED = 6.25;
+    private static double MEDIUM_SPEED = 15;
     private static double HARD_SPEED = 20;
     private Difficulty difficulty;
     private double minY, maxY, hitY;
@@ -43,17 +43,17 @@ public class AI {
         Player opponent = gamesState.getPlayer1();
         Player ai = gamesState.getPlayer2();
 
-        if(!ballInArea)
-            if(ball.getY() < maxY){
-                ballInArea=!ballInArea;
-                setWillHit();
-                if(difficulty == Difficulty.HARD)
-                    generateHitDirection();
-            } else {
-                if(ball.getY() > maxY){
-                    ballInArea=!ballInArea;
+        if(ballInArea && ball.getY() > maxY) {
+                if(ballInArea) {
+                    ballInArea = false;
                     setWillHit();
-                    if(difficulty == Difficulty.HARD)
+                    if (difficulty == Difficulty.HARD)
+                        generateHitDirection();
+                }
+            } else if(!ballInArea && ball.getY() < maxY) {
+                if(!ballInArea) {
+                    ballInArea = true;
+                    if (difficulty == Difficulty.HARD)
                         generateHitDirection();
                 }
             }

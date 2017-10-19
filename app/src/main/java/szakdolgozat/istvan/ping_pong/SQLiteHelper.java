@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  * Created by Pisti on 2017. 10. 14..
  */
 
-public class MySQLiteHelper extends SQLiteOpenHelper {
+public class SQLiteHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "MatchDB";
@@ -27,7 +28,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String MATCH_COLUMN_SCORE = "Score";
     public static final String MATCH_COLUMN_DATE = "Date";
 
-    public MySQLiteHelper(Context context) {
+    public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME , null, DATABASE_VERSION);
     }
 
@@ -98,8 +99,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         return match;
     }
 
-    public List<Match> getAllMatches() {
-        List<Match> matches = new LinkedList<>();
+    public ArrayList<Match> getAllMatches() {
+        ArrayList<Match> matches = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor =  db.rawQuery( "SELECT * FROM " + MATCH_TABLE_NAME, null );
 

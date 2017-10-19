@@ -1,12 +1,8 @@
 package szakdolgozat.istvan.ping_pong;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
@@ -19,7 +15,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -29,7 +24,6 @@ public class MainActivity extends FragmentActivity {
     private MainButtonsManipulator mainButtonsManipulator;
     private Options options;
     PopupWindow popupWindow;
-    MySQLiteHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,12 +75,6 @@ public class MainActivity extends FragmentActivity {
 
         viewPager.setCurrentItem(MainButtonsManipulator.SINGLEPLAYER_POSITION);
         options = new Options(this);
-        helper = new MySQLiteHelper(this);
-        System.out.println("DB TEST");
-        helper.insertMatch("Tesz", "Asd", 1, 5);
-        List<Match> matches = helper.getAllMatches();
-        for(int i=0; i<matches.size(); i++)
-            System.out.println(matches.get(i).toString());
     }
 
     @Override

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/winner"
+        android:layout_width="95sp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Winner" />
+
+    <TextView
+        android:id="@+id/loser"
+        android:layout_width="95sp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/winner"
+        android:gravity="center"
+        android:text="Loser" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="95sp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/loser"
+        android:gravity="center"
+        android:text="Score" />
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="95sp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/score"
+        android:gravity="center"
+        android:text="Date" />
+</RelativeLayout>

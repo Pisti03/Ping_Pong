@@ -96,18 +96,14 @@ public class Ball {
     {
         Random r = new Random();
         ArrayList<Point> x = new ArrayList<>();
-        x.add(new Point(3,3));
-        x.add(new Point(4,4));
-        x.add(new Point(3,5));
-        x.add(new Point(4,5));
-        x.add(new Point(5,5));
-        x.add(new Point(6,5));
-        x.add(new Point(6,6));
-        x.add(new Point(6,7));
-        x.add(new Point(6,8));
-        x.add(new Point(8,7));
+        x.add(new Point(0,1));
+        x.add(new Point(1,1));
+        x.add(new Point(0,-1));
+        x.add(new Point(-1,1));
+        x.add(new Point(-1,-1));
+        x.add(new Point(1,-1));
         Collections.shuffle(x);
-        this.veloX = (r.nextBoolean() ? 1 : -1) * x.get(0).getX();
-        this.veloY = (r.nextBoolean() ? 1 : -1) * x.get(0).getY();
+        this.veloX =  (r.nextInt(9-5) + 5) * x.get(0).getX();
+        this.veloY =  (r.nextInt(9-5) + 5) * x.get(0).getY();
     }
 }

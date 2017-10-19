@@ -11,6 +11,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:text="@string/options"
+        android:textStyle="bold"
         android:textSize="36sp" />
 
     <SeekBar
