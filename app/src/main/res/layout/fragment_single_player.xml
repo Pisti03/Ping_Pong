@@ -4,15 +4,6 @@
     android:layout_height="match_parent"
     tools:context="szakdolgozat.istvan.ping_pong.SinglePlayerFragment">
 
-    <Spinner
-        android:id="@+id/spinnerBestOf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/spinnerDifficulties"
-        android:layout_alignStart="@+id/spinnerDifficulties"
-        android:layout_below="@+id/textView3"
-        android:layout_marginTop="23dp" />
-
     <TextView
         android:id="@+id/TV_SINGLEPLAYER"
         android:layout_width="wrap_content"
@@ -59,5 +50,16 @@
         android:layout_marginBottom="54dp"
         android:text="Difficulty"
         android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/numBestOf"
+        android:layout_width="50sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:ems="10"
+        android:inputType="number"
+        android:layout_below="@+id/textView3"
+        android:layout_alignLeft="@+id/spinnerDifficulties"
+        android:layout_alignStart="@+id/spinnerDifficulties" />
 
 </RelativeLayout>

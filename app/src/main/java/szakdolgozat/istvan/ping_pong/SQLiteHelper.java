@@ -123,9 +123,40 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return matches;
     }
 
+    public ArrayList<Match> getFirstXMatches(int i) {
+        ArrayList<Match> matches = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor =  db.rawQuery( "SELECT * FROM " + MATCH_TABLE_NAME + " ORDER BY " + MATCH_COLUMN_DATE + " DESC LIMIT " + i, null );
+
+        Match match;
+
+        if (cursor.moveToFirst()) {
+            do {
+                match = new Match();
+                match.setId(Integer.parseInt(cursor.getString(0)));
+                match.setPlayer1(cursor.getString(1));
+                match.setPlayer2(cursor.getString(2));
+                match.setWinner(Integer.parseInt(cursor.getString(3)));
+                match.setScore(Integer.parseInt(cursor.getString(4)));
+                match.setDate(Timestamp.valueOf(cursor.getString(5)));
+
+                matches.add(match);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return matches;
+    }
+
     public int numberOfMatches() {
         SQLiteDatabase db = this.getReadableDatabase();
         int numRows = (int) DatabaseUtils.queryNumEntries(db, MATCH_TABLE_NAME);
+        db.close();
+        return numRows;
+    }
+
+    public int numberOFMatchesAgainstAi() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int numRows = (int) DatabaseUtils.queryNumEntries(db, MATCH_TABLE_NAME, MATCH_COLUMN_PLAYER2 + "='AI'");
         db.close();
         return numRows;
     }

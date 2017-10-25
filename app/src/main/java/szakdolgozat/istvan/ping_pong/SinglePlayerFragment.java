@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ public class SinglePlayerFragment extends Fragment implements View.OnClickListen
 
     private Button start;
     private Spinner spinner;
+    EditText bestOf;
 
     public static SinglePlayerFragment newInstance() {
         return new SinglePlayerFragment();
@@ -54,12 +56,13 @@ public class SinglePlayerFragment extends Fragment implements View.OnClickListen
                 R.layout.support_simple_spinner_dropdown_item, list);
         dataAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
+        bestOf = (EditText) getView().findViewById(R.id.numBestOf);
+        bestOf.setText("5");
     }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonStart:
-                System.out.println("buttonStart pressed");
                 Intent intent = new Intent(getActivity(), GameActivity.class);
                 Bundle b = new Bundle();
                 b.putInt("players", 1); //Your id
@@ -79,6 +82,7 @@ public class SinglePlayerFragment extends Fragment implements View.OnClickListen
                         break;
                 }
                 b.putInt("difficulty", temp);
+                b.putInt("bestof",Integer.parseInt(bestOf.getText().toString()));
                 intent.putExtras(b);
                 startActivity(intent);
             break;

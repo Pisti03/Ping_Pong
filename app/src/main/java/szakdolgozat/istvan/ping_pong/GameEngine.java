@@ -10,10 +10,14 @@ public class GameEngine {
     private boolean isAI = false;
     private AI ai;
     private Sound sound;
+    private Boolean endgame;
+    private int goal;
 
-    public GameEngine(double x, double y) {
+    public GameEngine(double x, double y, int goal) {
         this.screenWidth = x;
         this.screenHeight = y;
+        this.endgame = false;
+        this.goal = goal;
         restart();
     }
 
@@ -27,11 +31,13 @@ public class GameEngine {
         restart();
     }
 
-    public GameEngine(double x, double y, Difficulty difficulty) {
+    public GameEngine(double x, double y, Difficulty difficulty, int goal) {
         this.screenWidth = x;
         this.screenHeight = y;
         this.isAI = true;
         this.ai = new AI(difficulty, screenHeight * 1 / 12, screenHeight * 1 / 4);
+        this.goal = goal;
+        this.endgame = false;
         restart();
     }
 
@@ -242,6 +248,7 @@ public class GameEngine {
     }
 
     public void nextStep() {
+
         Ball ball = gameState.getBall();
         collision();
         ball.nextPosition();
@@ -250,5 +257,16 @@ public class GameEngine {
             Point dest = ai.getDestination(gameState);
             movePlayer2(dest.getX(), dest.getY(), gameState.getPlayer2());
         }
+
+        //TODO
+        if(getGameState().getPlayer1().getScore() + getGameState().getPlayer2().getScore() == goal){
+            endgame = true;
+            ball.setX(10000);
+        }
+
+    }
+
+    public boolean isGameEnded(){
+        return endgame;
     }
 }

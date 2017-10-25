@@ -47,7 +47,7 @@
         android:text="Number of multiplayer matches:" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/numOfMatches"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView9"
@@ -58,22 +58,22 @@
         android:text="1" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/numOfMatchesAI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView11"
-        android:layout_alignStart="@+id/textView11"
+        android:layout_alignLeft="@+id/numOfMatches"
+        android:layout_alignStart="@+id/numOfMatches"
         android:layout_alignTop="@+id/textView9"
         android:text="2" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/numOfMatchesMulti"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView10"
         android:layout_alignBottom="@+id/textView10"
-        android:layout_alignLeft="@+id/textView12"
-        android:layout_alignStart="@+id/textView12"
+        android:layout_alignLeft="@+id/numOfMatchesAI"
+        android:layout_alignStart="@+id/numOfMatchesAI"
         android:text="3" />
 
     <TextView

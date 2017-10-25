@@ -18,6 +18,7 @@ public class GameActivity extends Activity {
     private boolean paused = false;
     private PopupWindow popupWindow;
     private int players, difficulty;
+    private int bestof;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class GameActivity extends Activity {
         if(b != null) {
             players = b.getInt("players");
             difficulty = b.getInt("difficulty");
+            bestof = b.getInt("bestof");
         }
         LayoutInflater inflater = (LayoutInflater) getSystemService( Context.LAYOUT_INFLATER_SERVICE );
         inflater.inflate(R.layout.activity_game, (ViewGroup) findViewById(R.id.mainlayout));
@@ -41,9 +43,9 @@ public class GameActivity extends Activity {
     protected void onStart() {
         super.onStart();
         if(players == 1)
-            gameView.startSinglePlayer(difficulty);
+            gameView.startSinglePlayer(difficulty, bestof);
         else if(players == 2)
-            gameView.startMultiPlayer();
+            gameView.startMultiPlayer(bestof);
     }
 
     @Override

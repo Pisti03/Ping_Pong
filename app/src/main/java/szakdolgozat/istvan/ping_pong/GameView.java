@@ -38,7 +38,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         gameActivity = (GameActivity) getContext();
     }
 
-    public void startSinglePlayer(int difficulty){
+    public void startSinglePlayer(int difficulty, int goal){
         Difficulty diff;
         switch (difficulty){
             case 1:
@@ -55,13 +55,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 break;
         }
 
-        gameEngine = new GameEngine(width, height, diff);
+        gameEngine = new GameEngine(width, height, diff, goal);
         this.multiplayer = false;
         gameLoop = new GameLoop(this, gameEngine);
     }
 
-    public void startMultiPlayer(){
-        gameEngine = new GameEngine(width, height);
+    public void startMultiPlayer(int goal){
+        gameEngine = new GameEngine(width, height, goal);
         this.multiplayer = true;
         gameLoop = new GameLoop(this, gameEngine);
     }
@@ -77,6 +77,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
+        checkEndGame();
         setScore();
         drawMap(canvas);
         drawPlayers(canvas);
@@ -125,9 +126,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         });
     }
 
+    private void checkEndGame(){
+        if (gameEngine.isGameEnded()){
+            //TODO
+        }
+    }
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        System.out.println(w + " " + h);
         this.width = w;
         this.height = h;
         super.onSizeChanged(w, h, oldw, oldh);
