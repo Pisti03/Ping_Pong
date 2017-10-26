@@ -23,7 +23,8 @@ public class SinglePlayerFragment extends Fragment implements View.OnClickListen
 
     private Button start;
     private Spinner spinner;
-    EditText bestOf;
+    private EditText bestOf;
+    private Options options;
 
     public static SinglePlayerFragment newInstance() {
         return new SinglePlayerFragment();
@@ -32,6 +33,7 @@ public class SinglePlayerFragment extends Fragment implements View.OnClickListen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        options = new Options(getContext());
     }
 
     @Override
@@ -83,6 +85,8 @@ public class SinglePlayerFragment extends Fragment implements View.OnClickListen
                 }
                 b.putInt("difficulty", temp);
                 b.putInt("bestof",Integer.parseInt(bestOf.getText().toString()));
+                b.putString("player1", options.getUsername());
+                b.putString("player2", "AI");
                 intent.putExtras(b);
                 startActivity(intent);
             break;

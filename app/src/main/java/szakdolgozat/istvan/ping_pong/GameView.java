@@ -26,6 +26,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private Player[] players;
     private GameActivity gameActivity;
     private TextView playerScore, playerScore2;
+    private String player1, player2;
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -38,7 +39,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         gameActivity = (GameActivity) getContext();
     }
 
-    public void startSinglePlayer(int difficulty, int goal){
+    public void startSinglePlayer(int difficulty, int goal, String player1, String player2){
         Difficulty diff;
         switch (difficulty){
             case 1:
@@ -54,15 +55,18 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 diff = Difficulty.MEDIUM;
                 break;
         }
-
+        this.player1 = player1;
+        this.player2 = player2;
         gameEngine = new GameEngine(width, height, diff, goal);
         this.multiplayer = false;
         gameLoop = new GameLoop(this, gameEngine);
     }
 
-    public void startMultiPlayer(int goal){
+    public void startMultiPlayer(int goal, String player1, String player2){
         gameEngine = new GameEngine(width, height, goal);
         this.multiplayer = true;
+        this.player1 = player1;
+        this.player2 = player2;
         gameLoop = new GameLoop(this, gameEngine);
     }
 
@@ -77,7 +81,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-        checkEndGame();
         setScore();
         drawMap(canvas);
         drawPlayers(canvas);
@@ -126,10 +129,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         });
     }
 
-    private void checkEndGame(){
-        if (gameEngine.isGameEnded()){
-            //TODO
-        }
+    public void endGame(){
+        SQLiteHelper helper = new SQLiteHelper(getContext());
+        int score1 = gameEngine.getGameState().getPlayer1().getScore();
+        int score2 = gameEngine.getGameState().getPlayer2().getScore();
+        if(score1 > score2)
+            helper.insertMatch(player1, player2, 1, score1);
+        else
+            helper.insertMatch(player1, player2, 2, score2);
     }
 
     @Override

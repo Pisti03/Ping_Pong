@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 public class Options {
     public static final String MYOPTIONS = "MyOptions";
     public static final String USERNAME= "UserName";
+    public static final String OPPONENTNAME = "OpponentName";
     public static final String SOUND = "Sound";
     public static final String VOLUME = "Volume";
     public static final String SCREENHEIGHT = "Height";
@@ -25,6 +26,11 @@ public class Options {
 
     public void setUsername(String userName){
         editor.putString(USERNAME, userName);
+        editor.commit();
+    }
+
+    public void setOpponentName(String opponentName){
+        editor.putString(OPPONENTNAME, opponentName);
         editor.commit();
     }
 
@@ -50,7 +56,11 @@ public class Options {
 
 
     public String getUsername(){
-        return sharedpreferences.getString(USERNAME, null);
+        return sharedpreferences.getString(USERNAME, "Player1");
+    }
+
+    public String getOpponentName(){
+        return sharedpreferences.getString(OPPONENTNAME, "Player2");
     }
 
     public Boolean getSound(){

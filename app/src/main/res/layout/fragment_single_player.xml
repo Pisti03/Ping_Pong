@@ -27,9 +27,10 @@
         android:id="@+id/spinnerDifficulties"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="159dp"
+        android:layout_alignLeft="@+id/numBestOf"
+        android:layout_alignStart="@+id/numBestOf"
         android:layout_below="@+id/TV_SINGLEPLAYER"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="158dp" />
 
     <TextView
         android:id="@+id/textView3"
@@ -55,11 +56,11 @@
         android:id="@+id/numBestOf"
         android:layout_width="50sp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
-        android:ems="10"
-        android:inputType="number"
         android:layout_below="@+id/textView3"
-        android:layout_alignLeft="@+id/spinnerDifficulties"
-        android:layout_alignStart="@+id/spinnerDifficulties" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="33dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="numberDecimal" />
 
 </RelativeLayout>

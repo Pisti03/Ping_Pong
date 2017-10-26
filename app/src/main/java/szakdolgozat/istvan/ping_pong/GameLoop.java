@@ -31,6 +31,7 @@ public class GameLoop extends Thread {
         while (running) {
             Canvas c = null;
             startTime = System.currentTimeMillis();
+
             if(!paused && !gameEngine.isGameEnded())
                 gameEngine.nextStep();
 
@@ -47,6 +48,7 @@ public class GameLoop extends Thread {
             if(gameEngine.isGameEnded())
             {
                 stopLoop();
+                gameView.endGame();
             }
             sleepTime = ticksPS-(System.currentTimeMillis() - startTime);
             try {
