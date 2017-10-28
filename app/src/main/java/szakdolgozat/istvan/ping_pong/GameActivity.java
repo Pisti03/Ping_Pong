@@ -70,13 +70,17 @@ public class GameActivity extends Activity {
         final View popupView = inflater.inflate(R.layout.pausepopup, null);
 
         Button buttonContinue = (Button) popupView.findViewById(R.id.buttonContinue);
-        buttonContinue.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                popupWindow.dismiss();
-                gameView.continueGame();
-                paused=false;
-            }
-        });
+
+        if(!gameView.isGameEnded()) {
+            buttonContinue.setOnClickListener(new Button.OnClickListener() {
+                public void onClick(View v) {
+                    popupWindow.dismiss();
+                    gameView.continueGame();
+                    paused=false;
+                }
+            });
+        }
+
         Button buttonRestart = (Button) popupView.findViewById(R.id.buttonRestart);
         buttonRestart.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
@@ -85,6 +89,7 @@ public class GameActivity extends Activity {
                 paused=false;
             }
         });
+
         Button buttonExit = (Button) popupView.findViewById(R.id.buttonExit2);
         buttonExit.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {

@@ -25,7 +25,7 @@ public class GameEngine {
         this.screenWidth = x;
         this.screenHeight = y;
         this.isAI = isAI;
-        this.ai = new AI(Difficulty.MEDIUM, screenHeight * 1 / 12, screenHeight * 1 / 4);
+        this.ai = new AI(Difficulty.MEDIUM, screenWidth, screenHeight * 1 / 4);
         if(isAI)
             gameState.getPlayer2().setMoving(true);
         restart();
@@ -35,14 +35,16 @@ public class GameEngine {
         this.screenWidth = x;
         this.screenHeight = y;
         this.isAI = true;
-        this.ai = new AI(difficulty, screenHeight * 1 / 12, screenHeight * 1 / 4);
+        this.ai = new AI(difficulty, screenWidth, screenHeight * 1 / 4);
         this.goal = goal;
         this.endgame = false;
         restart();
+        getGameState().getPlayer2().setMoving(true);
     }
 
     public void restart() {
         gameState = new GameState(screenWidth, screenHeight);
+        endgame = false;
     }
 
     public GameState getGameState() {
@@ -164,7 +166,7 @@ public class GameEngine {
 
         if (ball.getX() <= 0) {
             ball.setX((ball.getDiameter() / 2) + 0.2);
-            gameState.getBall().reverseX();
+            ball.reverseX();
             //sound.playWallSound();
         }
 

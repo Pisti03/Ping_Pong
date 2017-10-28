@@ -25,7 +25,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private Boolean multiplayer;
     private Player[] players;
     private GameActivity gameActivity;
-    private TextView playerScore, playerScore2;
+    private TextView playerScore, playerScore2, winner;
     private String player1, player2;
 
     public GameView(Context context, AttributeSet attrs) {
@@ -76,6 +76,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         View root = getRootView();
         playerScore = (TextView) root.findViewById(R.id.playerScore);
         playerScore2 = (TextView) root.findViewById(R.id.playerScore2);
+        winner = (TextView) root.findViewById(R.id.TV_WINNER);
     }
 
     @Override
@@ -129,14 +130,34 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         });
     }
 
+    private void announceWinner(final String name, final int color){
+        gameActivity.runOnUiThread(new Runnable() {
+            public void run() {
+                winner.setTextColor(color);
+                winner.setText(name + " won!");
+            }
+        });
+    }
+
+    private void clearWinner(){
+        gameActivity.runOnUiThread(new Runnable() {
+            public void run() {
+                winner.setText("");
+            }
+        });
+    }
+
     public void endGame(){
         SQLiteHelper helper = new SQLiteHelper(getContext());
         int score1 = gameEngine.getGameState().getPlayer1().getScore();
         int score2 = gameEngine.getGameState().getPlayer2().getScore();
-        if(score1 > score2)
+        if(score1 > score2) {
+            announceWinner(player1, gameEngine.getGameState().getPlayer1().getColor());
             helper.insertMatch(player1, player2, 1, score1);
-        else
+        } else {
+            announceWinner(player2, gameEngine.getGameState().getPlayer2().getColor());
             helper.insertMatch(player1, player2, 2, score2);
+        }
     }
 
     @Override
@@ -216,8 +237,15 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void restart() {
+        clearWinner();
         gameEngine.restart();
-        continueGame();
+        if(gameLoop.isRunning()) {
+            continueGame();
+        } else {
+            gameLoop.setRunning(true);
+            gameLoop.start();
+        }
+
 
     }
 
@@ -231,6 +259,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     public void stopGame() {
         gameLoop.stopLoop();
+    }
+
+    public boolean isGameEnded(){
+        return gameEngine.isGameEnded();
     }
 }
 

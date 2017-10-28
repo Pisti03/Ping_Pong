@@ -22,6 +22,12 @@ public class Ball {
         this.color = color;
     }
 
+    public Ball(double diameter, double x, double y) {
+        this.diameter = diameter;
+        this.x = x;
+        this.y = y;
+    }
+
     public double getDiameter() {
         return diameter;
     }

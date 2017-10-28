@@ -58,6 +58,7 @@ public class SinglePlayerFragment extends Fragment implements View.OnClickListen
                 R.layout.support_simple_spinner_dropdown_item, list);
         dataAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
+        spinner.setSelection(1);
         bestOf = (EditText) getView().findViewById(R.id.numBestOf);
         bestOf.setText("5");
     }

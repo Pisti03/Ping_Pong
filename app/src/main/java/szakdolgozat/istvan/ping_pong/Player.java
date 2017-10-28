@@ -100,4 +100,8 @@ public class Player {
         this.lastX = this.X;
         this.lastY = this.Y;
     }
+
+    public  void  setLastY(double y){
+        this.lastY = y;
+    }
 }

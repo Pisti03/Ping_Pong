@@ -11,13 +11,14 @@ public class AI {
     private static double MEDIUM_SPEED = 15;
     private static double HARD_SPEED = 20;
     private Difficulty difficulty;
-    private double minY, maxY, hitY;
+    private double screenWidth, maxY, hitY;
     private boolean willHit, ballInArea;
     private Direction hitDirection;
+    private Point destination;
 
-    public AI(Difficulty difficulty, double minY, double maxY) {
+    public AI(Difficulty difficulty, double screenWidth, double maxY) {
         this.difficulty = difficulty;
-        this.minY = minY;
+        this.screenWidth = screenWidth;
         this.maxY = maxY;
         setHitY();
         setWillHit();
@@ -44,18 +45,14 @@ public class AI {
         Player ai = gamesState.getPlayer2();
 
         if(ballInArea && ball.getY() > maxY) {
-                if(ballInArea) {
-                    ballInArea = false;
-                    setWillHit();
-                    if (difficulty == Difficulty.HARD)
-                        generateHitDirection();
-                }
+                ballInArea = false;
+                setWillHit();
+                if (difficulty == Difficulty.HARD)
+                    generateHitDirection();
             } else if(!ballInArea && ball.getY() < maxY) {
-                if(!ballInArea) {
-                    ballInArea = true;
-                    if (difficulty == Difficulty.HARD)
-                        generateHitDirection();
-                }
+                ballInArea = true;
+                if (difficulty == Difficulty.HARD)
+                    generateHitDirection();
             }
 
         switch (difficulty) {
@@ -91,24 +88,50 @@ public class AI {
             point.setX(ball.getX());
 
         if ((ball.getY() > ((hitY + ai.getHeight() / 2) + MEDIUM_SPEED)) || (ball.getY() < ai.getY()))
-            point.setY(ai.getY() - MEDIUM_SPEED);
+            point.setY(ai.getY() - MEDIUM_SPEED/2);
         else if (isBallInRange(ball, ai, MEDIUM_SPEED))
-            if(willHit)
-                point.setY(ai.getY() + MEDIUM_SPEED);
+            if(willHit) {
+                if(ball.getY() - ball.getDiameter()/2 - 0.5 > MEDIUM_SPEED)
+                    point.setY(ai.getY() + MEDIUM_SPEED);
+                else
+                    point.setY(ball.getY() - ball.getDiameter()/2 - 0.5);
+
+            }
 
         return point;
     }
 
     private boolean isBallInRange(Ball ball, Player ai, double speed) {
-        if (ball.getX() < ai.getX() + speed || ball.getX() > ai.getX() - speed)
-            if (ball.getY() < ai.getY() + speed || ball.getY() > ai.getY() - speed)
+        if ((ball.getX() < ai.getX() + speed) && (ball.getX() > ai.getX() - speed))
+            if ((ball.getY()-ball.getDiameter()/2 < ai.getY() + ai.getHeight()/2 + speed) && (ball.getY() - ball.getDiameter()/2 > ai.getY() + ai.getHeight()/2 - speed))
                 return true;
         return false;
     }
 
     private Point getHardDestination(Player ai, Ball ball) {
         Point point = new Point();
+        Point temp = new Point();
+        double speed = MEDIUM_SPEED;
+        if(ball.getVeloX() < MEDIUM_SPEED)
+            speed = ball.getVeloX();
 
+        if(!isBallInRange(ball, ai, speed)) {
+            for(int i=10; i>0; i--) {
+                temp = calcBallPosition(ball, i);
+                if (temp.getY() > ai.getY() - 5 && temp.getY() < ai.getY() + 5)
+                {
+                    temp = destination;
+                    break;
+                }
+                destination = temp;
+            }
+        }
+
+        if(temp.getX() > ai.getX())
+            point.setX(ai.getX() + speed);
+        else
+            point.setX(ai.getX() - speed);
+        point.setY(ai.getY());
         return point;
     }
 
@@ -134,5 +157,24 @@ public class AI {
             default:
                 hitDirection = Direction.CENTER;
         }
+    }
+
+    private Point calcBallPosition(Ball a, int step)
+    {
+        Ball ball = new Ball(a.getDiameter(), a.getX(), a.getY());
+        for(int i=0; i<step; i++) {
+            ball.nextPosition();
+            if (ball.getX() >= screenWidth) {
+                ball.setX(screenWidth - (ball.getDiameter() / 2) - 0.2);
+                ball.reverseX();
+            }
+
+            if (ball.getX() <= 0) {
+                ball.setX((ball.getDiameter() / 2) + 0.2);
+                ball.reverseX();
+            }
+        }
+        Point target = new Point(ball.getX(), ball.getY());
+        return target;
     }
 }
