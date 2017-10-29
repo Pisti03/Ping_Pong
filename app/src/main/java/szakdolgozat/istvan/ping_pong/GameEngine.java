@@ -26,7 +26,7 @@ public class GameEngine {
         this.screenHeight = y;
         this.isAI = isAI;
         this.ai = new AI(Difficulty.MEDIUM, screenWidth, screenHeight * 1 / 4);
-        if(isAI)
+        if (isAI)
             gameState.getPlayer2().setMoving(true);
         restart();
     }
@@ -137,34 +137,37 @@ public class GameEngine {
         double x, y;
         x = ball.getX();
         y = ball.getY();
-        if (y - ball.getDiameter()/2 < player.getY() - player.getHeight()/2 && x >= player.getX() - player.getWidth() / 2 && x <= player.getX() + player.getWidth() / 2)
+        if (y - ball.getDiameter() / 2 < player.getY() - player.getHeight() / 2 && x >= player.getX() - player.getWidth() / 2 && x <= player.getX() + player.getWidth() / 2)
             return Direction.UP;
 
-        if (y + ball.getDiameter()/2 > player.getY() + player.getHeight()/2 && x >= player.getX() - player.getWidth() / 2 && x <= player.getX() + player.getWidth() / 2)
+        if (y + ball.getDiameter() / 2 > player.getY() + player.getHeight() / 2 && x >= player.getX() - player.getWidth() / 2 && x <= player.getX() + player.getWidth() / 2)
             return Direction.DOWN;
 
-        if (x < player.getX()  - player.getWidth() / 2 && y < player.getY() - player.getHeight()/2 && y > player.getY() + player.getHeight()/2)
+        if (x < player.getX() - player.getWidth() / 2 && y < player.getY() - player.getHeight() / 2 && y > player.getY() + player.getHeight() / 2)
             return Direction.LEFT;
 
-        if (x > player.getX() + player.getWidth() / 2 && y < player.getY() - player.getHeight()/2 && y > player.getY() + player.getHeight()/2)
+        if (x > player.getX() + player.getWidth() / 2 && y < player.getY() - player.getHeight() / 2 && y > player.getY() + player.getHeight() / 2)
             return Direction.RIGHT;
 
-        if (y - ball.getDiameter()/2 < player.getY() - player.getHeight()/2 && x > player.getX() + player.getWidth())
+        if (y - ball.getDiameter() / 2 < player.getY() - player.getHeight() / 2 && x > player.getX() + player.getWidth())
             return Direction.UPRIGHT;
 
-        if (y + ball.getDiameter()/2 > player.getY() + player.getHeight()/2 && x > player.getX() + player.getWidth() / 2)
+        if (y + ball.getDiameter() / 2 > player.getY() + player.getHeight() / 2 && x > player.getX() + player.getWidth() / 2)
             return Direction.DOWNRIGHT;
 
-        if (y - ball.getDiameter()/2 < player.getY() - player.getHeight()/2 && x < player.getX() - player.getWidth() / 2)
+        if (y - ball.getDiameter() / 2 < player.getY() - player.getHeight() / 2 && x < player.getX() - player.getWidth() / 2)
             return Direction.UPLEFT;
 
-        if (y + ball.getDiameter()/2 > player.getY() + player.getHeight()/2 && x < player.getX() - player.getWidth() / 2)
+        if (y + ball.getDiameter() / 2 > player.getY() + player.getHeight() / 2 && x < player.getX() - player.getWidth() / 2)
             return Direction.DOWNLEFT;
 
-        return Direction.UP;
+        if (player.getY() < screenHeight / 2)
+            return Direction.DOWN;
+        else
+            return Direction.UP;
     }
 
-    public void moveBallOutOfPlayer(Player player, Ball ball){
+    public void moveBallOutOfPlayer(Player player, Ball ball) {
         switch (getDirection(ball, player)) {
             case UP:
                 ball.setY(player.getY() - player.getHeight() / 2 - 0.5 - ball.getDiameter() / 2);
@@ -227,7 +230,7 @@ public class GameEngine {
 
         if (testCollision(gameState.getPlayer2(), gameState.getBall())) {
             //sound.playPlayerSound();
-            moveBallOutOfPlayer(player2,ball);
+            moveBallOutOfPlayer(player2, ball);
             setSpeed(gameState.getPlayer2());
         }
 
@@ -261,8 +264,7 @@ public class GameEngine {
         }
     }
 
-    public void setPlayersLastPosition()
-    {
+    public void setPlayersLastPosition() {
         gameState.getPlayer1().setLast();
         gameState.getPlayer2().setLast();
     }
@@ -278,15 +280,14 @@ public class GameEngine {
             movePlayer2(dest.getX(), dest.getY(), gameState.getPlayer2());
         }
 
-        //TODO
-        if(getGameState().getPlayer1().getScore() + getGameState().getPlayer2().getScore() == goal){
+        if (getGameState().getPlayer1().getScore() + getGameState().getPlayer2().getScore() >= goal) {
             endgame = true;
             ball.setX(10000);
         }
 
     }
 
-    public boolean isGameEnded(){
+    public boolean isGameEnded() {
         return endgame;
     }
 }
