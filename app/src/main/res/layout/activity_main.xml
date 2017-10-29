@@ -30,8 +30,8 @@
 
         <ImageButton
             android:id="@+id/buttonSinglePlayer"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="@dimen/buttonsizebig"
+            android:layout_height="@dimen/buttonsizebig"
             android:onClick="toSinglePlayer"
             android:src="@mipmap/singleplayer"
             android:layout_alignParentBottom="true"
@@ -40,8 +40,8 @@
 
         <ImageButton
             android:id="@+id/buttonMultiPlayer"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/buttonsizebig"
+            android:layout_height="@dimen/buttonsizesmall"
             android:onClick="toMultiPlayer"
             android:src="@mipmap/multiplayer"
             android:layout_alignParentBottom="true"
@@ -50,8 +50,8 @@
 
         <ImageButton
             android:id="@+id/buttonHighScores"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/buttonsizebig"
+            android:layout_height="@dimen/buttonsizesmall"
             android:onClick="toHighScores"
             android:src="@mipmap/highscores"
             android:layout_alignParentBottom="true"
@@ -59,8 +59,8 @@
 
         <ImageButton
             android:id="@+id/buttonOptions"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/buttonsizebig"
+            android:layout_height="@dimen/buttonsizesmall"
             android:onClick="toOptions"
             android:src="@mipmap/options"
             android:layout_alignParentBottom="true"
@@ -69,8 +69,8 @@
 
         <ImageButton
             android:id="@+id/buttonAbout"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/buttonsizebig"
+            android:layout_height="@dimen/buttonsizesmall"
             android:onClick="toAbout"
             android:src="@mipmap/about"
             android:layout_alignParentBottom="true"

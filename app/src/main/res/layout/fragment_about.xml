@@ -13,19 +13,17 @@
         android:overScrollMode="never"
         android:layout_below="@+id/textView6"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="15sp"
-        android:layout_marginRight="15sp"
-        android:layout_marginBottom="60sp">
+        android:layout_marginTop="@dimen/labeltextsize"
+        android:layout_marginBottom="@dimen/buttonsizebig">
         <TextView
             android:id="@+id/TV_ABOUT"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="51dp"
             android:layout_weight="1.0"
             android:text="@string/about"
-            android:textSize="17sp"/>
+            android:textSize="@dimen/textsize"/>
     </ScrollView>
 
 
@@ -36,7 +34,7 @@
         android:layout_height="wrap_content"
         android:text="@string/aboutlabel"
         android:textStyle="bold"
-        android:textSize="36sp"
+        android:textSize="@dimen/labeltextsize"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true" />
 
