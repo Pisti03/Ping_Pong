@@ -9,7 +9,8 @@ import android.graphics.Color;
 public class Player {
     private int score;
     private double X, Y, lastX, lastY;
-    public double width, height;
+    private double width, height;
+    private double virtualHeight;
     private int color;
     private Boolean moving;
     //private Pickup pickup;

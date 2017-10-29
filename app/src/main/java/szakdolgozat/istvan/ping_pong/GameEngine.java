@@ -137,21 +137,65 @@ public class GameEngine {
         double x, y;
         x = ball.getX();
         y = ball.getY();
-        if (y < player.getY() && x >= player.getX() - player.getWidth() / 2 && x <= player.getX() + player.getWidth() / 2)
+        if (y - ball.getDiameter()/2 < player.getY() - player.getHeight()/2 && x >= player.getX() - player.getWidth() / 2 && x <= player.getX() + player.getWidth() / 2)
             return Direction.UP;
 
-        if (y > player.getY() && x >= player.getX() - player.getWidth() / 2 && x <= player.getX() + player.getWidth() / 2)
+        if (y + ball.getDiameter()/2 > player.getY() + player.getHeight()/2 && x >= player.getX() - player.getWidth() / 2 && x <= player.getX() + player.getWidth() / 2)
             return Direction.DOWN;
 
-        if (x < player.getX())
+        if (x < player.getX()  - player.getWidth() / 2 && y < player.getY() - player.getHeight()/2 && y > player.getY() + player.getHeight()/2)
             return Direction.LEFT;
 
-        if (x > player.getX())
+        if (x > player.getX() + player.getWidth() / 2 && y < player.getY() - player.getHeight()/2 && y > player.getY() + player.getHeight()/2)
             return Direction.RIGHT;
+
+        if (y - ball.getDiameter()/2 < player.getY() - player.getHeight()/2 && x > player.getX() + player.getWidth())
+            return Direction.UPRIGHT;
+
+        if (y + ball.getDiameter()/2 > player.getY() + player.getHeight()/2 && x > player.getX() + player.getWidth() / 2)
+            return Direction.DOWNRIGHT;
+
+        if (y - ball.getDiameter()/2 < player.getY() - player.getHeight()/2 && x < player.getX() - player.getWidth() / 2)
+            return Direction.UPLEFT;
+
+        if (y + ball.getDiameter()/2 > player.getY() + player.getHeight()/2 && x < player.getX() - player.getWidth() / 2)
+            return Direction.DOWNLEFT;
 
         return Direction.UP;
     }
 
+    public void moveBallOutOfPlayer(Player player, Ball ball){
+        switch (getDirection(ball, player)) {
+            case UP:
+                ball.setY(player.getY() - player.getHeight() / 2 - 0.5 - ball.getDiameter() / 2);
+                break;
+            case DOWN:
+                ball.setY(player.getY() + player.getHeight() / 2 + 0.5 + ball.getDiameter() / 2);
+                break;
+            case RIGHT:
+                ball.setX(player.getX() + player.getWidth() / 2 + 0.5 + ball.getDiameter() / 2);
+                break;
+            case LEFT:
+                ball.setX(player.getX() - player.getWidth() / 2 - 0.5 - ball.getDiameter() / 2);
+                break;
+            case UPRIGHT:
+                ball.setY(player.getY() - player.getHeight() / 2 - 0.5 - ball.getDiameter() / 2);
+                ball.setX(player.getX() + player.getWidth() / 2 + 0.5 + ball.getDiameter() / 2);
+                break;
+            case DOWNRIGHT:
+                ball.setY(player.getY() + player.getHeight() / 2 + 0.5 + ball.getDiameter() / 2);
+                ball.setX(player.getX() + player.getWidth() / 2 + 0.5 + ball.getDiameter() / 2);
+                break;
+            case UPLEFT:
+                ball.setX(player.getX() + player.getWidth() / 2 + 0.5 + ball.getDiameter() / 2);
+                ball.setX(player.getX() - player.getWidth() / 2 - 0.5 - ball.getDiameter() / 2);
+                break;
+            case DOWNLEFT:
+                ball.setX(player.getX() - player.getWidth() / 2 - 0.5 - ball.getDiameter() / 2);
+                ball.setX(player.getX() - player.getWidth() / 2 - 0.5 - ball.getDiameter() / 2);
+                break;
+        }
+    }
 
     public void collision() {
         Ball ball = gameState.getBall();
@@ -175,41 +219,15 @@ public class GameEngine {
             outOfMap();
         }
 
-        if (testCollision(gameState.getPlayer1(), gameState.getBall())) {
+        if (testCollision(player1, ball)) {
             //sound.playPlayerSound();
-            switch (getDirection(ball, player1)) {
-                case UP:
-                    ball.setY(player1.getY() - player1.getHeight() / 2 - 0.1 - ball.getDiameter() / 2);
-                    break;
-                case DOWN:
-                    ball.setY(player1.getY() + player1.getHeight() / 2 + 0.1 + ball.getDiameter() / 2);
-                    break;
-                case RIGHT:
-                    ball.setX(player1.getX() + player1.getWidth() / 2 + 0.1 + ball.getDiameter() / 2);
-                    break;
-                case LEFT:
-                    ball.setX(player1.getX() - player1.getWidth() / 2 - 0.1 - ball.getDiameter() / 2);
-                    break;
-            }
+            moveBallOutOfPlayer(player1, ball);
             setSpeed(gameState.getPlayer1());
         }
 
         if (testCollision(gameState.getPlayer2(), gameState.getBall())) {
             //sound.playPlayerSound();
-            switch (getDirection(ball, player2)) {
-                case UP:
-                    ball.setY(player2.getY() - player2.getHeight() / 2 - 0.5 - ball.getDiameter() / 2);
-                    break;
-                case DOWN:
-                    ball.setY(player2.getY() + player2.getHeight() / 2 + 0.5 + ball.getDiameter() / 2);
-                    break;
-                case RIGHT:
-                    ball.setX(player2.getX() + player2.getWidth() / 2 + 0.5 + ball.getDiameter() / 2);
-                    break;
-                case LEFT:
-                    ball.setX(player2.getX() - player2.getWidth() / 2 - 0.5 - ball.getDiameter() / 2);
-                    break;
-            }
+            moveBallOutOfPlayer(player2,ball);
             setSpeed(gameState.getPlayer2());
         }
 

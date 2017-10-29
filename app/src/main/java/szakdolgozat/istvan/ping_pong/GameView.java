@@ -215,9 +215,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             }
             case MotionEvent.ACTION_MOVE: { // a pointer was moved
                 for (int size = event.getPointerCount(), i = 0; i < size; i++) {
-                    if (event.getY(i) > height / 2) {
+                    if (event.getY(i) > height / 2 && players[pointerIndex].getColor() == gameEngine.getGameState().getPlayer1().getColor()) {
                         gameEngine.movePlayer1(event.getX(i), event.getY(i), players[pointerIndex]);
-                    } else if (multiplayer) {
+                    } else if (multiplayer && players[pointerIndex].getColor() == gameEngine.getGameState().getPlayer2().getColor()) {
                         gameEngine.movePlayer2(event.getX(i), event.getY(i), players[pointerIndex]);
                     }
                 }

@@ -9,5 +9,9 @@ public enum Direction {
     LEFT,
     UP,
     DOWN,
+    UPRIGHT,
+    UPLEFT,
+    DOWNRIGHT,
+    DOWNLEFT,
     CENTER
 }
