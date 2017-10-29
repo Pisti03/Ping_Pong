@@ -7,7 +7,6 @@
     <dimen name="buttonsizesmall">50sp</dimen>
     <dimen name="labeltextsize">36sp</dimen>
     <dimen name="scoretextsize">25sp</dimen>
-    <dimen name="scoretextsize">25sp</dimen>
     <dimen name="textsize">17sp</dimen>
     <dimen name="popupheight">220sp</dimen>
 </resources>
