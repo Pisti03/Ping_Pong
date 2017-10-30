@@ -25,7 +25,6 @@ public class GameActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle b = getIntent().getExtras();
-        players = -1; // or other values
         if(b != null) {
             players = b.getInt("players");
             difficulty = b.getInt("difficulty");
@@ -37,7 +36,7 @@ public class GameActivity extends Activity {
         inflater.inflate(R.layout.activity_game, (ViewGroup) findViewById(R.id.mainlayout));
         setContentView(R.layout.activity_game);
 
-        gameView = (GameView) findViewById(R.id.gameView); //new GameView(this)
+        gameView = (GameView) findViewById(R.id.gameView);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
@@ -49,6 +48,18 @@ public class GameActivity extends Activity {
             gameView.startSinglePlayer(difficulty, bestof, player1, player2);
         else if(players == 2)
             gameView.startMultiPlayer(bestof, player1, player2);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        gameView.pauseGame();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        gameView.continueGame();
     }
 
     @Override

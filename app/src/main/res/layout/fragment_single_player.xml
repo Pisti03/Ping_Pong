@@ -37,8 +37,8 @@
         android:id="@+id/spinnerDifficulties"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/numBestOf"
-        android:layout_alignStart="@+id/numBestOf"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:layout_below="@+id/textView7"
         android:layout_marginTop="@dimen/textsize"/>
 

@@ -2,7 +2,7 @@
 
 <resources>
     <dimen name="listcolumnwidth">80sp</dimen>
-    <dimen name="listheight">200sp</dimen>
+    <dimen name="listheight">225sp</dimen>
     <dimen name="buttonsizebig">60sp</dimen>
     <dimen name="buttonsizesmall">50sp</dimen>
     <dimen name="labeltextsize">30sp</dimen>

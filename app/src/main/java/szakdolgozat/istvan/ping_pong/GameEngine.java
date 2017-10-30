@@ -13,31 +13,34 @@ public class GameEngine {
     private Boolean endgame;
     private int goal;
 
-    public GameEngine(double x, double y, int goal) {
+    public GameEngine(double x, double y, int goal, Sound sound) {
         this.screenWidth = x;
         this.screenHeight = y;
         this.endgame = false;
         this.goal = goal;
+        this.sound = sound;
         restart();
     }
 
-    public GameEngine(double x, double y, boolean isAI) {
+    public GameEngine(double x, double y, boolean isAI, Sound sound) {
         this.screenWidth = x;
         this.screenHeight = y;
         this.isAI = isAI;
+        this.sound = sound;
         this.ai = new AI(Difficulty.MEDIUM, screenWidth, screenHeight * 1 / 4);
         if (isAI)
             gameState.getPlayer2().setMoving(true);
         restart();
     }
 
-    public GameEngine(double x, double y, Difficulty difficulty, int goal) {
+    public GameEngine(double x, double y, Difficulty difficulty, int goal, Sound sound) {
         this.screenWidth = x;
         this.screenHeight = y;
         this.isAI = true;
         this.ai = new AI(difficulty, screenWidth, screenHeight * 1 / 4);
         this.goal = goal;
         this.endgame = false;
+        this.sound = sound;
         restart();
         getGameState().getPlayer2().setMoving(true);
     }
@@ -208,13 +211,13 @@ public class GameEngine {
         if (ball.getX() >= screenWidth) {
             ball.setX(screenWidth - (ball.getDiameter() / 2) - 0.2);
             ball.reverseX();
-            //sound.playWallSound();
+            sound.playWallSound();
         }
 
         if (ball.getX() <= 0) {
             ball.setX((ball.getDiameter() / 2) + 0.2);
             ball.reverseX();
-            //sound.playWallSound();
+            sound.playWallSound();
         }
 
         if (ball.getY() > screenHeight || ball.getY() < 0) {
@@ -223,13 +226,13 @@ public class GameEngine {
         }
 
         if (testCollision(player1, ball)) {
-            //sound.playPlayerSound();
+            sound.playPlayerSound();
             moveBallOutOfPlayer(player1, ball);
             setSpeed(gameState.getPlayer1());
         }
 
         if (testCollision(gameState.getPlayer2(), gameState.getBall())) {
-            //sound.playPlayerSound();
+            sound.playPlayerSound();
             moveBallOutOfPlayer(player2, ball);
             setSpeed(gameState.getPlayer2());
         }

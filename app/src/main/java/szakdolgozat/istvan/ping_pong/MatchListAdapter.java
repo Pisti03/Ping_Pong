@@ -8,7 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,8 +22,11 @@ import java.util.List;
 
 public class MatchListAdapter extends ArrayAdapter<Match> {
 
+    SimpleDateFormat format;
+
     public MatchListAdapter(Context context, int resource, ArrayList<Match> values) {
         super(context, resource, values);
+        this.format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     }
 
     @Override
@@ -36,7 +44,7 @@ public class MatchListAdapter extends ArrayAdapter<Match> {
         winner.setText(match.getPlayer1());
         loser.setText(match.getPlayer2());
         score.setText(Integer.toString(match.getScore()));
-        date.setText(match.getDate().toString());
+        date.setText(format.format(match.getDate()));
 
         if(match.getWinner() == 1) {
             winner.setText(match.getPlayer1());

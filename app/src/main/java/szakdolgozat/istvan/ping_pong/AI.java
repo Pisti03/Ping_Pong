@@ -14,7 +14,6 @@ public class AI {
     private double screenWidth, maxY, hitY;
     private boolean willHit, ballInArea;
     private Direction hitDirection;
-    private Point destination;
 
     public AI(Difficulty difficulty, double screenWidth, double maxY) {
         this.difficulty = difficulty;
@@ -23,9 +22,10 @@ public class AI {
         this.medium_speed = screenWidth/70;
         this.hard_speed = screenWidth/45;
         this.maxY = maxY;
+        this.ballInArea = false;
         setHitY();
         setWillHit();
-        this.ballInArea = false;
+
     }
 
     private void setHitY() {

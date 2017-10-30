@@ -12,7 +12,7 @@ public class Match {
     private String player2;
     private int winner;
     private int score;
-    private  Timestamp date;
+    private Timestamp date;
 
     public Match() {
     }

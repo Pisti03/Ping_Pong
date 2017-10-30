@@ -40,6 +40,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void startSinglePlayer(int difficulty, int goal, String player1, String player2){
+        Sound sound = new Sound(getContext());
         Difficulty diff;
         switch (difficulty){
             case 1:
@@ -57,13 +58,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         }
         this.player1 = player1;
         this.player2 = player2;
-        gameEngine = new GameEngine(width, height, diff, goal);
+        gameEngine = new GameEngine(width, height, diff, goal, sound);
         this.multiplayer = false;
         gameLoop = new GameLoop(this, gameEngine);
     }
 
     public void startMultiPlayer(int goal, String player1, String player2){
-        gameEngine = new GameEngine(width, height, goal);
+        Sound sound = new Sound(getContext());
+        gameEngine = new GameEngine(width, height, goal, sound);
         this.multiplayer = true;
         this.player1 = player1;
         this.player2 = player2;
@@ -242,6 +244,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         if(gameLoop.isRunning()) {
             continueGame();
         } else {
+            gameLoop = new GameLoop(this, gameEngine);
             gameLoop.setRunning(true);
             gameLoop.start();
         }
