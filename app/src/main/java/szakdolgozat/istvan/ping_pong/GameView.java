@@ -204,11 +204,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN: {
-                if (event.getY(pointerIndex) > height / 2) {
+                if (event.getY(pointerIndex) > height / 2 && pointerIndex<2) {
                     players[pointerIndex] = gameEngine.getGameState().getPlayer1();
                     players[pointerIndex].setMoving(true);
                     gameEngine.movePlayer1(event.getX(pointerIndex), event.getY(pointerIndex), players[pointerIndex]);
-                } else if (multiplayer) {
+                } else if (multiplayer && pointerIndex<2) {
                     players[pointerIndex] = gameEngine.getGameState().getPlayer2();
                     players[pointerIndex].setMoving(true);
                     gameEngine.movePlayer2(event.getX(pointerIndex), event.getY(pointerIndex), players[pointerIndex]);
@@ -216,11 +216,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 break;
             }
             case MotionEvent.ACTION_MOVE: { // a pointer was moved
-                for (int size = event.getPointerCount(), i = 0; i < size; i++) {
-                    if (event.getY(i) > height / 2 && players[pointerIndex].getColor() == gameEngine.getGameState().getPlayer1().getColor()) {
-                        gameEngine.movePlayer1(event.getX(i), event.getY(i), players[pointerIndex]);
-                    } else if (multiplayer && players[pointerIndex].getColor() == gameEngine.getGameState().getPlayer2().getColor()) {
-                        gameEngine.movePlayer2(event.getX(i), event.getY(i), players[pointerIndex]);
+                for (int i = 0; i < event.getPointerCount(); i++) {
+                    if (event.getY(i) > height / 2) {
+                        gameEngine.movePlayer1(event.getX(i), event.getY(i), gameEngine.getGameState().getPlayer1());
+                    } else if (multiplayer) {
+                        gameEngine.movePlayer2(event.getX(i), event.getY(i), gameEngine.getGameState().getPlayer2());
                     }
                 }
                 break;
@@ -229,7 +229,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             case MotionEvent.ACTION_POINTER_UP:
             case MotionEvent.ACTION_CANCEL: {
                 //FINGER UP, PLAYER NOT MOVING, DEFAULT HIT WILL BE EXECUTED
-                players[pointerIndex].setMoving(false);
+                if(pointerIndex < 2)
+                    players[pointerIndex].setMoving(false);
                 break;
             }
         }
