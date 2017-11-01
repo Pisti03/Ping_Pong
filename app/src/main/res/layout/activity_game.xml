@@ -25,8 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
-            android:textSize="@dimen/scoretextsize"
-            android:textColor="#FF0000"/>
+            android:textSize="@dimen/scoretextsize" />
 
         <TextView
             android:id="@+id/playerScore"
@@ -34,8 +33,7 @@
             android:layout_height="wrap_content"
             android:text="0"
             android:textSize="@dimen/scoretextsize"
-            android:layout_below="@+id/playerScore2"
-            android:textColor="#00FF00"/>
+            android:layout_below="@+id/playerScore2"/>
     </LinearLayout>
 
     <TextView

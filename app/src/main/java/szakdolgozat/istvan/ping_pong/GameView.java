@@ -77,7 +77,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         super.onAttachedToWindow();
         View root = getRootView();
         playerScore = (TextView) root.findViewById(R.id.playerScore);
+        playerScore.setTextColor(gameEngine.getGameState().getPlayer1().getColor());
         playerScore2 = (TextView) root.findViewById(R.id.playerScore2);
+        playerScore2.setTextColor(gameEngine.getGameState().getPlayer2().getColor());
         winner = (TextView) root.findViewById(R.id.TV_WINNER);
     }
 
@@ -110,14 +112,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private void drawMap(Canvas canvas) {
         Paint paint = new Paint();
-        canvas.drawColor(Color.WHITE);
+        canvas.drawColor(Color.parseColor("#3a7a2d"));//Color.WHITE);
         paint.setAlpha(50);
-        paint.setColor(Color.GRAY);
+        paint.setColor(Color.WHITE);
         canvas.drawLine(0, height / 2, width, height / 2, paint);
-        paint.setColor(Color.GREEN);
+        paint.setColor(gameEngine.getGameState().getPlayer1().getColor());
         canvas.drawLine(0, height - (height * 1 / 4), width, height - (height * 1 / 4), paint);
         canvas.drawLine(0, height - (height * 1 / 12), width, height - (height * 1 / 12), paint);
-        paint.setColor(Color.RED);
+        paint.setColor(gameEngine.getGameState().getPlayer2().getColor());
         canvas.drawLine(0, height * 1 / 4, width, height * 1 / 4, paint);
         canvas.drawLine(0, height * 1 / 12, width, height * 1 / 12, paint);
     }

@@ -5,7 +5,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/singleplayer"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
@@ -21,9 +21,6 @@
         </activity>
         <activity
             android:name=".GameActivity"
-            android:screenOrientation="nosensor"/>
-        <activity
-            android:name=".Multiplayer.MultiplayerActivity"
             android:screenOrientation="nosensor"/>
     </application>
 
