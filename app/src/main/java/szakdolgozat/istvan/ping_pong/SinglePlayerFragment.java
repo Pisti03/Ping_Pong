@@ -87,7 +87,7 @@ public class SinglePlayerFragment extends Fragment implements View.OnClickListen
                 b.putInt("difficulty", temp);
                 b.putInt("bestof",Integer.parseInt(bestOf.getText().toString()));
                 b.putString("player1", options.getUsername());
-                b.putString("player2", "AI");
+                b.putString("player2", "AI"+String.valueOf(spinner.getSelectedItem()));
                 intent.putExtras(b);
                 startActivity(intent);
             break;

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -17,14 +18,13 @@ import android.widget.Toast;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OptionsFragment extends Fragment implements View.OnClickListener {
+public class OptionsFragment extends Fragment {
 
     private View view;
     private Options options;
     private int volumeLevel;
     private EditText userName;
     private SeekBar volume;
-    private Button save;
     private Switch sound;
 
     public static OptionsFragment newInstance() {
@@ -47,8 +47,6 @@ public class OptionsFragment extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
         view = getView();
-        save = (Button) view.findViewById(R.id.BT_SAVE);
-        save.setOnClickListener(this);
         volume = (SeekBar) view.findViewById(R.id.SB_VOLUME);
         volume.setMax(100);
         volumeLevel = options.getVolume();
@@ -61,28 +59,31 @@ public class OptionsFragment extends Fragment implements View.OnClickListener {
             }
 
             public void onStartTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method
+
             }
 
             public void onStopTrackingTouch(SeekBar seekBar) {
                 volumeLevel = progressChangedValue;
+                options.setVolume(volumeLevel);
             }
         });
 
         sound = (Switch) view.findViewById(R.id.SW_SOUND);
         sound.setChecked(options.getSound());
+        sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                options.setSound(sound.isChecked());
+            }
+        });
         userName = (EditText) view.findViewById(R.id.ET_NAME);
         userName.setText(options.getUsername());
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.BT_SAVE:
-                options.setVolume(volumeLevel);
-                options.setUsername(userName.getText().toString());
-                options.setSound(sound.isChecked());
-                break;
-        }
+        userName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!userName.getText().toString().equals(options.getUsername()))
+                    options.setUsername(userName.getText().toString());
+            }
+        });
     }
 }

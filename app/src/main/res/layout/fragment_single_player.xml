@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/labeltextsize"
-        android:text="First To Reach:"
+        android:text="Best Of"
         android:textSize="@dimen/textsize"
         android:layout_below="@+id/spinnerDifficulties"
         android:layout_centerHorizontal="true" />

@@ -25,6 +25,7 @@
         android:layout_toRightOf="@+id/loser"
         android:gravity="center"
         android:text="Score" />
+
     <TextView
         android:id="@+id/date"
         android:layout_width="@dimen/listcolumnwidth"
@@ -32,4 +33,5 @@
         android:layout_toRightOf="@+id/score"
         android:gravity="center"
         android:text="Date" />
+
 </RelativeLayout>

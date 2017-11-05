@@ -48,12 +48,14 @@ public class MatchListAdapter extends ArrayAdapter<Match> {
 
         if(match.getWinner() == 1) {
             winner.setText(match.getPlayer1());
-            winner.setTextColor(Color.GREEN);
+            winner.setTextColor(Color.BLUE);
             loser.setText(match.getPlayer2());
+            loser.setTextColor(Color.RED);
         } else {
             winner.setText(match.getPlayer2());
-            winner.setTextColor(Color.GREEN);
+            winner.setTextColor(Color.RED);
             loser.setText(match.getPlayer1());
+            loser.setTextColor(Color.BLUE);
         }
         return convertView;
     }

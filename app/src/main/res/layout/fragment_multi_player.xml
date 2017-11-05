@@ -34,26 +34,13 @@
         android:text="Best Of" />
 
     <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView11"
-        android:layout_alignStart="@+id/textView11"
-        android:layout_below="@+id/M_BESTOF"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/labeltextsize"
-        android:textSize="@dimen/textsize"
-        android:text="Player1" />
-
-    <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/M_BESTOF"
-        android:layout_alignRight="@+id/M_BESTOF"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/M_PLAYER1"
-        android:layout_marginTop="@dimen/labeltextsize"
-        android:text="Player2"
+        android:layout_marginTop="@dimen/textsize"
+        android:text="vs"
         android:textSize="@dimen/textsize" />
 
     <EditText
@@ -72,7 +59,9 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/M_PLAYER2"
         android:layout_alignStart="@+id/M_PLAYER2"
-        android:layout_below="@+id/textView12"
+        android:layout_below="@+id/M_BESTOF"
+        android:layout_marginTop="@dimen/labeltextsize"
+        android:textColor="@color/blue"
         android:ems="10"
         android:gravity="center"
         android:inputType="textPersonName"
@@ -84,6 +73,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView13"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/textsize"
+        android:textColor="@color/red"
         android:ems="10"
         android:gravity="center"
         android:inputType="textPersonName"

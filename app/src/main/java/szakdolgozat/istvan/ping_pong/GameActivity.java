@@ -18,7 +18,7 @@ public class GameActivity extends Activity {
     private boolean paused = false;
     private PopupWindow popupWindow;
     private int players, difficulty;
-    private int bestof;
+    private int bestOf;
     private String player1, player2;
 
     @Override
@@ -28,7 +28,7 @@ public class GameActivity extends Activity {
         if(b != null) {
             players = b.getInt("players");
             difficulty = b.getInt("difficulty");
-            bestof = b.getInt("bestof");
+            bestOf = b.getInt("bestof");
             player1 = b.getString("player1");
             player2 = b.getString("player2");
         }
@@ -45,9 +45,9 @@ public class GameActivity extends Activity {
     protected void onStart() {
         super.onStart();
         if(players == 1)
-            gameView.startSinglePlayer(difficulty, bestof, player1, player2);
+            gameView.startSinglePlayer(difficulty, bestOf, player1, player2);
         else if(players == 2)
-            gameView.startMultiPlayer(bestof, player1, player2);
+            gameView.startMultiPlayer(bestOf, player1, player2);
     }
 
     @Override

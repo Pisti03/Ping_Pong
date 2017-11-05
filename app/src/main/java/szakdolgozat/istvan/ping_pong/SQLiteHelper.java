@@ -157,8 +157,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public int numberOFMatchesAgainstAi() {
         SQLiteDatabase db = this.getReadableDatabase();
         int numRows = (int) DatabaseUtils.queryNumEntries(db, MATCH_TABLE_NAME, MATCH_COLUMN_PLAYER2 + "='AI'");
+        int numRowsEasy = (int) DatabaseUtils.queryNumEntries(db, MATCH_TABLE_NAME, MATCH_COLUMN_PLAYER2 + "='AIEasy'");
+        int numRowsMedium = (int) DatabaseUtils.queryNumEntries(db, MATCH_TABLE_NAME, MATCH_COLUMN_PLAYER2 + "='AIMedium'");
+        int numRowsHard = (int) DatabaseUtils.queryNumEntries(db, MATCH_TABLE_NAME, MATCH_COLUMN_PLAYER2 + "='AIHard'");
+        int sum = numRows + numRowsEasy + numRowsMedium + numRowsHard;
         db.close();
-        return numRows;
+        return sum;
     }
 
 }

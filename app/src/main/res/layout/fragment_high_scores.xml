@@ -14,13 +14,22 @@
         android:textStyle="bold"
         android:textSize="@dimen/labeltextsize" />
 
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Statistics"
+        android:layout_marginTop="@dimen/textsize"
+        android:layout_below="@id/textView5"
+        android:textStyle="bold" />
+
     <RelativeLayout
         android:id="@+id/relativeLayoutNumOfMatches"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView5"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/labeltextsize">
+        android:layout_below="@+id/textView15"
+        android:layout_centerHorizontal="true">
 
         <TextView
             android:id="@+id/textView8"

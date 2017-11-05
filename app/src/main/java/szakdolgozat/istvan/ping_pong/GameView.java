@@ -180,6 +180,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 gameLoop.join();
                 retry = false;
             } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }

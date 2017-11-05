@@ -35,16 +35,19 @@ public class GameLoop extends Thread {
             if(!paused && !gameEngine.isGameEnded())
                 gameEngine.nextStep();
 
-            try {
-                c = gameView.getHolder().lockCanvas();
-                synchronized (gameView.getHolder()) {
-                    gameView.draw(c);
-                }
-            } finally {
-                if (c != null) {
-                    gameView.getHolder().unlockCanvasAndPost(c);
+            if(!paused) {
+                try {
+                    c = gameView.getHolder().lockCanvas();
+                    synchronized (gameView.getHolder()) {
+                        gameView.draw(c);
+                    }
+                } finally {
+                    if (c != null) {
+                        gameView.getHolder().unlockCanvasAndPost(c);
+                    }
                 }
             }
+
             if(gameEngine.isGameEnded())
             {
                 stopLoop();

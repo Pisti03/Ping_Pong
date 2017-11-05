@@ -46,13 +46,15 @@
         android:id="@+id/ET_NAME"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/textsize"
+        android:layout_below="@+id/SB_VOLUME"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/TV_VOLUME"
+        android:layout_toRightOf="@+id/TV_VOLUME"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/name"
-        android:layout_below="@+id/SB_VOLUME"
-        android:layout_alignLeft="@+id/BT_SAVE"
-        android:layout_alignStart="@+id/BT_SAVE" />
+        android:text="@string/name" />
 
     <TextView
         android:id="@+id/TV_NAME"
@@ -64,15 +66,6 @@
         android:layout_alignBottom="@+id/ET_NAME"
         android:layout_alignLeft="@+id/TV_VOLUME"
         android:layout_alignStart="@+id/TV_VOLUME" />
-
-    <Button
-        android:id="@+id/BT_SAVE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/buttonsizebig"
-        android:text="Save" />
 
     <TextView
         android:id="@+id/textView2"
