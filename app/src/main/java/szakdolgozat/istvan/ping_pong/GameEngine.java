@@ -208,13 +208,13 @@ public class GameEngine {
         Player player1 = gameState.getPlayer1();
         Player player2 = gameState.getPlayer2();
 
-        if (ball.getX() >= screenWidth) {
+        if (ball.getX() + ball.getDiameter()/2 >= screenWidth) {
             ball.setX(screenWidth - (ball.getDiameter() / 2) - 0.2);
             ball.reverseX();
             sound.playWallSound();
         }
 
-        if (ball.getX() <= 0) {
+        if (ball.getX() - ball.getDiameter()/2 <= 0) {
             ball.setX((ball.getDiameter() / 2) + 0.2);
             ball.reverseX();
             sound.playWallSound();
@@ -275,8 +275,8 @@ public class GameEngine {
     public void nextStep() {
 
         Ball ball = gameState.getBall();
-        collision();
         ball.nextPosition();
+        collision();
         setPlayersLastPosition();
         if (isAI) {
             Point dest = ai.getDestination(gameState);

@@ -76,6 +76,7 @@ public class OptionsFragment extends Fragment {
                 options.setSound(sound.isChecked());
             }
         });
+
         userName = (EditText) view.findViewById(R.id.ET_NAME);
         userName.setText(options.getUsername());
         userName.setOnFocusChangeListener(new View.OnFocusChangeListener() {

@@ -10,10 +10,8 @@ public class Player {
     private int score;
     private double X, Y, lastX, lastY;
     private double width, height;
-    private double virtualHeight;
     private int color;
     private Boolean moving;
-    //private Pickup pickup;
 
     public Player(double X, double Y, double width, double height, int color) {
         this.score = 0;
