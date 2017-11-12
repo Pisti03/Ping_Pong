@@ -13,8 +13,7 @@ public class GameLoop extends Thread {
     private GameEngine gameEngine;
     private boolean paused = false;
 
-    public GameLoop(GameView gameView, GameEngine gameEngine)
-    {
+    public GameLoop(GameView gameView, GameEngine gameEngine) {
         this.gameView = gameView;
         this.gameEngine = gameEngine;
     }
@@ -32,10 +31,10 @@ public class GameLoop extends Thread {
             Canvas c = null;
             startTime = System.currentTimeMillis();
 
-            if(!paused && !gameEngine.isGameEnded())
+            if (!paused && !gameEngine.isGameEnded())
                 gameEngine.nextStep();
 
-            if(!paused) {
+            if (!paused) {
                 try {
                     c = gameView.getHolder().lockCanvas();
                     synchronized (gameView.getHolder()) {
@@ -48,12 +47,11 @@ public class GameLoop extends Thread {
                 }
             }
 
-            if(gameEngine.isGameEnded())
-            {
+            if (gameEngine.isGameEnded()) {
                 stopLoop();
                 gameView.endGame();
             }
-            sleepTime = ticksPS-(System.currentTimeMillis() - startTime);
+            sleepTime = ticksPS - (System.currentTimeMillis() - startTime);
             try {
                 if (sleepTime > 0)
                     sleep(sleepTime);
@@ -69,7 +67,7 @@ public class GameLoop extends Thread {
         return running;
     }
 
-    public void stopLoop(){
+    public void stopLoop() {
         this.running = false;
     }
 
@@ -79,7 +77,7 @@ public class GameLoop extends Thread {
         }
     }
 
-   public void unPause() {
+    public void unPause() {
         synchronized (gameView.getHolder()) {
             paused = false;
         }

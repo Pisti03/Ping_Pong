@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class Ball {
     private double diameter;
-    private double x,y;
+    private double x, y;
     private double veloX, veloY;
     private int color;
 
@@ -76,40 +76,35 @@ public class Ball {
         this.color = color;
     }
 
-    public void reverseX()
-    {
-        this.veloX*=-1;
+    public void reverseX() {
+        this.veloX *= -1;
     }
 
-    public void reverseY()
-    {
-        this.veloY*=-1;
+    public void reverseY() {
+        this.veloY *= -1;
     }
 
-    public void nextPosition()
-    {
-        this.x+=this.veloX;
-        this.y+=this.veloY;
+    public void nextPosition() {
+        this.x += this.veloX;
+        this.y += this.veloY;
     }
 
-    public void setPosition(double x, double y)
-    {
-        this.x=x;
-        this.y=y;
+    public void setPosition(double x, double y) {
+        this.x = x;
+        this.y = y;
     }
 
-    public void generateNewDirection()
-    {
+    public void generateNewDirection() {
         Random r = new Random();
         ArrayList<Point> x = new ArrayList<>();
-        x.add(new Point(0,1));
-        x.add(new Point(1,1));
-        x.add(new Point(0,-1));
-        x.add(new Point(-1,1));
-        x.add(new Point(-1,-1));
-        x.add(new Point(1,-1));
+        x.add(new Point(0, 1));
+        x.add(new Point(1, 1));
+        x.add(new Point(0, -1));
+        x.add(new Point(-1, 1));
+        x.add(new Point(-1, -1));
+        x.add(new Point(1, -1));
         Collections.shuffle(x);
-        this.veloX =  (r.nextInt(9-5) + 5) * x.get(0).getX();
-        this.veloY =  (r.nextInt(9-5) + 5) * x.get(0).getY();
+        this.veloX = (r.nextInt(9 - 5) + 5) * x.get(0).getX();
+        this.veloY = (r.nextInt(9 - 5) + 5) * x.get(0).getY();
     }
 }

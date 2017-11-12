@@ -8,11 +8,11 @@
         android:id="@+id/TV_SINGLEPLAYER"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/singleplayer"
-        android:textStyle="bold"
-        android:textSize="@dimen/labeltextsize"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="@string/singleplayer"
+        android:textSize="@dimen/labeltextsize"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView7"
@@ -28,10 +28,10 @@
         android:id="@+id/spinnerDifficulties"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
         android:layout_below="@+id/textView7"
-        android:layout_marginTop="@dimen/textsize"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/textsize"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/textView3"
@@ -59,9 +59,9 @@
         android:id="@+id/buttonStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/buttonsizebig" />
+        android:layout_marginBottom="@dimen/buttonsizebig"
+        android:text="Start" />
 
 </RelativeLayout>

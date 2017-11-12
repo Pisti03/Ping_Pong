@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:background="@null"
     android:gravity="center"
-    android:background="@null">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="270sp"
+        android:layout_height="@dimen/popupheight"
         android:background="@android:color/darker_gray"
         android:orientation="vertical">
 
@@ -24,9 +24,10 @@
                 android:id="@+id/textView"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginBottom="@dimen/textsize"
-                android:text="Pause" />
+                android:gravity="center"
+                android:text="Pause"
+                android:textSize="@dimen/textsize" />
 
             <Button
                 android:id="@+id/buttonContinue"

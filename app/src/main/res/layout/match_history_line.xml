@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/winner"
@@ -33,6 +34,7 @@
         android:layout_toRightOf="@+id/wscore"
         android:gravity="center"
         android:text="Score" />
+
     <TextView
         android:id="@+id/date"
         android:layout_width="@dimen/listcolumnwidth"
@@ -40,7 +42,5 @@
         android:layout_toRightOf="@+id/lscore"
         android:gravity="center"
         android:text="Date" />
-
-
 
 </RelativeLayout>

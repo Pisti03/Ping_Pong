@@ -208,13 +208,13 @@ public class GameEngine {
         Player player1 = gameState.getPlayer1();
         Player player2 = gameState.getPlayer2();
 
-        if (ball.getX() + ball.getDiameter()/2 >= screenWidth) {
+        if (ball.getX() + ball.getDiameter() / 2 >= screenWidth) {
             ball.setX(screenWidth - (ball.getDiameter() / 2) - 0.2);
             ball.reverseX();
             sound.playWallSound();
         }
 
-        if (ball.getX() - ball.getDiameter()/2 <= 0) {
+        if (ball.getX() - ball.getDiameter() / 2 <= 0) {
             ball.setX((ball.getDiameter() / 2) + 0.2);
             ball.reverseX();
             sound.playWallSound();
@@ -278,8 +278,8 @@ public class GameEngine {
         double playerUpSide = player.getY() - player.getHeight() / 2;
         double playerDownSide = player.getY() + player.getHeight() / 2;
 
-        if(x > playerLeftSide && x < playerRightSide)
-            if(y> playerUpSide && y < playerDownSide)
+        if (x > playerLeftSide && x < playerRightSide)
+            if (y > playerUpSide && y < playerDownSide)
                 return true;
 
         return false;

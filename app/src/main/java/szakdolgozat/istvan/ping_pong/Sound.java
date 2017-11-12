@@ -18,8 +18,8 @@ public class Sound {
     public Sound(Context context) {
         this.context = context;
         Options options = new Options(context);
-        if(options.getSound())
-            this.volume = (float) options.getVolume()/ (float) 100;
+        if (options.getSound())
+            this.volume = (float) options.getVolume() / (float) 100;
         else
             this.volume = 0.0f;
     }
@@ -27,7 +27,7 @@ public class Sound {
     public void play(int rid) {
         stop();
         mediaPlayer = MediaPlayer.create(context, rid);
-        mediaPlayer.setVolume(volume,volume);
+        mediaPlayer.setVolume(volume, volume);
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
@@ -44,34 +44,35 @@ public class Sound {
         }
     }
 
-    public void setVolume(Float volume){
+    public void setVolume(Float volume) {
         mediaPlayer.setVolume(volume, volume);
     }
 
-    void playWallSound(){
-        if(random.nextBoolean())
+    void playWallSound() {
+        if (random.nextBoolean())
             play(R.raw.wall);
         else
             play(R.raw.wall2);
     }
-    public void playPlayerSound(){
-        if(random.nextBoolean())
+
+    public void playPlayerSound() {
+        if (random.nextBoolean())
             play(R.raw.player);
         else
             play(R.raw.player2);
     }
 
-    public void playWinSound(){
+    public void playWinSound() {
         //mediaPlayer.create(context, R.id.asd);
         mediaPlayer.start();
     }
 
-    public void mute(){
+    public void mute() {
         this.volume = 0.0f;
     }
 
-    public void unMute(){
+    public void unMute() {
         Options options = new Options(context);
-        this.volume = (float) options.getVolume()/ (float) 100;
+        this.volume = (float) options.getVolume() / (float) 100;
     }
 }

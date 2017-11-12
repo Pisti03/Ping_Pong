@@ -28,14 +28,14 @@ public class GameActivity extends Activity {
         Bundle b = getIntent().getExtras();
         Options options = new Options(this);
         sound = options.getSound();
-        if(b != null) {
+        if (b != null) {
             players = b.getInt("players");
             difficulty = b.getInt("difficulty");
             bestOf = b.getInt("bestof");
             player1 = b.getString("player1");
             player2 = b.getString("player2");
         }
-        LayoutInflater inflater = (LayoutInflater) getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.activity_game, (ViewGroup) findViewById(R.id.mainlayout));
         setContentView(R.layout.activity_game);
 
@@ -45,9 +45,9 @@ public class GameActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(players == 1)
+        if (players == 1)
             gameView.startSinglePlayer(difficulty, bestOf, player1, player2);
-        else if(players == 2)
+        else if (players == 2)
             gameView.startMultiPlayer(bestOf, player1, player2);
     }
 
@@ -66,7 +66,7 @@ public class GameActivity extends Activity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if(!paused) {
+            if (!paused) {
                 gameView.pauseGame();
                 paused = true;
                 callPopUp();
@@ -76,19 +76,19 @@ public class GameActivity extends Activity {
         return false;
     }
 
-    private void callPopUp(){
+    private void callPopUp() {
 
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View popupView = inflater.inflate(R.layout.pausepopup, null);
 
         Button buttonContinue = (Button) popupView.findViewById(R.id.buttonContinue);
 
-        if(!gameView.isGameEnded()) {
+        if (!gameView.isGameEnded()) {
             buttonContinue.setOnClickListener(new Button.OnClickListener() {
                 public void onClick(View v) {
                     popupWindow.dismiss();
                     gameView.continueGame();
-                    paused=false;
+                    paused = false;
                 }
             });
         }
@@ -98,28 +98,28 @@ public class GameActivity extends Activity {
             public void onClick(View v) {
                 popupWindow.dismiss();
                 gameView.restart();
-                paused=false;
+                paused = false;
             }
         });
 
         final Button buttonSound = (Button) popupView.findViewById(R.id.buttonSound);
 
-        if(sound)
+        if (sound)
             buttonSound.setText("MUTE");
         else
             buttonSound.setText("UNMUTE");
 
         buttonSound.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-               if(sound) {
-                   sound = false;
-                   buttonSound.setText("UNMUTE");
-                   gameView.muteGame();
-               } else {
-                   sound = true;
-                   buttonSound.setText("MUTE");
-                   gameView.unMuteGame();
-               }
+                if (sound) {
+                    sound = false;
+                    buttonSound.setText("UNMUTE");
+                    gameView.muteGame();
+                } else {
+                    sound = true;
+                    buttonSound.setText("MUTE");
+                    gameView.unMuteGame();
+                }
             }
         });
 

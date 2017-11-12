@@ -41,9 +41,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         this.sound = new Sound(getContext());
     }
 
-    public void startSinglePlayer(int difficulty, int goal, String player1, String player2){
+    public void startSinglePlayer(int difficulty, int goal, String player1, String player2) {
         Difficulty diff;
-        switch (difficulty){
+        switch (difficulty) {
             case 1:
                 diff = Difficulty.EASY;
                 break;
@@ -64,7 +64,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         gameLoop = new GameLoop(this, gameEngine);
     }
 
-    public void startMultiPlayer(int goal, String player1, String player2){
+    public void startMultiPlayer(int goal, String player1, String player2) {
         gameEngine = new GameEngine(width, height, goal, sound);
         this.multiplayer = true;
         this.player1 = player1;
@@ -133,7 +133,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         });
     }
 
-    private void announceWinner(final String name, final int color){
+    private void announceWinner(final String name, final int color) {
         gameActivity.runOnUiThread(new Runnable() {
             public void run() {
                 winner.setTextColor(color);
@@ -142,7 +142,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         });
     }
 
-    private void clearWinner(){
+    private void clearWinner() {
         gameActivity.runOnUiThread(new Runnable() {
             public void run() {
                 winner.setText("");
@@ -150,11 +150,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         });
     }
 
-    public void endGame(){
+    public void endGame() {
         SQLiteHelper helper = new SQLiteHelper(getContext());
         int score1 = gameEngine.getGameState().getPlayer1().getScore();
         int score2 = gameEngine.getGameState().getPlayer2().getScore();
-        if(score1 > score2) {
+        if (score1 > score2) {
             announceWinner(player1, gameEngine.getGameState().getPlayer1().getColor());
             helper.insertMatch(player1, player2, score1, score2);
         } else {
@@ -206,11 +206,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN: {
-                if (event.getY(pointerIndex) > height / 2 && pointerIndex<2 && gameEngine.pointInPlayer(gameEngine.getGameState().getPlayer1(), event.getX(pointerIndex), event.getY(pointerIndex))) {
+                if (event.getY(pointerIndex) > height / 2 && pointerIndex < 2 && gameEngine.pointInPlayer(gameEngine.getGameState().getPlayer1(), event.getX(pointerIndex), event.getY(pointerIndex))) {
                     players[pointerIndex] = gameEngine.getGameState().getPlayer1();
                     players[pointerIndex].setMoving(true);
                     gameEngine.movePlayer1(event.getX(pointerIndex), event.getY(pointerIndex), players[pointerIndex]);
-                } else if (multiplayer && pointerIndex<2 && gameEngine.pointInPlayer(gameEngine.getGameState().getPlayer2(), event.getX(pointerIndex), event.getY(pointerIndex))) {
+                } else if (multiplayer && pointerIndex < 2 && gameEngine.pointInPlayer(gameEngine.getGameState().getPlayer2(), event.getX(pointerIndex), event.getY(pointerIndex))) {
                     players[pointerIndex] = gameEngine.getGameState().getPlayer2();
                     players[pointerIndex].setMoving(true);
                     gameEngine.movePlayer2(event.getX(pointerIndex), event.getY(pointerIndex), players[pointerIndex]);
@@ -219,11 +219,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             }
             case MotionEvent.ACTION_MOVE: { // a pointer was moved
                 for (int i = 0; i < event.getPointerCount(); i++) {
-                    if (event.getY(pointerIndex) > height / 2 && pointerIndex<2 && gameEngine.pointInPlayer(gameEngine.getGameState().getPlayer1(), event.getX(pointerIndex), event.getY(pointerIndex))) {
+                    if (event.getY(pointerIndex) > height / 2 && pointerIndex < 2 && gameEngine.pointInPlayer(gameEngine.getGameState().getPlayer1(), event.getX(pointerIndex), event.getY(pointerIndex))) {
                         players[pointerIndex] = gameEngine.getGameState().getPlayer1();
                         players[pointerIndex].setMoving(true);
                         gameEngine.movePlayer1(event.getX(pointerIndex), event.getY(pointerIndex), players[pointerIndex]);
-                    } else if (multiplayer && pointerIndex<2 && gameEngine.pointInPlayer(gameEngine.getGameState().getPlayer2(), event.getX(pointerIndex), event.getY(pointerIndex))) {
+                    } else if (multiplayer && pointerIndex < 2 && gameEngine.pointInPlayer(gameEngine.getGameState().getPlayer2(), event.getX(pointerIndex), event.getY(pointerIndex))) {
                         players[pointerIndex] = gameEngine.getGameState().getPlayer2();
                         players[pointerIndex].setMoving(true);
                         gameEngine.movePlayer2(event.getX(pointerIndex), event.getY(pointerIndex), players[pointerIndex]);
@@ -239,7 +239,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_POINTER_UP:
             case MotionEvent.ACTION_CANCEL: {
-                if(pointerIndex < 2 && players[pointerIndex] != null)
+                if (pointerIndex < 2 && players[pointerIndex] != null)
                     players[pointerIndex].setMoving(false);
                 break;
             }
@@ -252,7 +252,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public void restart() {
         clearWinner();
         gameEngine.restart();
-        if(gameLoop.isRunning()) {
+        if (gameLoop.isRunning()) {
             continueGame();
         } else {
             gameLoop = new GameLoop(this, gameEngine);
@@ -275,7 +275,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         gameLoop.stopLoop();
     }
 
-    public boolean isGameEnded(){
+    public boolean isGameEnded() {
         return gameEngine.isGameEnded();
     }
 

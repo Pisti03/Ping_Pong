@@ -48,7 +48,7 @@ public class MatchListAdapter extends ArrayAdapter<Match> {
         loser.setText(match.getPlayer2());
         date.setText(format.format(match.getDate()));
 
-        if(match.getPlayer1score() > match.getPlayer2score()) {
+        if (match.getPlayer1score() > match.getPlayer2score()) {
             winner.setText(match.getPlayer1());
             winner.setTextColor(Color.BLUE);
             wscore.setText(Integer.toString(match.getPlayer1score()));

@@ -11,8 +11,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:text="@string/options"
-        android:textStyle="bold"
-        android:textSize="@dimen/labeltextsize" />
+        android:textSize="@dimen/labeltextsize"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView2"
@@ -48,10 +48,10 @@
         android:id="@+id/SB_VOLUME"
         android:layout_width="200dp"
         android:layout_height="@dimen/labeltextsize"
-        android:layout_marginTop="@dimen/textsize"
-        android:layout_below="@+id/SW_SOUND"
         android:layout_alignLeft="@+id/ET_NAME"
-        android:layout_alignStart="@+id/ET_NAME" />
+        android:layout_alignStart="@+id/ET_NAME"
+        android:layout_below="@+id/SW_SOUND"
+        android:layout_marginTop="@dimen/textsize" />
 
     <TextView
         android:id="@+id/TV_NAME"

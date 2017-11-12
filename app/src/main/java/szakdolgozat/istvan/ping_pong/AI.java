@@ -18,9 +18,9 @@ public class AI {
     public AI(Difficulty difficulty, double screenWidth, double maxY) {
         this.difficulty = difficulty;
         this.screenWidth = screenWidth;
-        this.easy_speed = screenWidth/110;
-        this.medium_speed = screenWidth/70;
-        this.hard_speed = screenWidth/45;
+        this.easy_speed = screenWidth / 110;
+        this.medium_speed = screenWidth / 70;
+        this.hard_speed = screenWidth / 45;
         this.maxY = maxY;
         this.ballInArea = false;
         setHitY();

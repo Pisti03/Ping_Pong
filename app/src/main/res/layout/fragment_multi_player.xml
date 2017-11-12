@@ -11,17 +11,17 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="@string/multiplayer"
-        android:textStyle="bold"
-        android:textSize="@dimen/labeltextsize" />
+        android:textSize="@dimen/labeltextsize"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/buttonStart2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/buttonsizebig" />
+        android:layout_marginBottom="@dimen/buttonsizebig"
+        android:text="Start" />
 
     <TextView
         android:id="@+id/textView11"
@@ -30,15 +30,15 @@
         android:layout_below="@+id/textView4"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/labeltextsize"
-        android:textSize="18sp"
-        android:text="Best Of" />
+        android:text="Best Of"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/M_PLAYER1"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/textsize"
         android:text="vs"
         android:textSize="@dimen/textsize" />
@@ -61,11 +61,11 @@
         android:layout_alignStart="@+id/M_PLAYER2"
         android:layout_below="@+id/M_BESTOF"
         android:layout_marginTop="@dimen/labeltextsize"
-        android:textColor="@color/blue"
         android:ems="10"
         android:gravity="center"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="Name"
+        android:textColor="@color/blue" />
 
     <EditText
         android:id="@+id/M_PLAYER2"
@@ -74,10 +74,10 @@
         android:layout_below="@+id/textView13"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/textsize"
-        android:textColor="@color/red"
         android:ems="10"
         android:gravity="center"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="Name"
+        android:textColor="@color/red" />
 
 </RelativeLayout>

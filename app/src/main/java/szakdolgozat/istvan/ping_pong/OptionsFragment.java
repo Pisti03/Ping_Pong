@@ -82,7 +82,7 @@ public class OptionsFragment extends Fragment {
         userName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!userName.getText().toString().equals(options.getUsername()))
+                if (!userName.getText().toString().equals(options.getUsername()))
                     options.setUsername(userName.getText().toString());
             }
         });

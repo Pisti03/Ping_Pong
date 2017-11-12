@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,61 +15,61 @@
         android:overScrollMode="never" />
 
     <RelativeLayout
+        android:id="@+id/buttonsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonsLayout"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <ImageButton
             android:id="@+id/buttonSinglePlayer"
             android:layout_width="@dimen/buttonsizebig"
             android:layout_height="@dimen/buttonsizebig"
-            android:onClick="toSinglePlayer"
-            android:src="@mipmap/singleplayer"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/buttonMultiPlayer"
-            android:layout_toStartOf="@+id/buttonMultiPlayer" />
+            android:layout_toStartOf="@+id/buttonMultiPlayer"
+            android:onClick="toSinglePlayer"
+            android:src="@mipmap/singleplayer" />
 
         <ImageButton
             android:id="@+id/buttonMultiPlayer"
             android:layout_width="@dimen/buttonsizebig"
             android:layout_height="@dimen/buttonsizesmall"
-            android:onClick="toMultiPlayer"
-            android:src="@mipmap/multiplayer"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/buttonHighScores"
-            android:layout_toStartOf="@+id/buttonHighScores" />
+            android:layout_toStartOf="@+id/buttonHighScores"
+            android:onClick="toMultiPlayer"
+            android:src="@mipmap/multiplayer" />
 
         <ImageButton
             android:id="@+id/buttonHighScores"
             android:layout_width="@dimen/buttonsizebig"
             android:layout_height="@dimen/buttonsizesmall"
-            android:onClick="toHighScores"
-            android:src="@mipmap/highscores"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:onClick="toHighScores"
+            android:src="@mipmap/highscores" />
 
         <ImageButton
             android:id="@+id/buttonOptions"
             android:layout_width="@dimen/buttonsizebig"
             android:layout_height="@dimen/buttonsizesmall"
-            android:onClick="toOptions"
-            android:src="@mipmap/options"
             android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/buttonHighScores"
             android:layout_toRightOf="@+id/buttonHighScores"
-            android:layout_toEndOf="@+id/buttonHighScores" />
+            android:onClick="toOptions"
+            android:src="@mipmap/options" />
 
         <ImageButton
             android:id="@+id/buttonAbout"
             android:layout_width="@dimen/buttonsizebig"
             android:layout_height="@dimen/buttonsizesmall"
-            android:onClick="toAbout"
-            android:src="@mipmap/about"
             android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/buttonOptions"
             android:layout_toRightOf="@+id/buttonOptions"
-            android:layout_toEndOf="@+id/buttonOptions" />
+            android:onClick="toAbout"
+            android:src="@mipmap/about" />
 
     </RelativeLayout>
 

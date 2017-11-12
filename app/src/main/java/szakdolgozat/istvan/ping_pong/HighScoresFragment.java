@@ -41,7 +41,7 @@ public class HighScoresFragment extends Fragment {
         int totalNum, aiNum, multiNum;
         totalNum = helper.numberOfMatches();
         aiNum = helper.numberOFMatchesAgainstAi();
-        multiNum = totalNum-aiNum;
+        multiNum = totalNum - aiNum;
         total.setText(Integer.toString(totalNum));
         againstai.setText(Integer.toString(aiNum));
         multiplayer.setText(Integer.toString(multiNum));

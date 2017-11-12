@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SinglePlayerFragment extends Fragment implements View.OnClickListener{
+public class SinglePlayerFragment extends Fragment implements View.OnClickListener {
 
     private Button start;
     private Spinner spinner;
@@ -62,6 +62,7 @@ public class SinglePlayerFragment extends Fragment implements View.OnClickListen
         bestOf = (EditText) getView().findViewById(R.id.numBestOf);
         bestOf.setText("3");
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -70,27 +71,27 @@ public class SinglePlayerFragment extends Fragment implements View.OnClickListen
                 Bundle b = new Bundle();
                 b.putInt("players", 1); //Your id
                 int temp;
-                switch (String.valueOf(spinner.getSelectedItem())){
+                switch (String.valueOf(spinner.getSelectedItem())) {
                     case "Easy":
-                        temp=1;
+                        temp = 1;
                         break;
                     case "Medium":
-                        temp=2;
+                        temp = 2;
                         break;
                     case "Hard":
-                        temp=3;
+                        temp = 3;
                         break;
                     default:
-                        temp=2;
+                        temp = 2;
                         break;
                 }
                 b.putInt("difficulty", temp);
-                b.putInt("bestof",Integer.parseInt(bestOf.getText().toString()));
+                b.putInt("bestof", Integer.parseInt(bestOf.getText().toString()));
                 b.putString("player1", options.getUsername());
-                b.putString("player2", "AI"+String.valueOf(spinner.getSelectedItem()));
+                b.putString("player2", "AI" + String.valueOf(spinner.getSelectedItem()));
                 intent.putExtras(b);
                 startActivity(intent);
-            break;
+                break;
         }
     }
 

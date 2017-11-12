@@ -8,17 +8,17 @@ import android.support.v4.app.FragmentManager;
  * Created by Pisti on 2017. 09. 04..
  */
 
-public class MainPageAdapter extends FragmentPagerAdapter{
+public class MainPageAdapter extends FragmentPagerAdapter {
 
     private static int NUMBER_OF_BUTTONS = MainButtonsManipulator.NUMBER_OF_BUTTONS;
 
-    public MainPageAdapter(FragmentManager fragmentManager){
+    public MainPageAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
     }
 
     @Override
     public Fragment getItem(int position) {
-        switch (position){
+        switch (position) {
             case MainButtonsManipulator.SINGLEPLAYER_POSITION:
                 return SinglePlayerFragment.newInstance();
             case MainButtonsManipulator.MULTIPLAYER_POSITION:

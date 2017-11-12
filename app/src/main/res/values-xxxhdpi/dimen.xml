@@ -8,5 +8,5 @@
     <dimen name="labeltextsize">36sp</dimen>ű
     <dimen name="scoretextsize">25sp</dimen>
     <dimen name="textsize">17sp</dimen>
-    <dimen name="popupheight">220sp</dimen>
+    <dimen name="popupheight">270sp</dimen>
 </resources>

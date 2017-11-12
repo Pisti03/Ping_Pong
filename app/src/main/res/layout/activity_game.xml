@@ -2,24 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="szakdolgozat.istvan.ping_pong.GameActivity"
-    android:id="@+id/mainlayout">
+    tools:context="szakdolgozat.istvan.ping_pong.GameActivity">
 
     <szakdolgozat.istvan.ping_pong.GameView
         android:id="@+id/gameView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <LinearLayout
+        android:id="@+id/scoreLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:id="@+id/scoreLayout">
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/playerScore2"
             android:layout_width="wrap_content"
@@ -31,9 +32,9 @@
             android:id="@+id/playerScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/playerScore2"
             android:text="0"
-            android:textSize="@dimen/scoretextsize"
-            android:layout_below="@+id/playerScore2"/>
+            android:textSize="@dimen/scoretextsize" />
     </LinearLayout>
 
     <TextView
@@ -42,6 +43,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:textSize="@dimen/labeltextsize"/>
+        android:textSize="@dimen/labeltextsize" />
 
 </RelativeLayout>

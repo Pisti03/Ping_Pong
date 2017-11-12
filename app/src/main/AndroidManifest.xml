@@ -19,7 +19,7 @@
         </activity>
         <activity
             android:name=".GameActivity"
-            android:screenOrientation="nosensor"/>
+            android:screenOrientation="nosensor" />
     </application>
 
 </manifest>

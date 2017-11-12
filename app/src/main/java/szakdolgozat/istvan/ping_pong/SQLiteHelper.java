@@ -29,18 +29,18 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public static final String MATCH_COLUMN_DATE = "Date";
 
     public SQLiteHelper(Context context) {
-        super(context, DATABASE_NAME , null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_BOOK_TABLE = "CREATE TABLE " + MATCH_TABLE_NAME + "  ( " +
-                MATCH_COLUMN_ID           + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                MATCH_COLUMN_PLAYER1      + " TEXT, "    +
-                MATCH_COLUMN_PLAYER2      + " TEXT, "    +
-                MATCH_COLUMN_PLAYER1SCORE + " INTEGER, "    +
+                MATCH_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                MATCH_COLUMN_PLAYER1 + " TEXT, " +
+                MATCH_COLUMN_PLAYER2 + " TEXT, " +
+                MATCH_COLUMN_PLAYER1SCORE + " INTEGER, " +
                 MATCH_COLUMN_PLAYER2SCORE + " INTEGER, " +
-                MATCH_COLUMN_DATE         + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP )";
+                MATCH_COLUMN_DATE + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP )";
 
         db.execSQL(CREATE_BOOK_TABLE);
     }
@@ -71,7 +71,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         contentValues.put(MATCH_COLUMN_PLAYER2, player2);
         contentValues.put(MATCH_COLUMN_PLAYER1SCORE, player1score);
         contentValues.put(MATCH_COLUMN_PLAYER2SCORE, player2score);
-        db.update(MATCH_TABLE_NAME, contentValues, MATCH_COLUMN_ID + " = ? ", new String[] { Integer.toString(id) } );
+        db.update(MATCH_TABLE_NAME, contentValues, MATCH_COLUMN_ID + " = ? ", new String[]{Integer.toString(id)});
         db.close();
     }
 
@@ -79,13 +79,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(MATCH_TABLE_NAME,
                 MATCH_COLUMN_ID + " = ? ",
-                new String[] { Integer.toString(id) });
+                new String[]{Integer.toString(id)});
         db.close();
     }
 
     public Match getMatch(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor =  db.rawQuery("SELECT * FROM " + MATCH_TABLE_NAME + " WHERE " +
+        Cursor cursor = db.rawQuery("SELECT * FROM " + MATCH_TABLE_NAME + " WHERE " +
                 MATCH_COLUMN_ID + "=?", new String[]{Integer.toString(id)});
 
         Match match = new Match();
@@ -102,7 +102,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public ArrayList<Match> getAllMatches() {
         ArrayList<Match> matches = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor =  db.rawQuery( "SELECT * FROM " + MATCH_TABLE_NAME, null );
+        Cursor cursor = db.rawQuery("SELECT * FROM " + MATCH_TABLE_NAME, null);
 
         Match match;
 
@@ -126,7 +126,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public ArrayList<Match> getFirstXMatches(int i) {
         ArrayList<Match> matches = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor =  db.rawQuery( "SELECT * FROM " + MATCH_TABLE_NAME + " ORDER BY " + MATCH_COLUMN_DATE + " DESC LIMIT " + i, null );
+        Cursor cursor = db.rawQuery("SELECT * FROM " + MATCH_TABLE_NAME + " ORDER BY " + MATCH_COLUMN_DATE + " DESC LIMIT " + i, null);
 
         Match match;
 

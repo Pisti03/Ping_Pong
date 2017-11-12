@@ -25,9 +25,8 @@ public class Player {
         this.moving = false;
     }
 
-    public void increaseScore(int score)
-    {
-        this.score+=score;
+    public void increaseScore(int score) {
+        this.score += score;
     }
 
     public int getScore() {
@@ -46,11 +45,11 @@ public class Player {
         return color;
     }
 
-    public double getWidth(){
+    public double getWidth() {
         return width;
     }
 
-    public double getHeight(){
+    public double getHeight() {
         return height;
     }
 
@@ -100,7 +99,7 @@ public class Player {
         this.lastY = this.Y;
     }
 
-    public  void  setLastY(double y){
+    public void setLastY(double y) {
         this.lastY = y;
     }
 }

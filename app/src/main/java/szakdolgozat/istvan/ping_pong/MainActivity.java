@@ -34,7 +34,7 @@ public class MainActivity extends FragmentActivity {
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
         /*Converts an unpacked complex data value holding a dimension to its final floating point value. The two parameters unit and value are as in TYPE_DIMENSION.*/
-        int pixelHeight=(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, MainButtonsManipulator.MODIFIED_HEIGHT_IN_DP, getResources().getDisplayMetrics());
+        int pixelHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, MainButtonsManipulator.MODIFIED_HEIGHT_IN_DP, getResources().getDisplayMetrics());
         ImageButton imageButton = (ImageButton) findViewById(R.id.buttonMultiPlayer);
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) imageButton.getLayoutParams();
         mainButtonsManipulator = new MainButtonsManipulator(params.width, params.height, pixelHeight);
@@ -82,15 +82,15 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(options.getUsername() == null)
+        if (options.getUsername() == null)
             firstTimeSetup();
     }
 
-    public void firstTimeSetup(){
+    public void firstTimeSetup() {
         double width, height;
         width = Resources.getSystem().getDisplayMetrics().widthPixels;
         height = Resources.getSystem().getDisplayMetrics().heightPixels;
-        options.setScreenHeight((float)height);
+        options.setScreenHeight((float) height);
         options.setScreenWidth((float) width);
         options.setSound(true);
         options.setVolume(50);
@@ -104,7 +104,7 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onClick(View view) {
                 String userName = editText.getText().toString();
-                if(userName.isEmpty())
+                if (userName.isEmpty())
                     userName = "Player";
                 options.setUsername(userName);
                 popupWindow.dismiss();
@@ -122,27 +122,27 @@ public class MainActivity extends FragmentActivity {
         });
     }
 
-    public void toSinglePlayer(View v){
+    public void toSinglePlayer(View v) {
         ViewPager viewPagerGame = (ViewPager) findViewById(R.id.viewPager);
         viewPagerGame.setCurrentItem(MainButtonsManipulator.SINGLEPLAYER_POSITION, false);
     }
 
-    public void toMultiPlayer(View v){
+    public void toMultiPlayer(View v) {
         ViewPager viewPagerGame = (ViewPager) findViewById(R.id.viewPager);
         viewPagerGame.setCurrentItem(MainButtonsManipulator.MULTIPLAYER_POSITION, false);
     }
 
-    public void toHighScores(View v){
+    public void toHighScores(View v) {
         ViewPager viewPagerGame = (ViewPager) findViewById(R.id.viewPager);
         viewPagerGame.setCurrentItem(MainButtonsManipulator.HIGHSCORES_POSITION, false);
     }
 
-    public void toOptions(View v){
+    public void toOptions(View v) {
         ViewPager viewPagerGame = (ViewPager) findViewById(R.id.viewPager);
         viewPagerGame.setCurrentItem(MainButtonsManipulator.OPTIONS_POSITION, false);
     }
 
-    public void toAbout(View v){
+    public void toAbout(View v) {
         ViewPager viewPagerGame = (ViewPager) findViewById(R.id.viewPager);
         viewPagerGame.setCurrentItem(MainButtonsManipulator.ABOUT_POSITION, false);
     }

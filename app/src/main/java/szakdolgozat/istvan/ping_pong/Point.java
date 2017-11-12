@@ -7,13 +7,12 @@ package szakdolgozat.istvan.ping_pong;
 public class Point {
     private double X, Y;
 
-    Point(){
+    Point() {
         this.X = 0;
         this.Y = 0;
     }
 
-    Point(double X, double Y)
-    {
+    Point(double X, double Y) {
         this.X = X;
         this.Y = Y;
     }
