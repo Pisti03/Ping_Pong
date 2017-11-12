@@ -20,11 +20,14 @@ public class GameActivity extends Activity {
     private int players, difficulty;
     private int bestOf;
     private String player1, player2;
+    private Boolean sound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle b = getIntent().getExtras();
+        Options options = new Options(this);
+        sound = options.getSound();
         if(b != null) {
             players = b.getInt("players");
             difficulty = b.getInt("difficulty");
@@ -96,6 +99,27 @@ public class GameActivity extends Activity {
                 popupWindow.dismiss();
                 gameView.restart();
                 paused=false;
+            }
+        });
+
+        final Button buttonSound = (Button) popupView.findViewById(R.id.buttonSound);
+
+        if(sound)
+            buttonSound.setText("MUTE");
+        else
+            buttonSound.setText("UNMUTE");
+
+        buttonSound.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+               if(sound) {
+                   sound = false;
+                   buttonSound.setText("UNMUTE");
+                   gameView.muteGame();
+               } else {
+                   sound = true;
+                   buttonSound.setText("MUTE");
+                   gameView.unMuteGame();
+               }
             }
         });
 

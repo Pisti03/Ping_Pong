@@ -27,6 +27,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private GameActivity gameActivity;
     private TextView playerScore, playerScore2, winner;
     private String player1, player2;
+    Sound sound;
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -37,10 +38,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         players = new Player[2];
         setFocusable(true);
         gameActivity = (GameActivity) getContext();
+        this.sound = new Sound(getContext());
     }
 
     public void startSinglePlayer(int difficulty, int goal, String player1, String player2){
-        Sound sound = new Sound(getContext());
         Difficulty diff;
         switch (difficulty){
             case 1:
@@ -64,7 +65,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void startMultiPlayer(int goal, String player1, String player2){
-        Sound sound = new Sound(getContext());
         gameEngine = new GameEngine(width, height, goal, sound);
         this.multiplayer = true;
         this.player1 = player1;
@@ -239,7 +239,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_POINTER_UP:
             case MotionEvent.ACTION_CANCEL: {
-                //FINGER UP, PLAYER NOT MOVING, DEFAULT HIT WILL BE EXECUTED
                 if(pointerIndex < 2 && players[pointerIndex] != null)
                     players[pointerIndex].setMoving(false);
                 break;
@@ -278,6 +277,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     public boolean isGameEnded(){
         return gameEngine.isGameEnded();
+    }
+
+    public void muteGame() {
+        sound.mute();
+    }
+
+    public void unMuteGame() {
+        sound.unMute();
     }
 }
 

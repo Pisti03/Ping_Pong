@@ -54,15 +54,24 @@ public class Sound {
         else
             play(R.raw.wall2);
     }
-    void playPlayerSound(){
+    public void playPlayerSound(){
         if(random.nextBoolean())
             play(R.raw.player);
         else
             play(R.raw.player2);
     }
 
-    void playWinSound(){
+    public void playWinSound(){
         //mediaPlayer.create(context, R.id.asd);
         mediaPlayer.start();
+    }
+
+    public void mute(){
+        this.volume = 0.0f;
+    }
+
+    public void unMute(){
+        Options options = new Options(context);
+        this.volume = (float) options.getVolume()/ (float) 100;
     }
 }
