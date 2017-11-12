@@ -59,7 +59,9 @@ public class GameLoop extends Thread {
                     sleep(sleepTime);
                 else
                     sleep(10);
-            } catch (Exception e) {}
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

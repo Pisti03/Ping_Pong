@@ -10,18 +10,17 @@ public class Match {
     private int id;
     private String player1;
     private String player2;
-    private int winner;
-    private int score;
+    private int player1score, player2score;
     private Timestamp date;
 
     public Match() {
     }
 
-    public Match(String player1, String player2, int winner, int score, Timestamp date) {
+    public Match(String player1, String player2, int player1score, int player2score, Timestamp date) {
         this.player1 = player1;
         this.player2 = player2;
-        this.winner = winner;
-        this.score = score;
+        this.player1score = player1score;
+        this.player2score = player2score;
         this.date = date;
     }
 
@@ -37,12 +36,12 @@ public class Match {
         return player2;
     }
 
-    public int getWinner() {
-        return winner;
+    public int getPlayer1score() {
+        return player1score;
     }
 
-    public int getScore() {
-        return score;
+    public int getPlayer2score() {
+        return player2score;
     }
 
     public Timestamp getDate() {
@@ -61,12 +60,12 @@ public class Match {
         this.player2 = player2;
     }
 
-    public void setWinner(int winner) {
-        this.winner = winner;
+    public void setPlayer1score(int player1score) {
+        this.player1score = player1score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setPlayer2score(int player2score) {
+        this.player2score = player2score;
     }
 
     public void setDate(Timestamp date) {
@@ -79,8 +78,8 @@ public class Match {
                 "id=" + id +
                 ", player1='" + player1 + '\'' +
                 ", player2='" + player2 + '\'' +
-                ", winner='" + winner + '\'' +
-                ", score=" + score +
+                ", player1score=" + player1score +
+                ", player2score=" + player2score +
                 ", date=" + date +
                 '}';
     }

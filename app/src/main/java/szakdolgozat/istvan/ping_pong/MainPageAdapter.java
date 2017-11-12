@@ -10,7 +10,7 @@ import android.support.v4.app.FragmentManager;
 
 public class MainPageAdapter extends FragmentPagerAdapter{
 
-    private static int NUMBER_OF_ITEMS = MainButtonsManipulator.NUMBER_OF_BUTTONS;
+    private static int NUMBER_OF_BUTTONS = MainButtonsManipulator.NUMBER_OF_BUTTONS;
 
     public MainPageAdapter(FragmentManager fragmentManager){
         super(fragmentManager);
@@ -36,6 +36,6 @@ public class MainPageAdapter extends FragmentPagerAdapter{
 
     @Override
     public int getCount() {
-        return NUMBER_OF_ITEMS;
+        return NUMBER_OF_BUTTONS;
     }
 }

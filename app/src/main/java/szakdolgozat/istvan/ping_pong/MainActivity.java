@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -30,13 +31,6 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        float dpHeight = displayMetrics.heightPixels / displayMetrics.density;
-        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
-
-        System.out.println("height: " + dpHeight);
-        System.out.println("width: " + dpWidth);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
         /*Converts an unpacked complex data value holding a dimension to its final floating point value. The two parameters unit and value are as in TYPE_DIMENSION.*/
@@ -109,7 +103,10 @@ public class MainActivity extends FragmentActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                options.setUsername(editText.getText().toString());
+                String userName = editText.getText().toString();
+                if(userName.isEmpty())
+                    userName = "Player";
+                options.setUsername(userName);
                 popupWindow.dismiss();
             }
         });

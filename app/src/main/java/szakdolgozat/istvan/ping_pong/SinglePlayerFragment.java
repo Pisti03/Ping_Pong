@@ -60,7 +60,7 @@ public class SinglePlayerFragment extends Fragment implements View.OnClickListen
         spinner.setAdapter(dataAdapter);
         spinner.setSelection(1);
         bestOf = (EditText) getView().findViewById(R.id.numBestOf);
-        bestOf.setText("5");
+        bestOf.setText("3");
     }
     @Override
     public void onClick(View v) {

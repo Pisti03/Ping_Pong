@@ -18,14 +18,14 @@ import java.util.List;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "MatchDB";
     public static final String MATCH_TABLE_NAME = "Matches";
     public static final String MATCH_COLUMN_ID = "id";
     public static final String MATCH_COLUMN_PLAYER1 = "Player1";
     public static final String MATCH_COLUMN_PLAYER2 = "Player2";
-    public static final String MATCH_COLUMN_WINNER = "Winner";
-    public static final String MATCH_COLUMN_SCORE = "Score";
+    public static final String MATCH_COLUMN_PLAYER1SCORE = "Player1Score";
+    public static final String MATCH_COLUMN_PLAYER2SCORE = "Player2Score";
     public static final String MATCH_COLUMN_DATE = "Date";
 
     public SQLiteHelper(Context context) {
@@ -35,12 +35,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_BOOK_TABLE = "CREATE TABLE " + MATCH_TABLE_NAME + "  ( " +
-                MATCH_COLUMN_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                MATCH_COLUMN_PLAYER1 + " TEXT, "    +
-                MATCH_COLUMN_PLAYER2 + " TEXT, "    +
-                MATCH_COLUMN_WINNER  + " INTEGER, "    +
-                MATCH_COLUMN_SCORE   + " INTEGER, " +
-                MATCH_COLUMN_DATE    + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP )";
+                MATCH_COLUMN_ID           + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                MATCH_COLUMN_PLAYER1      + " TEXT, "    +
+                MATCH_COLUMN_PLAYER2      + " TEXT, "    +
+                MATCH_COLUMN_PLAYER1SCORE + " INTEGER, "    +
+                MATCH_COLUMN_PLAYER2SCORE + " INTEGER, " +
+                MATCH_COLUMN_DATE         + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP )";
 
         db.execSQL(CREATE_BOOK_TABLE);
     }
@@ -51,26 +51,26 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
-    public void insertMatch(String player1, String player2, int winner, int score) {
+    public void insertMatch(String player1, String player2, int player1score, int player2score) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(MATCH_COLUMN_PLAYER1, player1);
         contentValues.put(MATCH_COLUMN_PLAYER2, player2);
-        contentValues.put(MATCH_COLUMN_WINNER, winner);
-        contentValues.put(MATCH_COLUMN_SCORE, score);
+        contentValues.put(MATCH_COLUMN_PLAYER1SCORE, player1score);
+        contentValues.put(MATCH_COLUMN_PLAYER2SCORE, player2score);
 
         db.insert(MATCH_TABLE_NAME, null, contentValues);
         db.close();
     }
 
-    public void updateMatch(Integer id, String player1, String player2, int winner, int score) {
+    public void updateMatch(Integer id, String player1, String player2, int player1score, int player2score) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(MATCH_COLUMN_PLAYER1, player1);
         contentValues.put(MATCH_COLUMN_PLAYER2, player2);
-        contentValues.put(MATCH_COLUMN_WINNER, winner);
-        contentValues.put(MATCH_COLUMN_SCORE, score);
+        contentValues.put(MATCH_COLUMN_PLAYER1SCORE, player1score);
+        contentValues.put(MATCH_COLUMN_PLAYER2SCORE, player2score);
         db.update(MATCH_TABLE_NAME, contentValues, MATCH_COLUMN_ID + " = ? ", new String[] { Integer.toString(id) } );
         db.close();
     }
@@ -92,8 +92,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         match.setId(Integer.parseInt(cursor.getString(0)));
         match.setPlayer1(cursor.getString(1));
         match.setPlayer2(cursor.getString(2));
-        match.setWinner(Integer.parseInt(cursor.getString(3)));
-        match.setScore(Integer.parseInt(cursor.getString(4)));
+        match.setPlayer1score(Integer.parseInt(cursor.getString(3)));
+        match.setPlayer2score(Integer.parseInt(cursor.getString(4)));
         match.setDate(Timestamp.valueOf(cursor.getString(5)));
         db.close();
         return match;
@@ -112,8 +112,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 match.setId(Integer.parseInt(cursor.getString(0)));
                 match.setPlayer1(cursor.getString(1));
                 match.setPlayer2(cursor.getString(2));
-                match.setWinner(Integer.parseInt(cursor.getString(3)));
-                match.setScore(Integer.parseInt(cursor.getString(4)));
+                match.setPlayer1score(Integer.parseInt(cursor.getString(3)));
+                match.setPlayer2score(Integer.parseInt(cursor.getString(4)));
                 match.setDate(Timestamp.valueOf(cursor.getString(5)));
 
                 matches.add(match);
@@ -136,8 +136,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 match.setId(Integer.parseInt(cursor.getString(0)));
                 match.setPlayer1(cursor.getString(1));
                 match.setPlayer2(cursor.getString(2));
-                match.setWinner(Integer.parseInt(cursor.getString(3)));
-                match.setScore(Integer.parseInt(cursor.getString(4)));
+                match.setPlayer1score(Integer.parseInt(cursor.getString(3)));
+                match.setPlayer2score(Integer.parseInt(cursor.getString(4)));
                 match.setDate(Timestamp.valueOf(cursor.getString(5)));
 
                 matches.add(match);

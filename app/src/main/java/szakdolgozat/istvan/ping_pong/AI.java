@@ -92,7 +92,7 @@ public class AI {
 
         if ((ball.getY() > ((hitY + ai.getHeight() / 2) + medium_speed)) || (ball.getY() < ai.getY()))
             point.setY(ai.getY() - medium_speed / 2);
-        else if (isBallInRange(ball, ai, medium_speed))
+        else if (isBallInRange(ball, ai, medium_speed) && ball.getY() < hitY)
             if (willHit) {
                 if (ball.getY() - ball.getDiameter() / 2 - 0.5 > medium_speed)
                     point.setY(ai.getY() + medium_speed);

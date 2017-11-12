@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <dimen name="listcolumnwidth">95sp</dimen>
+    <dimen name="listcolumnwidth">76sp</dimen>
     <dimen name="listheight">340sp</dimen>
     <dimen name="buttonsizebig">60sp</dimen>
     <dimen name="buttonsizesmall">50sp</dimen>

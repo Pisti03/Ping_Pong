@@ -24,13 +24,6 @@ public class Sound {
             this.volume = 0.0f;
     }
 
-    public void stop() {
-        if (mediaPlayer != null) {
-            mediaPlayer.release();
-            mediaPlayer = null;
-        }
-    }
-
     public void play(int rid) {
         stop();
         mediaPlayer = MediaPlayer.create(context, rid);
@@ -42,6 +35,13 @@ public class Sound {
             }
         });
         mediaPlayer.start();
+    }
+
+    public void stop() {
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 
     public void setVolume(Float volume){

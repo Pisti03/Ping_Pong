@@ -272,8 +272,23 @@ public class GameEngine {
         gameState.getPlayer2().setLast();
     }
 
-    public void nextStep() {
+    public boolean pointInPlayer(Player player, double x, double y) {
+        double playerLeftSide = player.getX() - player.getWidth() / 2;
+        double playerRightSide = player.getX() + player.getWidth() / 2;
+        double playerUpSide = player.getY() - player.getHeight() / 2;
+        double playerDownSide = player.getY() + player.getHeight() / 2;
 
+        if(x > playerLeftSide && x < playerRightSide)
+            if(y> playerUpSide && y < playerDownSide)
+                return true;
+
+        return false;
+    }
+
+    public void nextStep() {
+        Player player1, player2;
+        player1 = getGameState().getPlayer1();
+        player2 = getGameState().getPlayer2();
         Ball ball = gameState.getBall();
         ball.nextPosition();
         collision();
@@ -283,7 +298,7 @@ public class GameEngine {
             movePlayer2(dest.getX(), dest.getY(), gameState.getPlayer2());
         }
 
-        if (getGameState().getPlayer1().getScore() + getGameState().getPlayer2().getScore() >= goal) {
+        if (player1.getScore() >= goal || player2.getScore() >= goal) {
             endgame = true;
             ball.setX(10000);
         }

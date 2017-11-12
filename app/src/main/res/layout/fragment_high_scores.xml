@@ -110,7 +110,8 @@
             android:id="@+id/firstline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView14">
+            android:layout_below="@id/textView14"
+            android:layout_marginBottom="3sp">
 
             <TextView
                 android:id="@+id/TV_HPLAYER1"
@@ -128,18 +129,25 @@
                 android:text="Opponent" />
 
             <TextView
-                android:id="@+id/TV_HSCORE"
+                android:id="@+id/TV_WSCORE"
                 android:layout_width="@dimen/listcolumnwidth"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/TV_HPLAYER2"
                 android:gravity="center"
-                android:text="Score" />
+                android:text="Winner Score" />
+            <TextView
+                android:id="@+id/TV_LSCORE"
+                android:layout_width="@dimen/listcolumnwidth"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/TV_WSCORE"
+                android:gravity="center"
+                android:text="Loser Score" />
 
             <TextView
                 android:id="@+id/TV_HDATE"
                 android:layout_width="@dimen/listcolumnwidth"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/TV_HSCORE"
+                android:layout_toRightOf="@+id/TV_LSCORE"
                 android:gravity="center"
                 android:text="Date" />
         </LinearLayout>
@@ -148,6 +156,10 @@
             android:id="@+id/matchList"
             android:layout_width="match_parent"
             android:layout_height="@dimen/listheight"
+            android:layout_marginTop="2sp"
+            android:listSelector="@android:color/transparent"
+            android:divider="#000000"
+            android:dividerHeight="1sp"
             android:layout_below="@id/firstline" />
     </RelativeLayout>
 
