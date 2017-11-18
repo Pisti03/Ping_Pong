@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class MainButtonsManipulator {
 
     public static final int NUMBER_OF_BUTTONS = 5;
-    public static final int MODIFIED_HEIGHT_IN_DP = 60;
+    public static final int MODIFIED_HEIGHT_IN_DP = 70;
 
     public static final int SINGLEPLAYER_POSITION = 0;
     public static final int MULTIPLAYER_POSITION = 1;

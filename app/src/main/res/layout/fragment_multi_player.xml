@@ -2,12 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/pingpong"
     tools:context="szakdolgozat.istvan.ping_pong.MultiPlayerFragment">
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="@string/multiplayer"
@@ -27,6 +29,7 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         android:layout_below="@+id/textView4"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/labeltextsize"
@@ -37,6 +40,7 @@
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         android:layout_below="@+id/M_PLAYER1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/textsize"
@@ -48,6 +52,7 @@
         android:layout_width="50sp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView11"
+        android:textColor="@android:color/white"
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:gravity="center"
@@ -64,6 +69,7 @@
         android:ems="10"
         android:gravity="center"
         android:inputType="textPersonName"
+        android:background="#92000000"
         android:text="Name"
         android:textColor="@color/blue" />
 
@@ -73,11 +79,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView13"
         android:layout_centerHorizontal="true"
+        android:background="#92000000"
         android:layout_marginTop="@dimen/textsize"
         android:ems="10"
         android:gravity="center"
         android:inputType="textPersonName"
         android:text="Name"
-        android:textColor="@color/red" />
+        android:textColor="@color/red"/>
 
 </RelativeLayout>

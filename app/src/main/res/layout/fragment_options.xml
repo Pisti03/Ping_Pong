@@ -2,12 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/pingpong"
     tools:context="szakdolgozat.istvan.ping_pong.OptionsFragment">
 
     <TextView
         android:id="@+id/textViewMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:text="@string/options"
@@ -15,9 +17,10 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/TV_SOUND"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         android:layout_alignBaseline="@+id/SW_SOUND"
         android:layout_alignBottom="@+id/SW_SOUND"
         android:layout_alignLeft="@+id/TV_VOLUME"
@@ -29,6 +32,7 @@
         android:id="@+id/SW_SOUND"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/labeltextsize"
+        android:textColor="@android:color/white"
         android:layout_alignLeft="@+id/SB_VOLUME"
         android:layout_alignStart="@+id/SB_VOLUME"
         android:layout_below="@+id/textViewMenu"
@@ -38,6 +42,7 @@
         android:id="@+id/TV_VOLUME"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         android:layout_above="@+id/ET_NAME"
         android:layout_toLeftOf="@+id/textViewMenu"
         android:layout_toStartOf="@+id/textViewMenu"
@@ -46,7 +51,7 @@
 
     <SeekBar
         android:id="@+id/SB_VOLUME"
-        android:layout_width="200dp"
+        android:layout_width="@dimen/seekbarwidth"
         android:layout_height="@dimen/labeltextsize"
         android:layout_alignLeft="@+id/ET_NAME"
         android:layout_alignStart="@+id/ET_NAME"
@@ -57,6 +62,7 @@
         android:id="@+id/TV_NAME"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
         android:layout_alignBaseline="@+id/ET_NAME"
         android:layout_alignBottom="@+id/ET_NAME"
         android:layout_alignLeft="@+id/TV_VOLUME"
@@ -66,8 +72,9 @@
 
     <EditText
         android:id="@+id/ET_NAME"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/seekbarwidth"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         android:layout_below="@+id/SB_VOLUME"
         android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp"

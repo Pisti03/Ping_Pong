@@ -7,9 +7,9 @@ import java.util.Random;
  */
 
 public class AI {
-    private double easy_speed = 10;
-    private double medium_speed = 15;
-    private double hard_speed = 25;
+    private double easy_speed;
+    private double medium_speed;
+    private double hard_speed;
     private Difficulty difficulty;
     private double screenWidth, maxY, hitY;
     private boolean willHit, ballInArea;
@@ -170,5 +170,21 @@ public class AI {
         }
         Point target = new Point(ball.getX(), ball.getY());
         return target;
+    }
+
+    public boolean isWillHit() {
+        return willHit;
+    }
+
+    public double getSpeed() {
+        switch (difficulty) {
+            case EASY:
+                return easy_speed;
+            case MEDIUM:
+                return medium_speed;
+            case HARD:
+                return hard_speed;
+        }
+        return medium_speed;
     }
 }

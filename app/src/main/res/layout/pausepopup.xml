@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="@dimen/popupheight"
-        android:background="@android:color/darker_gray"
+        android:background="@color/lightgray"
         android:orientation="vertical">
 
         <LinearLayout

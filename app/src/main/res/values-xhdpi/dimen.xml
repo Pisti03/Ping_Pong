@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <dimen name="listcolumnwidth">76sp</dimen>
-    <dimen name="listheight">340sp</dimen>
-    <dimen name="buttonsizebig">60sp</dimen>
-    <dimen name="buttonsizesmall">50sp</dimen>
-    <dimen name="labeltextsize">36sp</dimen>
-    <dimen name="scoretextsize">25sp</dimen>
-    <dimen name="textsize">17sp</dimen>
-    <dimen name="popupheight">270sp</dimen>
+    <dimen name="listcolumnwidth">76dp</dimen>
+    <dimen name="listheight">340dp</dimen>
+    <dimen name="buttonsizebig">60dp</dimen>
+    <dimen name="buttonsizesmall">50dp</dimen>
+    <dimen name="labeltextsize">36dp</dimen>
+    <dimen name="scoretextsize">25dp</dimen>
+    <dimen name="textsize">17dp</dimen>
+    <dimen name="popupheight">270dp</dimen>
+    <dimen name="seekbarwidth">200dp</dimen>
 </resources>

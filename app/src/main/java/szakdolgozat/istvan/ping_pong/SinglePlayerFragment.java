@@ -54,10 +54,9 @@ public class SinglePlayerFragment extends Fragment implements View.OnClickListen
         list.add("Easy");
         list.add("Medium");
         list.add("Hard");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getContext(),
-                R.layout.support_simple_spinner_dropdown_item, list);
-        dataAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        spinner.setAdapter(dataAdapter);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.spinnerview, list);
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
         spinner.setSelection(1);
         bestOf = (EditText) getView().findViewById(R.id.numBestOf);
         bestOf.setText("3");

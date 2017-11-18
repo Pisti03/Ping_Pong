@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="horizontal"
+    android:id="@+id/matchline">
 
     <TextView
         android:id="@+id/winner"
         android:layout_width="@dimen/listcolumnwidth"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         android:gravity="center"
         android:text="Winner" />
 
@@ -15,6 +17,7 @@
         android:id="@+id/loser"
         android:layout_width="@dimen/listcolumnwidth"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         android:layout_toRightOf="@+id/winner"
         android:gravity="center"
         android:text="Loser" />
@@ -23,6 +26,7 @@
         android:id="@+id/wscore"
         android:layout_width="@dimen/listcolumnwidth"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         android:layout_toRightOf="@+id/loser"
         android:gravity="center"
         android:text="Score" />
@@ -31,6 +35,7 @@
         android:id="@+id/lscore"
         android:layout_width="@dimen/listcolumnwidth"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         android:layout_toRightOf="@+id/wscore"
         android:gravity="center"
         android:text="Score" />
@@ -39,8 +44,9 @@
         android:id="@+id/date"
         android:layout_width="@dimen/listcolumnwidth"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         android:layout_toRightOf="@+id/lscore"
         android:gravity="center"
         android:text="Date" />
 
-</RelativeLayout>
+</LinearLayout>

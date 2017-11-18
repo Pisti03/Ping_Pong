@@ -76,6 +76,7 @@ public class MainActivity extends FragmentActivity {
         });
 
         viewPager.setCurrentItem(MainButtonsManipulator.SINGLEPLAYER_POSITION);
+        mainButtonsManipulator.setButtonSelected(MainButtonsManipulator.SINGLEPLAYER_POSITION);
         options = new Options(this);
     }
 

@@ -235,6 +235,9 @@ public class GameEngine {
             sound.playPlayerSound();
             moveBallOutOfPlayer(player2, ball);
             setSpeed(gameState.getPlayer2());
+            if(ai.isWillHit()){
+                ball.setVeloY(ball.getVeloY()*1.3);
+            }
         }
 
     }
@@ -286,11 +289,8 @@ public class GameEngine {
     }
 
     public void nextStep() {
-        Player player1, player2;
-        player1 = getGameState().getPlayer1();
-        player2 = getGameState().getPlayer2();
-        Ball ball = gameState.getBall();
-        ball.nextPosition();
+        checkEndgame();
+        gameState.getBall().nextPosition();
         collision();
         setPlayersLastPosition();
         if (isAI) {
@@ -298,6 +298,13 @@ public class GameEngine {
             movePlayer2(dest.getX(), dest.getY(), gameState.getPlayer2());
         }
 
+    }
+
+    public void checkEndgame(){
+        Player player1, player2;
+        player1 = getGameState().getPlayer1();
+        player2 = getGameState().getPlayer2();
+        Ball ball = gameState.getBall();
         if (player1.getScore() >= goal || player2.getScore() >= goal) {
             endgame = true;
             ball.setX(10000);

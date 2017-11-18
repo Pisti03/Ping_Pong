@@ -22,7 +22,6 @@ public class OptionsFragment extends Fragment {
 
     private View view;
     private Options options;
-    private int volumeLevel;
     private EditText userName;
     private SeekBar volume;
     private Switch sound;
@@ -49,8 +48,7 @@ public class OptionsFragment extends Fragment {
         view = getView();
         volume = (SeekBar) view.findViewById(R.id.SB_VOLUME);
         volume.setMax(100);
-        volumeLevel = options.getVolume();
-        volume.setProgress(volumeLevel);
+        volume.setProgress(options.getVolume());
         volume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int progressChangedValue = 0;
 
@@ -63,8 +61,7 @@ public class OptionsFragment extends Fragment {
             }
 
             public void onStopTrackingTouch(SeekBar seekBar) {
-                volumeLevel = progressChangedValue;
-                options.setVolume(volumeLevel);
+                options.setVolume(progressChangedValue);
             }
         });
 
