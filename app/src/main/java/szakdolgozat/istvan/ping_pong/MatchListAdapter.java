@@ -2,6 +2,7 @@ package szakdolgozat.istvan.ping_pong;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,7 @@ public class MatchListAdapter extends ArrayAdapter<Match> {
 
         if (match.getPlayer1score() > match.getPlayer2score()) {
             winner.setText(match.getPlayer1());
+            winner.setTypeface(winner.getTypeface(), Typeface.BOLD);
             //winner.setTextColor(Color.BLUE);
             wscore.setText(Integer.toString(match.getPlayer1score()));
             //wscore.setTextColor(Color.BLUE);
@@ -61,6 +63,7 @@ public class MatchListAdapter extends ArrayAdapter<Match> {
             //lscore.setTextColor(Color.RED);
         } else {
             winner.setText(match.getPlayer2());
+            winner.setTypeface(winner.getTypeface(), Typeface.BOLD);
             //winner.setTextColor(Color.RED);
             wscore.setText(Integer.toString(match.getPlayer2score()));
             //wscore.setTextColor(Color.RED);

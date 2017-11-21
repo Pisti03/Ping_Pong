@@ -53,7 +53,7 @@ public class HighScoresFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         ListView lstItems = (ListView) getActivity().findViewById(R.id.matchList);
         lstItems.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        ArrayList<Match> matches = helper.getFirstXMatches(50);
+        ArrayList<Match> matches = helper.getFirstXMatches(100);
         MatchListAdapter adapter = new MatchListAdapter(getActivity(), R.id.matchList, matches);
         lstItems.setAdapter(adapter);
     }

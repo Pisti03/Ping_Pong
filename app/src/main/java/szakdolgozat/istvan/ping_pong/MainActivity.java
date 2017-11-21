@@ -18,14 +18,12 @@ import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
-import java.util.List;
-
 public class MainActivity extends FragmentActivity {
 
     private static MainPageAdapter mainPageAdapter;
     private MainButtonsManipulator mainButtonsManipulator;
     private Options options;
-    PopupWindow popupWindow;
+    private PopupWindow popupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

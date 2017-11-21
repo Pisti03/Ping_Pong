@@ -235,8 +235,8 @@ public class GameEngine {
             sound.playPlayerSound();
             moveBallOutOfPlayer(player2, ball);
             setSpeed(gameState.getPlayer2());
-            if(ai.isWillHit()){
-                ball.setVeloY(ball.getVeloY()*1.3);
+            if(isAI && ai.isWillHit()){
+                ball.setVeloY(ai.getSpeed() + 1);
             }
         }
 
@@ -289,7 +289,6 @@ public class GameEngine {
     }
 
     public void nextStep() {
-        checkEndgame();
         gameState.getBall().nextPosition();
         collision();
         setPlayersLastPosition();
@@ -297,6 +296,7 @@ public class GameEngine {
             Point dest = ai.getDestination(gameState);
             movePlayer2(dest.getX(), dest.getY(), gameState.getPlayer2());
         }
+        checkEndgame();
 
     }
 

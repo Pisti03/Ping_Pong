@@ -9,8 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by Pisti on 2017. 10. 14..
@@ -34,7 +32,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_BOOK_TABLE = "CREATE TABLE " + MATCH_TABLE_NAME + "  ( " +
+        String match_table = "CREATE TABLE " + MATCH_TABLE_NAME + "  ( " +
                 MATCH_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 MATCH_COLUMN_PLAYER1 + " TEXT, " +
                 MATCH_COLUMN_PLAYER2 + " TEXT, " +
@@ -42,13 +40,26 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 MATCH_COLUMN_PLAYER2SCORE + " INTEGER, " +
                 MATCH_COLUMN_DATE + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP )";
 
-        db.execSQL(CREATE_BOOK_TABLE);
+        db.execSQL(match_table);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + MATCH_TABLE_NAME);
         this.onCreate(db);
+    }
+
+    public void insertMatch(Match match) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(MATCH_COLUMN_PLAYER1, match.getPlayer1());
+        contentValues.put(MATCH_COLUMN_PLAYER2, match.getPlayer2());
+        contentValues.put(MATCH_COLUMN_PLAYER1SCORE, match.getPlayer1score());
+        contentValues.put(MATCH_COLUMN_PLAYER2SCORE, match.getPlayer2score());
+
+        db.insert(MATCH_TABLE_NAME, null, contentValues);
+        db.close();
     }
 
     public void insertMatch(String player1, String player2, int player1score, int player2score) {

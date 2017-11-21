@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/pingpong"
+    android:background="@mipmap/pingpongdarkened"
     tools:context="szakdolgozat.istvan.ping_pong.OptionsFragment">
 
     <TextView
@@ -62,7 +62,7 @@
         android:id="@+id/TV_NAME"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:layout_alignBaseline="@+id/ET_NAME"
         android:layout_alignBottom="@+id/ET_NAME"
         android:layout_alignLeft="@+id/TV_VOLUME"

@@ -56,7 +56,7 @@ public class Options {
 
 
     public String getUsername() {
-        return sharedpreferences.getString(USERNAME, "Player1");
+        return sharedpreferences.getString(USERNAME, null);
     }
 
     public String getOpponentName() {

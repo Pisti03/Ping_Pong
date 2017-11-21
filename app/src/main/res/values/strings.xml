@@ -18,6 +18,7 @@
         <item>Hard</item>
     </string-array>
 
-    <string name="about">This game was made as a thesis work at the University of Debrecen. The aim of the game is to reach the goal before your opponent does. You can move your paddle horizontally and vertically too. To move your paddle you have to touch your paddle or move your finder above it first. The ball speed will adjust to the speed of your paddle.
+    <string name="about">Thanks for playing playing my game. The aim is to reach the goal before your opponent does. You can move your paddle horizontally and vertically too. To move your paddle you have to touch your paddle or move your finger above it first. The ball speed will adjust to the speed of your paddle when you hit it.
+        Have fun!
     </string>
 </resources>
